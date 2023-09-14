@@ -10,19 +10,30 @@ public class Matrix{
         this.row = row;
         this.col = col;
 
-        int i, j;
-        for(i = 0; i < row; ++i){
-            for(j = 0; j < col; ++j){
+        for(int i = 0; i < row; ++i){
+            for(int j = 0; j < col; ++j){
                 this.set(i, j, 0.0);
             }
         }
     }
 
-    double get(int i, int j){
-        return this.data[i][j];
+    double get(int row, int col){
+        return this.data[row][col];
     }
 
-    void set(int i, int j, double newValue){
-        this.data[i][j] = newValue;
+    void set(int row, int col, double newValue){
+        this.data[row][col] = newValue;
+    }
+
+    Matrix copy(){
+        var M = new Matrix(row, col);
+
+        for(int i = 0; i < row; ++i){
+            for(int j = 0; j < col; ++j){
+                M.set(i, j, this.get(i, j));
+            }
+        }
+
+        return M;
     }
 }

@@ -14,9 +14,8 @@ public class MatrixReader {
 
         var M = new Matrix(row, col);
 
-        int i, j;
-        for(i = 0; i < row; ++i){
-            for(j = 0; j < col; ++j){
+        for(int i = 0; i < row; ++i){
+            for(int j = 0; j < col; ++j){
                 M.set(i, j, scanner.nextDouble());
             }
         }
