@@ -8,7 +8,7 @@ public class MatrixManipulator {
     }
 
     public double[] getRow(int row){
-        var r = new double[this.M.row];
+        var r = new double[this.M.col];
         for(int i = 0; i < this.M.col; ++i) r[i] = this.M.get(row, i);
         return r;
     }
@@ -39,11 +39,56 @@ public class MatrixManipulator {
         this.setRow(row, tmp);
     }
 
-    public void linearCombinationOfRow(int rowTarget, int rowSource, int multiplier){
+    public void linearCombinationOfRow(int rowTarget, int rowSource, double multiplier){
         var target = this.getRow(rowTarget);
         var source = this.getRow(rowSource);
         for(int i = 0; i < this.M.col; ++i) target[i] += source[i] * multiplier;
         this.setRow(rowTarget, target);
+    }
+
+    public int getMostLeftNonZeroOfRow(int row){
+        for(int i = 0; i < this.M.col; ++i){
+            if(this.M.get(row, i) != 0) return i;
+        }
+        return -1;
+    }
+
+    public void gaussianElimination(){
+        for(int i = 0; i < this.M.row; ++i){
+
+            int mostLeftRow = i;
+            int mostLeft = this.getMostLeftNonZeroOfRow(i);
+            if(mostLeft == -1) mostLeft = Integer.MAX_VALUE;
+            for (int j = i; j < this.M.row; ++j) {
+                int t = this.getMostLeftNonZeroOfRow(j);
+                if(t != -1 && t < mostLeft){
+                    mostLeft = t;
+                    mostLeftRow = j;
+                }
+            }
+            if(mostLeftRow != i) switchRow(i, mostLeftRow);
+
+            if (mostLeft != Integer.MAX_VALUE && this.M.get(i, mostLeft) != 0.0) {
+                this.multiplyRow(i, 1 / this.M.get(i, mostLeft));
+                for (int j = i + 1; j < this.M.row; ++j) {
+                    this.linearCombinationOfRow(j, i, (-1) * this.M.get(j, mostLeft));
+                }
+            }
+        }
+    }
+
+    public void gausJordanElimination(){
+        this.gaussianElimination();
+
+        for(int i = this.M.row - 1; i >= 0; --i){
+            int mostLeft = this.getMostLeftNonZeroOfRow(i);
+
+            if(mostLeft != -1){
+                for(int j = 0; j < i; ++j){
+                    this.linearCombinationOfRow(j, i, (-1) * this.M.get(j, mostLeft));
+                }
+            }
+        }
     }
 
     public Matrix getResult(){
