@@ -77,6 +77,20 @@ public class MatrixManipulator {
         }
     }
 
+    public void gausJordanElimination(){
+        this.gaussianElimination();
+
+        for(int i = this.M.row - 1; i >= 0; --i){
+            int mostLeft = this.getMostLeftNonZeroOfRow(i);
+
+            if(mostLeft != -1){
+                for(int j = 0; j < i; ++j){
+                    this.linearCombinationOfRow(j, i, (-1) * this.M.get(j, mostLeft));
+                }
+            }
+        }
+    }
+
     public Matrix getResult(){
         return this.M;
     }

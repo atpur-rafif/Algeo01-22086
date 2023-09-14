@@ -6,7 +6,7 @@ public class Test {
         MatrixPrinter.print(M);
 
         var Manipulator = new MatrixManipulator(M);
-        Manipulator.gaussianElimination();
+        Manipulator.gausJordanElimination();
 
         System.out.println("");
         MatrixPrinter.print(Manipulator.getResult());
