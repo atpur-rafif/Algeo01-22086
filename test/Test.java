@@ -1,8 +1,8 @@
-import Printer.StringPrinter;
+import Matrix.*;
 
 public class Test {
     public static void main(String[] args){
-        var printer = new StringPrinter();
-        printer.print("Hello, world!");
+        var M = MatrixReader.read();
+        MatrixPrinter.print(M);
     }
 }
