@@ -1,0 +1,10 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "bin/Matrix.jar",
+    ],
+    "java.project.sourcePaths": [
+        "src",
+        "test"
+    ]
+}
