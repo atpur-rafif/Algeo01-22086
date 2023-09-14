@@ -22,6 +22,7 @@ public class Matrix{
     }
 
     void set(int row, int col, double newValue){
+        if(newValue == -0.0) newValue = 0.0;
         this.data[row][col] = newValue;
     }
 
