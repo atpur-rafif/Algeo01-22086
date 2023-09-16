@@ -3,9 +3,9 @@ package Matrix;
 import java.util.Scanner;
 
 public class MatrixReader {
-    public static Matrix read(){
-        var scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
+    public static Matrix read(){
         System.out.print("Masukkan baris: ");
         int row = scanner.nextInt();
 
@@ -20,7 +20,6 @@ public class MatrixReader {
             }
         }
 
-        scanner.close();
         return M;
     }
 }
