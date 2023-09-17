@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 
 public class Test {
     public static void main(String[] args){
-        var r = BicubicSpline.createMatrix();
+        var r = EquationSolver.MatrixD;
         MatrixPrinter.print(r);
     }
 }
