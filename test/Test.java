@@ -8,7 +8,14 @@ import Image.ResizingMatrix;
 
 public class Test {
     public static void main(String[] args){
-        var p = ImageLoader.load("./test/Image.jpeg");
-        ImageSaver.save(p, "./tmp/lmao.jpeg");
+        Matrix sampleF = MatrixReader.read();
+        Matrix equation = BicubicSpline.getEquation(sampleF);
+
+        System.out.println();
+        MatrixPrinter.print(equation);
+        System.out.println();
+        var r = BicubicSpline.approximate(equation, 0, 1);
+        System.out.println();
+        System.out.print(r);
     }
 }
