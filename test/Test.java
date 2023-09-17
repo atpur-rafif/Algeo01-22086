@@ -1,6 +1,8 @@
 import Matrix.*;
 
 import Application.*;
+import Point.Point;
+import Image.EquationSolver;
 import Image.ImageLoader;
 import Image.ImageSaver;
 
@@ -11,9 +13,7 @@ import javax.imageio.ImageIO;
 
 public class Test {
     public static void main(String[] args){
-        var g = ImageLoader.load("./test/Image.jpeg");
-        System.out.print(g.height);
-
-        ImageSaver.save(g, "./tmp/Image.jpeg");
+        var r = BicubicSpline.createMatrix();
+        MatrixPrinter.print(r);
     }
 }
