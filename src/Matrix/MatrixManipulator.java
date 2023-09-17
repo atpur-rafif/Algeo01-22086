@@ -91,17 +91,6 @@ public class MatrixManipulator {
         }
     }
 
-    public void transpose(){
-        var result = new Matrix(this.M.row, this.M.col);
-        for(int i = 0; i < M.row; ++i){
-            for(int j = 0; j < M.col; ++j){
-                result.set(i, j, this.M.get(j, i));
-            }
-        }
-        this.M = result; 
-
-    }
-
     public Matrix getResult(){
         return this.M;
     }
