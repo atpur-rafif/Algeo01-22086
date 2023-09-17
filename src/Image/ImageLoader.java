@@ -8,7 +8,7 @@ public class ImageLoader {
     public static Grayscale load(String path){
         BufferedImage buff = null;
         try {
-            buff = ImageIO.read(new File("./test/Image.jpeg"));
+            buff = ImageIO.read(new File(path));
         } catch (Exception e) {
             System.out.print(e);
         }
