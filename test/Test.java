@@ -5,11 +5,13 @@ public class Test {
         var M = MatrixReader.read();
 
 
-        var result = MatrixDeterminant.calculate(M);
 
 
         
-        System.out.println(result);
+        var Manipulator = new MatrixManipulator(M); 
+        Manipulator.gausJordanElimination();
+        MatrixPrinter.print(Manipulator.getResult());
+        
 
         // var Manipulator = new MatrixManipulator(M);
         // Manipulator.gausJordanElimination();

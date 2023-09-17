@@ -20,7 +20,7 @@ public class MatrixArithmetic {
         return Mresult;
 
     }
-    public static Matrix MultipyConst(Matrix M, int Constant){
+    public static Matrix MultiplyByConst(Matrix M, double Constant){
         var Mresult = new Matrix(M.row, M.col);
         for(int i = 0; i < M.row; ++i){
             for(int j = 0; j < M.col; ++j){
@@ -32,7 +32,7 @@ public class MatrixArithmetic {
     }
 
     public static Matrix Substraction(Matrix M1, Matrix M2){
-        return Addition(M1, MultipyConst(M2, -1));
+        return Addition(M1, MultiplyByConst(M2, -1));
     }
 
     public static Matrix Multiply(Matrix M1, Matrix M2){
