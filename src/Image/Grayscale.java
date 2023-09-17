@@ -22,6 +22,21 @@ public class Grayscale {
         }
     }
 
+    BufferedImage toImage() {
+        var buff = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
+
+        int i, j;
+        for (i = 0; i < this.height; ++i) {
+            for (j = 0; j < this.width; ++j) {
+                int t = this.getPixel(j, i);
+                Color c = new Color(t, t, t);
+                buff.setRGB(j, i, c.getRGB());
+            }
+        }
+
+        return buff;
+    }
+
     public int getPixel(int x, int y) {
         return this.pixelValue[y][x];
     }
