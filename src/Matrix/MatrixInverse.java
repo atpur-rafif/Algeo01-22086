@@ -1,7 +1,7 @@
 package Matrix;
 
 public class MatrixInverse {
-    public static Matrix calculate(Matrix M){
+    public static Matrix calculateWithCofactor(Matrix M){
         var determinant = MatrixDeterminant.calculate(M);
         return MatrixArithmetic.MultiplyByConst(adjoin(M), 1/determinant); 
     }
@@ -15,9 +15,38 @@ public class MatrixInverse {
                 adjoin.set(i, j, sign * MatrixDeterminant.calculate(cof));
             }
         }
-        var Manipulator = new MatrixManipulator(adjoin);
-        Manipulator.transpose();
-        return (Manipulator.getResult()); 
+        var DimensionManipulator = new MatrixDimensionManipulator(adjoin);
+        DimensionManipulator.transpose();
+        return (DimensionManipulator.getResult()); 
+    }
+    
+    private static Matrix addIdentityMatrixToRight(Matrix M){
+        var I = Matrix.createIdentityMatrix(M.col);
+        var ManipulatorI = new MatrixManipulator(I);
+        var DimensionManipulatorM = new MatrixDimensionManipulator(M);
+        var initialSize = M.col;
+        for(int i = 0; i < initialSize; ++i){
+            DimensionManipulatorM.addColumnToRight(ManipulatorI.getCol(i));
+        }
+        return DimensionManipulatorM.getResult();
     }
 
+    private static Matrix getRightSideMatrix(Matrix M){
+        var R = new Matrix(M.row, M.row);
+        var ManipulatorM = new MatrixManipulator(M);
+        var ManipulatorR = new MatrixManipulator(R);
+        for(int i = 0; i<M.row; ++i){
+            var col = ManipulatorM.getCol(i + M.row);
+            ManipulatorR.setCol(i, col);
+        }
+
+        return ManipulatorR.getResult();
+    }
+
+    public static Matrix calculateWithGaussJordan(Matrix M){
+        var T = addIdentityMatrixToRight(M); 
+        var Manipulator = new MatrixManipulator(T); 
+        Manipulator.gausJordanElimination(); 
+        return getRightSideMatrix(Manipulator.getResult()); 
+    }
 }

@@ -37,4 +37,14 @@ public class Matrix{
 
         return M;
     }
+
+    
+    public static Matrix createIdentityMatrix(int size){
+        var I = new Matrix(size, size); 
+        for(int i = 0; i < size ; ++i){
+            I.set(i, i, 1);
+        }
+
+        return I;
+    }
 }
