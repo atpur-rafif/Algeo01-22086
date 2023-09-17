@@ -1,6 +1,7 @@
 package Application;
 
 import Matrix.*;
+import Point.Point;
 
 public class BicubicSpline {
     static int maxDegree = 3;
