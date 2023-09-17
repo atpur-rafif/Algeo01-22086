@@ -1,4 +1,4 @@
-package Application;
+package Point;
 
 public class Point {
     public double x, y;
