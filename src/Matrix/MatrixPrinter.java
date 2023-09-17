@@ -6,7 +6,11 @@ public class MatrixPrinter {
 
         for(int i = 0; i < n; ++i){
             for(int j = 0; j < m; ++j){
-                System.out.printf("%.2f ", M.get(i, j));
+                if(M.get(i, j) != 0){
+                    System.out.printf("%.2f ", M.get(i, j));
+                } else {
+                    System.out.printf("... ", M.get(i, j));
+                }
             }
             System.out.print("\n");
         }

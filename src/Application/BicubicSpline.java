@@ -34,4 +34,6 @@ public class BicubicSpline {
         double[][] r = {f, f_x, f_y, f_xy};
         return r;
     });
+
+    public static Matrix MatrixIX = MatrixInverse.calculateWithGaussJordan(MatrixX);
 }

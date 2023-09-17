@@ -1,5 +1,6 @@
 package Image;
 
+import Application.BicubicSpline;
 import Matrix.*;
 import Point.EquationBySampling;
 
@@ -34,4 +35,6 @@ public class ResizingMatrix {
         double[][] r = {f, f_x, f_y, f_xy};
         return r;
     });
+
+    public static Matrix MatrixIXD = MatrixArithmetic.Multiply(BicubicSpline.MatrixIX, MatrixD);
 }
