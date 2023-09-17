@@ -1,11 +1,11 @@
 package Application;
 
 import Matrix.*;
-import Point.Point;
+import Point.EquationBySampling;
 
 public class BicubicSpline {
-    private static int maxDegree = 3;
-    private static int equationLength = 16;
+    private static int maxDegree = EquationBySampling.maxDegree;
+    private static int equationLength = EquationBySampling.equationLength;
 
     private static double pow(double x, int y){
         double r = 1;
@@ -13,14 +13,7 @@ public class BicubicSpline {
         return r;
     }
 
-    private static Point[] points = {
-        new Point(0, 0),
-        new Point(1, 0),
-        new Point(0, 1),
-        new Point(1, 1)
-    };
-
-    private static double[][] createEquation(Point p){
+    public static Matrix MatrixX = EquationBySampling.createMatrix((var p) -> {
         double x = p.x, y = p.y;
         double[] f = new double[equationLength];
         double[] f_x = new double[equationLength];
@@ -40,24 +33,5 @@ public class BicubicSpline {
         
         double[][] r = {f, f_x, f_y, f_xy};
         return r;
-    }
-
-    private static Matrix createMatrix(){
-        var M = new Matrix(equationLength, equationLength);
-        var Manipulator = new MatrixManipulator(M);
-
-        int i, j;
-        for(i = 0; i <= maxDegree; ++i){
-            var e = createEquation(points[i]);
-            for(j = 0; j <= maxDegree; ++j){
-                Manipulator.setRow(j * 4 + i, e[j]);
-            }
-        }
-
-        M = Manipulator.getResult();
-
-        return M;
-    }
-
-    public static Matrix MatrixX = createMatrix();
+    });
 }
