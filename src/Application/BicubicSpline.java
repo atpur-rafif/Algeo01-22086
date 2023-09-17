@@ -15,8 +15,8 @@ public class BicubicSpline {
 
     static Point[] points = {
         new Point(0, 0),
-        new Point(0, 1),
         new Point(1, 0),
+        new Point(0, 1),
         new Point(1, 1)
     };
 
@@ -28,8 +28,8 @@ public class BicubicSpline {
         double[] f_xy = new double[equationLength];
 
         int i, j, k = 0;
-        for(i = 0; i <= maxDegree; ++i){
-            for(j = 0; j <= maxDegree; ++j){
+        for(j = 0; j <= maxDegree; ++j){
+            for(i = 0; i <= maxDegree; ++i){
                 f[k] = pow(x, i) * pow(y, j);
                 f_x[k] = i * pow(x, i - 1) * pow(y, j);
                 f_y[k] = j * pow(x, i) * pow(y, j - 1);
