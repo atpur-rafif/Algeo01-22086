@@ -7,16 +7,16 @@ public class MatrixReader {
 
     public static Matrix read(){
         System.out.print("Masukkan baris: ");
-        int row = scanner.nextInt();
+        int row = Integer.parseInt(scanner.next());
 
         System.out.print("Masukkan kolom: ");
-        int col = scanner.nextInt();
+        int col = Integer.parseInt(scanner.next());
 
         var M = new Matrix(row, col);
 
         for(int i = 0; i < row; ++i){
             for(int j = 0; j < col; ++j){
-                M.set(i, j, scanner.nextDouble());
+                M.set(i, j, Double.parseDouble(scanner.next()));
             }
         }
 
