@@ -8,27 +8,33 @@ public class Grayscale {
     public int height;
     public int width;
 
-    Grayscale(BufferedImage buff){
-        this.height = buff.getHeight();
-        this.width = buff.getWidth();
+    Grayscale(int width, int height){
+        this.width = width;
+        this.height = height;
         this.pixelValue = new int[height][width];
-
-        int i, j;
-        for(i = 0; i < this.height; ++i){
-            for(j = 0; j < this.width; ++j){
-                Color c = new Color(buff.getRGB(j, i));
-                this.pixelValue[i][j] = (c.getRed() + c.getGreen() + c.getBlue()) / 3;
-            }
-        }
     }
 
-    BufferedImage toImage() {
-        var buff = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
+    public static Grayscale fromImage(BufferedImage buff){
+        var image = new Grayscale(buff.getWidth(), buff.getHeight());
 
         int i, j;
-        for (i = 0; i < this.height; ++i) {
-            for (j = 0; j < this.width; ++j) {
-                int t = this.getPixel(j, i);
+        for(i = 0; i < image.height; ++i){
+            for(j = 0; j < image.width; ++j){
+                Color c = new Color(buff.getRGB(j, i));
+                image.pixelValue[i][j] = (c.getRed() + c.getGreen() + c.getBlue()) / 3;
+            }
+        }
+
+        return image;
+    }
+
+    public static BufferedImage toImage(Grayscale image) {
+        var buff = new BufferedImage(image.width, image.height, BufferedImage.TYPE_INT_RGB);
+
+        int i, j;
+        for (i = 0; i < image.height; ++i) {
+            for (j = 0; j < image.width; ++j) {
+                int t = image.getPixel(j, i);
                 Color c = new Color(t, t, t);
                 buff.setRGB(j, i, c.getRGB());
             }

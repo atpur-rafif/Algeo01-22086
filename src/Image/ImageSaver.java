@@ -9,7 +9,7 @@ public class ImageSaver {
     public static void save(Grayscale image, String path){
         var file = new File(path);
         try {
-            ImageIO.write(image.toImage(), "jpg", file);
+            ImageIO.write(Grayscale.toImage(image), "jpg", file);
         } catch (IOException e) {
             System.out.print(file);
         }

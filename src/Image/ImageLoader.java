@@ -13,6 +13,6 @@ public class ImageLoader {
             System.out.print(e);
         }
 
-        return new Grayscale(buff);
+        return Grayscale.fromImage(buff);
     }
 }
