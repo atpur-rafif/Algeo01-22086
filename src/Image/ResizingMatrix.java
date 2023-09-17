@@ -4,11 +4,12 @@ import Matrix.*;
 import Point.EquationBySampling;
 
 public class ResizingMatrix {
-    private static int equationLength = EquationBySampling.equationLength;
-    private static int sampleSideCount = 4;
-    private static int coordinateOffset = (-1) * sampleSideCount + (-1);
-    private static int flattenCoordinate(int x, int y){
-        return (y * sampleSideCount) + x - coordinateOffset;
+    private static int equationCount = EquationBySampling.equationCount;
+    private static int coordinateOffset = (-1) * equationCount + (-1);
+
+    protected static int equationLength = EquationBySampling.equationLength;
+    protected static int flattenCoordinate(int x, int y){
+        return (y * equationCount) + x - coordinateOffset;
     }
 
     public static Matrix MatrixD = EquationBySampling.createMatrix((var p) -> {
