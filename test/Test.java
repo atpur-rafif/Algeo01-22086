@@ -1,14 +1,9 @@
 import Matrix.*;
+import Application.*;
 
 public class Test {
     public static void main(String[] args){
-        var M = MatrixReader.read();
+        var M = BicubicSpline.createMatrix();
         MatrixPrinter.print(M);
-
-        var Manipulator = new MatrixManipulator(M);
-        Manipulator.gausJordanElimination();
-
-        System.out.println("");
-        MatrixPrinter.print(Manipulator.getResult());
     }
 }

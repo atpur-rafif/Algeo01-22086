@@ -28,8 +28,8 @@ public class BicubicSpline {
         int i, j, k = 0;
         for(i = 0; i <= maxDegree; ++i){
             for(j = 0; j <= maxDegree; ++j){
-                f[k] = pow(x, i) * pow(x, j);
-                f_x[k] = i * pow(x, i - 1) * pow(x, j);
+                f[k] = pow(x, i) * pow(y, j);
+                f_x[k] = i * pow(x, i - 1) * pow(y, j);
                 f_y[k] = j * pow(x, i) * pow(y, j - 1);
                 f_xy[k] = i * j * pow(x, i - 1) * pow(y, j - 1);
                 ++k;
