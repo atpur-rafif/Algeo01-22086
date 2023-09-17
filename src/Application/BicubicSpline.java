@@ -5,7 +5,7 @@ import Point.Point;
 
 public class BicubicSpline {
     static int maxDegree = 3;
-    static int equationLength = (int) pow(maxDegree + 1, 2);
+    static int equationLength = 16;
 
     static double pow(double x, int y){
         double r = 1;
@@ -58,4 +58,5 @@ public class BicubicSpline {
 
         return M;
     }
+
 }
