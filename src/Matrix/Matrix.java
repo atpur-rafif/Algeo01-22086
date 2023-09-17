@@ -1,8 +1,8 @@
 package Matrix;
 
 public class Matrix{
-    int row;
-    int col;
+    public int row;
+    public int col;
     private double[][] data;
 
     public Matrix(int row, int col){
@@ -17,16 +17,16 @@ public class Matrix{
         }
     }
 
-    double get(int row, int col){
+    public double get(int row, int col){
         return this.data[row][col];
     }
 
-    void set(int row, int col, double newValue){
+    public void set(int row, int col, double newValue){
         if(newValue == -0.0) newValue = 0.0;
         this.data[row][col] = newValue;
     }
 
-    Matrix copy(){
+    public Matrix copy(){
         var M = new Matrix(row, col);
 
         for(int i = 0; i < row; ++i){
