@@ -4,23 +4,23 @@ import Matrix.*;
 import Point.Point;
 
 public class EquationSolver {
-    static int maxDegree = 3;
-    static int equationLength = 16;
+    private static int maxDegree = 3;
+    private static int equationLength = 16;
 
-    static Point[] points = {
+    private static Point[] points = {
         new Point(0, 0),
         new Point(1, 0),
         new Point(0, 1),
         new Point(1, 1)
     };
 
-    static int sampleSideCount = 4;
-    static int coordinateOffset = (-1) * sampleSideCount + (-1);
-    static int flattenCoordinate(int x, int y){
+    private static int sampleSideCount = 4;
+    private static int coordinateOffset = (-1) * sampleSideCount + (-1);
+    private static int flattenCoordinate(int x, int y){
         return (y * sampleSideCount) + x - coordinateOffset;
     }
 
-    public static double[][] createEquation(Point p){
+    private static double[][] createEquation(Point p){
         int x = (int) p.x, y = (int) p.y;
 
         double[] f = new double[equationLength];
@@ -44,7 +44,7 @@ public class EquationSolver {
         return r;
     }
 
-    public static Matrix createMatrix() {
+    private static Matrix createMatrix() {
         var M = new Matrix(equationLength, equationLength);
         var Manipulator = new MatrixManipulator(M);
 
@@ -60,4 +60,6 @@ public class EquationSolver {
 
         return M;
     }
+
+    public static Matrix MatrixD = createMatrix();
 }

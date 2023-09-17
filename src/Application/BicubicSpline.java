@@ -4,23 +4,23 @@ import Matrix.*;
 import Point.Point;
 
 public class BicubicSpline {
-    static int maxDegree = 3;
-    static int equationLength = 16;
+    private static int maxDegree = 3;
+    private static int equationLength = 16;
 
-    static double pow(double x, int y){
+    private static double pow(double x, int y){
         double r = 1;
         for(; y > 0; --y) r *= x;
         return r;
     }
 
-    static Point[] points = {
+    private static Point[] points = {
         new Point(0, 0),
         new Point(1, 0),
         new Point(0, 1),
         new Point(1, 1)
     };
 
-    static double[][] createEquation(Point p){
+    private static double[][] createEquation(Point p){
         double x = p.x, y = p.y;
         double[] f = new double[equationLength];
         double[] f_x = new double[equationLength];
@@ -42,7 +42,7 @@ public class BicubicSpline {
         return r;
     }
 
-    public static Matrix createMatrix(){
+    private static Matrix createMatrix(){
         var M = new Matrix(equationLength, equationLength);
         var Manipulator = new MatrixManipulator(M);
 
@@ -59,4 +59,5 @@ public class BicubicSpline {
         return M;
     }
 
+    public static Matrix MatrixX = createMatrix();
 }
