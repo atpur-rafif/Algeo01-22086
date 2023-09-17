@@ -15,4 +15,5 @@ public class EquationSolver {
     public static int flattenCoordinate(int x, int y){
         return (y * sampleSideCount) + x - coordinateOffset;
     }
+
 }

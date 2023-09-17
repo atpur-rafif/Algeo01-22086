@@ -20,7 +20,8 @@ public class BicubicSpline {
         new Point(1, 1)
     };
 
-    static double[][] createEquation(double x, double y){
+    static double[][] createEquation(Point p){
+        double x = p.x, y = p.y;
         double[] f = new double[equationLength];
         double[] f_x = new double[equationLength];
         double[] f_y = new double[equationLength];
@@ -47,8 +48,7 @@ public class BicubicSpline {
 
         int i, j;
         for(i = 0; i <= maxDegree; ++i){
-            var p = points[i];
-            var e = createEquation(p.x, p.y);
+            var e = createEquation(points[i]);
             for(j = 0; j <= maxDegree; ++j){
                 Manipulator.setRow(j * 4 + i, e[j]);
             }
