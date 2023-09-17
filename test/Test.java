@@ -3,13 +3,12 @@ import Matrix.*;
 public class Test {
     public static void main(String[] args){
         var M = MatrixReader.read();
+        var Manipulator = new MatrixManipulator(M);
 
 
-        var result = MatrixDeterminant.calculate(M);
-
-
+        Manipulator.transpose();
+        MatrixPrinter.print(Manipulator.getResult());
         
-        System.out.println(result);
 
         // var Manipulator = new MatrixManipulator(M);
         // Manipulator.gausJordanElimination();
