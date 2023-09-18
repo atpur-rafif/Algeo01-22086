@@ -14,6 +14,10 @@ public class Equation {
         return this.data[i];
     }
 
+    public void setCoefficient(int i, double value){
+        this.data[i] = value;
+    }
+
     public double apply(Vector independentVariable){
         double r = 0;
         for(int i = 0; i < this.independentVariableCount; ++i){
