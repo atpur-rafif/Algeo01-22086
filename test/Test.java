@@ -9,8 +9,8 @@ import Image.ResizingMatrix;
 
 public class Test {
     public static void main(String[] args){
-        var image = ImageLoader.load("./tmp/debug.png");
-        var resized = Resize.resize(image, 1.5);
-        ImageSaver.save(resized, "./tmp/debug-res.png");
+        var image = ImageLoader.load("./tmp/Image.jpeg");
+        var resized = Resize.resize(image, 3);
+        ImageSaver.save(resized, "./tmp/Image-10x-new.jpeg");
     }
 }

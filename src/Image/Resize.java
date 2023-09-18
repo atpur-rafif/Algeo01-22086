@@ -25,7 +25,7 @@ public class Resize {
     public static Grayscale resize(Grayscale image, double size){
         var newHeight = (int) (image.height * size);
         var newWidth = (int) (image.width * size);
-        var resized = new Grayscale(newHeight, newWidth);
+        var resized = new Grayscale(newWidth, newHeight);
 
         var cache = new Equation[image.height][image.width];
         var cacheStatus = new boolean[image.height][image.width];
@@ -38,7 +38,6 @@ public class Resize {
         int x, y;
         for(y = 0; y < newHeight; ++y){
             for(x = 0; x < newWidth; ++x){
-                // TODO: use transformation matrix?
                 double mapX = (x / size);
                 double mapY = (y / size);
 
@@ -62,6 +61,8 @@ public class Resize {
                 var p = (int) BicubicSpline.approximate(A, mapFracX, mapFracY);
                 resized.setPixelCartesian(x, y, p);
             }
+            System.out.printf("%.2f", (100 * y) / (double) newHeight);
+            System.out.print("%\n");
         }
 
         return resized;
