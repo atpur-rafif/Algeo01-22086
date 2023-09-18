@@ -4,10 +4,10 @@ import Matrix.*;
 import Point.*;
 
 public class BicubicSpline {
-    private static int maxDegree = EquationBySampling.maxDegree;
-    private static int equationLength = EquationBySampling.equationLength;
-    private static int pointCount = EquationBySampling.pointCount;
-    private static int equationCount = EquationBySampling.equationCount;
+    private static int maxDegree = EquationBySampling_Deprecated.maxDegree;
+    private static int equationLength = EquationBySampling_Deprecated.equationLength;
+    private static int pointCount = EquationBySampling_Deprecated.pointCount;
+    private static int equationCount = EquationBySampling_Deprecated.equationCount;
 
     private static double pow(double x, int y){
         double r = 1;
@@ -15,7 +15,7 @@ public class BicubicSpline {
         return r;
     }
 
-    public static Matrix MatrixX = EquationBySampling.createMatrix((var p) -> {
+    public static Matrix MatrixX = EquationBySampling_Deprecated.createMatrix((var p) -> {
         double x = p.x, y = p.y;
         double[] f = new double[equationLength];
         double[] f_x = new double[equationLength];

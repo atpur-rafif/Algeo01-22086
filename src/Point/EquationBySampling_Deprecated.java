@@ -3,7 +3,7 @@ package Point;
 import java.util.function.Function;
 import Matrix.*;
 
-public class EquationBySampling {
+public class EquationBySampling_Deprecated {
     public static int maxDegree = 3;
     public static int pointCount = 4;
     public static int equationCount = 4; // f f_x f_y f_xy

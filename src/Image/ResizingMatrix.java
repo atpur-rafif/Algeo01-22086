@@ -1,18 +1,18 @@
 package Image;
 
 import Matrix.*;
-import Point.EquationBySampling;
+import Point.EquationBySampling_Deprecated;
 
 public class ResizingMatrix {
-    private static int equationCount = EquationBySampling.equationCount;
+    private static int equationCount = EquationBySampling_Deprecated.equationCount;
     private static int coordinateOffset = (-1) * equationCount + (-1);
 
-    protected static int equationLength = EquationBySampling.equationLength;
+    protected static int equationLength = EquationBySampling_Deprecated.equationLength;
     protected static int flattenCoordinate(int x, int y){
         return (y * equationCount) + x - coordinateOffset;
     }
 
-    public static Matrix MatrixD = EquationBySampling.createMatrix((var p) -> {
+    public static Matrix MatrixD = EquationBySampling_Deprecated.createMatrix((var p) -> {
         int x = (int) p.x, y = (int) p.y;
 
         double[] f = new double[equationLength];
