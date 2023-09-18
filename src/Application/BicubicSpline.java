@@ -1,7 +1,7 @@
 package Application;
 
 import Matrix.*;
-import Point.EquationBySampling;
+import Point.*;
 
 public class BicubicSpline {
     private static int maxDegree = EquationBySampling.maxDegree;
@@ -58,22 +58,25 @@ public class BicubicSpline {
         f_xy(0, 1) 
         f_xy(1, 1)
     */
-    public static Matrix getEquation(Matrix F){
-        return MatrixArithmetic.Multiply(MatrixIX, F);
+    public static Equation getEquation(Matrix F){
+        var e = new Equation(equationLength);
+
+        var v = MatrixArithmetic.Multiply(MatrixIX, F);
+        for(int i = 0; i < equationLength; ++i) e.setCoefficient(i, v.get(i, 0));
+
+        return e;
     }
 
-    public static double approximate(Matrix equation, double x, double y){
-        var M = new Matrix(1, equationLength);
+    public static double approximate(Equation eq, double x, double y){
+        var V = new Vector(equationLength);
 
         int i, j;
         for(j = 0; j < equationCount; ++j){
             for(i = 0; i < pointCount; ++i){
-                M.set(0, i + 4 * j, Math.pow(x, i) * Math.pow(y, j));
+                V.setComponent(i + 4 * j, Math.pow(x, i) * Math.pow(y, j));
             }
         }
 
-        var R = MatrixArithmetic.Multiply(M, equation);
-
-        return R.get(0, 0);
+        return eq.apply(V);
     }
 }
