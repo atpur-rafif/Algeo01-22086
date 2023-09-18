@@ -3,6 +3,7 @@ package Image;
 import Application.BicubicSpline;
 import Matrix.Matrix;
 import Matrix.MatrixArithmetic;
+import Point.Equation;
 
 public class Resize {
     private static int equationLength = ResizingMatrix.equationLength;
@@ -20,27 +21,46 @@ public class Resize {
 
         return M;
     }
-    
-    public static Grayscale resize(Grayscale image, int size){
-        var resized = new Grayscale((int) Math.ceil(image.width * size), (int) Math.ceil(image.height * size));
+
+    public static Grayscale resize(Grayscale image, double size){
+        var newHeight = (int) (image.height * size);
+        var newWidth = (int) (image.width * size);
+        var resized = new Grayscale(newHeight, newWidth);
+
+        var cache = new Equation[image.height][image.width];
+        var cacheStatus = new boolean[image.height][image.width];
+        for(int i = 0; i < image.height; ++i){
+            for(int j = 0; j < image.width; ++j){
+                cacheStatus[i][j] = false;
+            }
+        }
 
         int x, y;
-        for(y = 0; y < image.height; ++y){
-            for(x = 0; x < image.width; ++x){
-                var I = getVarMatrixFromPivot(x, y, image);
-                var DI = MatrixArithmetic.Multiply(ResizingMatrix.MatrixD, I);
-                var A = BicubicSpline.getEquation(DI);
+        for(y = 0; y < newHeight; ++y){
+            for(x = 0; x < newWidth; ++x){
+                // TODO: use transformation matrix?
+                double mapX = (x / size);
+                double mapY = (y / size);
 
-                int px = size * x, py = size * y;
+                int mapIntX = (int) mapX;
+                int mapIntY = (int) mapY;
 
-                int ly, lx;
-                double div = size - 1;
-                for(ly = 0; ly < size; ++ly){
-                    for(lx = 0; lx < size; ++lx){
-                        var p = (int) BicubicSpline.approximate(A, lx / div, ly / div);
-                        resized.setPixelCartesian(px + lx, py + ly, p);
-                    }
+                double mapFracX = mapX - mapIntX;
+                double mapFracY = mapY - mapIntY;
+
+                Equation A;
+
+                if(!cacheStatus[mapIntY][mapIntX]){
+                    var I = getVarMatrixFromPivot(mapIntX, mapIntY, image);
+                    var DI = MatrixArithmetic.Multiply(ResizingMatrix.MatrixD, I);
+                    A = BicubicSpline.getEquation(DI);
+                    cache[mapIntY][mapIntX] = A;
+                } else {
+                    A = cache[mapIntY][mapIntX];
                 }
+
+                var p = (int) BicubicSpline.approximate(A, mapFracX, mapFracY);
+                resized.setPixelCartesian(x, y, p);
             }
         }
 
