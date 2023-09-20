@@ -1,7 +1,7 @@
 package Application;
 
-import Matrix.*;
 import Point.*;
+import Matrix.*;
 
 public class BicubicSpline_Old {
     private static int maxDegree = EquationBySampling_Deprecated.maxDegree;
