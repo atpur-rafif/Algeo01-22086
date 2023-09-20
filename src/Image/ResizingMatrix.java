@@ -1,7 +1,11 @@
 package Image;
 
-import Matrix.*;
+import javax.xml.crypto.dsig.Transform;
+
 import Point.EquationBySampling_Deprecated;
+import Point.GradientEquation;
+import Point.LocalSplineTransformation;
+import Point.Transformation;
 
 public class ResizingMatrix {
     private static int equationCount = EquationBySampling_Deprecated.equationCount;
@@ -12,27 +16,25 @@ public class ResizingMatrix {
         return (y * equationCount) + x - coordinateOffset;
     }
 
-    public static Matrix MatrixD = EquationBySampling_Deprecated.createMatrix((var p) -> {
+    public static Transformation transformation = new LocalSplineTransformation((var p) -> {
+        var EQ = new GradientEquation();
         int x = (int) p.x, y = (int) p.y;
 
-        double[] f = new double[equationLength];
-        f[flattenCoordinate(x, y)] = 1;
+        EQ.f.setCoefficient(flattenCoordinate(x, y), 1);
 
-        double[] f_x = new double[equationLength];
-        f_x[flattenCoordinate(x + 1, y)] = 0.5;
-        f_x[flattenCoordinate(x - 1, y)] = -0.5;
+        EQ.f_x.setCoefficient(flattenCoordinate(x + 1, y),0.5);
+        EQ.f_x.setCoefficient(flattenCoordinate(x - 1, y),-0.5);
 
-        double[] f_y = new double[equationLength];
-        f_y[flattenCoordinate(x, y + 1)] = 0.5;
-        f_y[flattenCoordinate(x, y - 1)] = -0.5;
+        EQ.f_y.setCoefficient(flattenCoordinate(x, y + 1), 0.5);
+        EQ.f_y.setCoefficient(flattenCoordinate(x, y - 1), -0.5);
 
-        double[] f_xy = new double[equationLength];
-        f_xy[flattenCoordinate(x + 1, y + 1)] = 0.25;
-        f_xy[flattenCoordinate(x - 1, y    )] = -0.25;
-        f_xy[flattenCoordinate(x    , y - 1)] = -0.25;
-        f_xy[flattenCoordinate(x    , y    )] = -0.25;
+        EQ.f_xy.setCoefficient(flattenCoordinate(x + 1, y + 1),  0.25);
+        EQ.f_xy.setCoefficient(flattenCoordinate(x - 1, y    ), -0.25);
+        EQ.f_xy.setCoefficient(flattenCoordinate(x    , y - 1), -0.25);
+        EQ.f_xy.setCoefficient(flattenCoordinate(x    , y    ), -0.25);
 
-        double[][] r = {f, f_x, f_y, f_xy};
-        return r;
+        return EQ;
     });
+
+
 }
