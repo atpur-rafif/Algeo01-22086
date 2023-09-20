@@ -42,6 +42,7 @@ public class Grayscale {
         for (i = 0; i < image.height; ++i) {
             for (j = 0; j < image.width; ++j) {
                 int t = image.getPixel(j, i);
+                if(i == 0 && j == 0) System.out.println(t);
                 if(t < 0){
                     System.out.println(t);
                     t = 0;

@@ -1,25 +1,23 @@
 package Image;
 
-import Application.BicubicSpline;
-import Matrix.Matrix;
-import Matrix.MatrixArithmetic;
-import Point.Equation;
+import Application.*;
+import Point.*;
 
 public class Resize {
     private static int equationLength = ResizingMatrix.equationLength;
 
-    private static Matrix getVarMatrixFromPivot(int x, int y, Grayscale image){
-        var M = new Matrix(equationLength, 1);
+    private static Vector getVarMatrixFromPivot(int x, int y, Grayscale image){
+        var V = new Vector(equationLength);
 
         int ly, lx;
         for(ly = -1; ly <= 2; ++ly){
             for(lx = -1; lx <= 2; ++lx){
                 var p = ResizingMatrix.flattenCoordinate(lx, ly);
-                M.set(p, 0, image.getPixelCartesian(x + lx, y + ly));
+                V.setComponent(p, image.getPixelCartesian(x + lx, y + ly));
             }
         }
 
-        return M;
+        return V;
     }
 
     public static Grayscale resize(Grayscale image, double size){
@@ -51,7 +49,7 @@ public class Resize {
 
                 if(!cacheStatus[mapIntY][mapIntX]){
                     var I = getVarMatrixFromPivot(mapIntX, mapIntY, image);
-                    var DI = MatrixArithmetic.Multiply(ResizingMatrix.MatrixD, I);
+                    var DI = ResizingMatrix.transformation.apply(I);
                     A = BicubicSpline.getEquation(DI);
                     cache[mapIntY][mapIntX] = A;
                 } else {

@@ -1,38 +1,43 @@
 package Image;
 
-import Matrix.*;
-import Point.EquationBySampling;
+import Point.BicubicSplineEquation;
+import Point.Equation;
+import Point.GradientEquation;
+import Point.LocalSplineTransformation;
+import Point.Transformation;
 
 public class ResizingMatrix {
-    private static int equationCount = EquationBySampling.equationCount;
+    private static int equationCount = GradientEquation.equationCount;
     private static int coordinateOffset = (-1) * equationCount + (-1);
 
-    protected static int equationLength = EquationBySampling.equationLength;
+    protected static int equationLength = BicubicSplineEquation.indepentdentVariableCount;
     protected static int flattenCoordinate(int x, int y){
         return (y * equationCount) + x - coordinateOffset;
     }
 
-    public static Matrix MatrixD = EquationBySampling.createMatrix((var p) -> {
+    public static Transformation transformation = new LocalSplineTransformation((var p) -> {
+        var EQ = new GradientEquation();
         int x = (int) p.x, y = (int) p.y;
 
-        double[] f = new double[equationLength];
-        f[flattenCoordinate(x, y)] = 1;
+        EQ.f = new Equation(equationLength);
+        EQ.f.setCoefficient(flattenCoordinate(x, y), 1);
 
-        double[] f_x = new double[equationLength];
-        f_x[flattenCoordinate(x + 1, y)] = 0.5;
-        f_x[flattenCoordinate(x - 1, y)] = -0.5;
+        EQ.f_x = new Equation(equationLength);
+        EQ.f_x.setCoefficient(flattenCoordinate(x + 1, y),0.5);
+        EQ.f_x.setCoefficient(flattenCoordinate(x - 1, y),-0.5);
 
-        double[] f_y = new double[equationLength];
-        f_y[flattenCoordinate(x, y + 1)] = 0.5;
-        f_y[flattenCoordinate(x, y - 1)] = -0.5;
+        EQ.f_y = new Equation(equationLength);
+        EQ.f_y.setCoefficient(flattenCoordinate(x, y + 1), 0.5);
+        EQ.f_y.setCoefficient(flattenCoordinate(x, y - 1), -0.5);
 
-        double[] f_xy = new double[equationLength];
-        f_xy[flattenCoordinate(x + 1, y + 1)] = 0.25;
-        f_xy[flattenCoordinate(x - 1, y    )] = -0.25;
-        f_xy[flattenCoordinate(x    , y - 1)] = -0.25;
-        f_xy[flattenCoordinate(x    , y    )] = -0.25;
+        EQ.f_xy = new Equation(equationLength);
+        EQ.f_xy.setCoefficient(flattenCoordinate(x + 1, y + 1),  0.25);
+        EQ.f_xy.setCoefficient(flattenCoordinate(x - 1, y    ), -0.25);
+        EQ.f_xy.setCoefficient(flattenCoordinate(x    , y - 1), -0.25);
+        EQ.f_xy.setCoefficient(flattenCoordinate(x    , y    ), -0.25);
 
-        double[][] r = {f, f_x, f_y, f_xy};
-        return r;
+        return EQ;
     });
+
+
 }
