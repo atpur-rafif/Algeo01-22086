@@ -2,9 +2,10 @@ package Point;
 
 import java.util.function.BiFunction;
 
-public class BicubicSplineEquation {
+public class BicubicSplineEquation{
     public static int indepentdentVariableCount = 16;
     public static int maxDegree = 3;
+
     /*
      * Independent variable disini adalah a, bukan x dan y
      * f(x, y) = \sum_{j = 0}^{3}{\sum{i = 0}^{3}{a_{ij} * x^{i} * y^{j}}} 
