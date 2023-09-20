@@ -1,16 +1,16 @@
 package Image;
 
+import Point.BicubicSplineEquation;
 import Point.Equation;
-import Point.EquationBySampling_Deprecated;
 import Point.GradientEquation;
 import Point.LocalSplineTransformation;
 import Point.Transformation;
 
 public class ResizingMatrix {
-    private static int equationCount = EquationBySampling_Deprecated.equationCount;
+    private static int equationCount = GradientEquation.equationCount;
     private static int coordinateOffset = (-1) * equationCount + (-1);
 
-    protected static int equationLength = EquationBySampling_Deprecated.equationLength;
+    protected static int equationLength = BicubicSplineEquation.indepentdentVariableCount;
     protected static int flattenCoordinate(int x, int y){
         return (y * equationCount) + x - coordinateOffset;
     }

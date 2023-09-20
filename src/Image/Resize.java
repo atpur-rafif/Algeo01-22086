@@ -1,7 +1,6 @@
 package Image;
 
 import Application.*;
-import Matrix.*;
 import Point.*;
 
 public class Resize {
@@ -57,7 +56,7 @@ public class Resize {
                     A = cache[mapIntY][mapIntX];
                 }
 
-                var p = (int) BicubicSpline_Old.approximate(A, mapFracX, mapFracY);
+                var p = (int) BicubicSpline.approximate(A, mapFracX, mapFracY);
                 resized.setPixelCartesian(x, y, p);
             }
             System.out.printf("%.2f", (100 * y) / (double) newHeight);
