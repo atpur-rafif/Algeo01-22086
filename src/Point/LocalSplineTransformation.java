@@ -2,14 +2,23 @@ package Point;
 
 import java.util.function.Function;
 
+import Matrix.Matrix;
+
 public class LocalSplineTransformation extends Transformation{
-    private static int maxDegree = 3;
     private static int pointCount = 4;
-    private static int equationCount = 4; // f f_x f_y f_xy
-    private static int equationLength = 16;
+    private static int equationCount = GradientEquation.equationCount;
+    private static int sideMatrixCount = pointCount * equationCount;
 
-    LocalSplineTransformation(Function<Point, GradientEquation> equation){
-
+    LocalSplineTransformation(Function<Point, GradientEquation> equation, int indepentdentVariableCount){
+        var m = new Matrix(sideMatrixCount, sideMatrixCount);
+        for(int i = 0; i < pointCount; ++i){
+            var EQ = equation.apply(points[i]).toArray();
+            for(int j = 0; j < equationCount; ++j){
+                for(int k = 0; k < indepentdentVariableCount; ++k){
+                    m.set(j * pointCount + i, k, EQ[j].getCoefficient(k));
+                }
+            }
+        }
     }
 
     private static Point[] points = {

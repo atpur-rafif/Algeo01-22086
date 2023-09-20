@@ -3,6 +3,7 @@ package Point;
 import java.util.function.BiFunction;
 
 public class BicubicSplineEquation{
+    /* [a_00 a_10 a_20 a_30 a_01 a_11 a_21 a_31 a_02 a_12 a_22 a_32 a_03 a_13 a_23 a_33] */
     public static int indepentdentVariableCount = 16;
     public static int maxDegree = 3;
 
