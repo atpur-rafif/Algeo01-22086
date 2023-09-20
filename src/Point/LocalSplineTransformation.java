@@ -9,13 +9,13 @@ public class LocalSplineTransformation extends Transformation{
     private static int equationCount = GradientEquation.equationCount;
     private static int sideMatrixCount = pointCount * equationCount;
 
-    LocalSplineTransformation(Function<Point, GradientEquation> equation, int indepentdentVariableCount){
-        var m = new Matrix(sideMatrixCount, sideMatrixCount);
+    public LocalSplineTransformation(Function<Point, GradientEquation> equation, int indepentdentVariableCount){
+        this.matrix = new Matrix(sideMatrixCount, sideMatrixCount);
         for(int i = 0; i < pointCount; ++i){
             var EQ = equation.apply(points[i]).toArray();
             for(int j = 0; j < equationCount; ++j){
                 for(int k = 0; k < indepentdentVariableCount; ++k){
-                    m.set(j * pointCount + i, k, EQ[j].getCoefficient(k));
+                    matrix.set(j * pointCount + i, k, EQ[j].getCoefficient(k));
                 }
             }
         }

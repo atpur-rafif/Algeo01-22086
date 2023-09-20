@@ -1,6 +1,6 @@
 package Image;
 
-import Application.BicubicSpline;
+import Application.BicubicSpline_Old;
 import Matrix.Matrix;
 import Matrix.MatrixArithmetic;
 import Point.Equation;
@@ -52,13 +52,13 @@ public class Resize {
                 if(!cacheStatus[mapIntY][mapIntX]){
                     var I = getVarMatrixFromPivot(mapIntX, mapIntY, image);
                     var DI = MatrixArithmetic.Multiply(ResizingMatrix.MatrixD, I);
-                    A = BicubicSpline.getEquation(DI);
+                    A = BicubicSpline_Old.getEquation(DI);
                     cache[mapIntY][mapIntX] = A;
                 } else {
                     A = cache[mapIntY][mapIntX];
                 }
 
-                var p = (int) BicubicSpline.approximate(A, mapFracX, mapFracY);
+                var p = (int) BicubicSpline_Old.approximate(A, mapFracX, mapFracY);
                 resized.setPixelCartesian(x, y, p);
             }
             System.out.printf("%.2f", (100 * y) / (double) newHeight);
