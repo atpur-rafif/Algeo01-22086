@@ -4,16 +4,17 @@ public class VectorSpace {
     public int basisCount;
     double[] data;
 
-    VectorSpace(int basisCount){
+    public VectorSpace(int basisCount){
         this.basisCount = basisCount;
         this.data = new double[basisCount];
+        for(int i = 0; i < basisCount; ++i) this.set(i, 0);
     }
 
-    double get(int i){
+    public double get(int i){
         return this.data[i];
     }
 
-    void set(int i, double newValue){
+    public void set(int i, double newValue){
         this.data[i] = newValue;
     }
 
