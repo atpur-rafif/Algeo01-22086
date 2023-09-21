@@ -2,7 +2,6 @@ package Image;
 
 import Application.*;
 import Vector.*;
-import Point.*;
 
 public class Resize {
     private static int equationLength = ResizingMatrix.equationLength;
