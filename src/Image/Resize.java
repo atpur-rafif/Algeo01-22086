@@ -1,19 +1,19 @@
 package Image;
 
 import Application.*;
-import Point.*;
+import Vector.*;
 
 public class Resize {
     private static int equationLength = ResizingMatrix.equationLength;
 
-    private static Vector getVarMatrixFromPivot(int x, int y, Grayscale image){
-        var V = new Vector(equationLength);
+    private static EuclideanSpace getVarMatrixFromPivot(int x, int y, Grayscale image){
+        var V = new EuclideanSpace(equationLength);
 
         int ly, lx;
         for(ly = -1; ly <= 2; ++ly){
             for(lx = -1; lx <= 2; ++lx){
                 var p = ResizingMatrix.flattenCoordinate(lx, ly);
-                V.setComponent(p, image.getPixelCartesian(x + lx, y + ly));
+                V.set(p, image.getPixelCartesian(x + lx, y + ly));
             }
         }
 
@@ -25,7 +25,7 @@ public class Resize {
         var newWidth = (int) (image.width * size);
         var resized = new Grayscale(newWidth, newHeight);
 
-        var cache = new Equation[image.height][image.width];
+        var cache = new EquationSpace[image.height][image.width];
         var cacheStatus = new boolean[image.height][image.width];
         for(int i = 0; i < image.height; ++i){
             for(int j = 0; j < image.width; ++j){
@@ -45,7 +45,7 @@ public class Resize {
                 double mapFracX = mapX - mapIntX;
                 double mapFracY = mapY - mapIntY;
 
-                Equation A;
+                EquationSpace A;
 
                 if(!cacheStatus[mapIntY][mapIntX]){
                     var I = getVarMatrixFromPivot(mapIntX, mapIntY, image);

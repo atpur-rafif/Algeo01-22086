@@ -7,7 +7,7 @@ public class GradientEquation {
     public EquationSpace f_y;
     public EquationSpace f_xy;
 
-    EquationSpace[] toArray(){
+    public EquationSpace[] toArray(){
         EquationSpace[] EQ = {f, f_x, f_y, f_xy};
         return EQ;
     }

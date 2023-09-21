@@ -1,8 +1,9 @@
-package Point;
+package Transformation;
 
 import java.util.function.Function;
-
-import Matrix.Matrix;
+import Matrix.*;
+import Vector.*;
+import Point.Point;
 
 public class LocalSplineTransformation extends Transformation{
     private static int pointCount = 4;
@@ -15,7 +16,7 @@ public class LocalSplineTransformation extends Transformation{
             var EQ = equation.apply(points[i]).toArray();
             for(int j = 0; j < equationCount; ++j){
                 for(int k = 0; k < EQ[j].independentVariableCount; ++k){
-                    matrix.set(j * pointCount + i, k, EQ[j].getCoefficient(k));
+                    matrix.set(j * pointCount + i, k, EQ[j].get(k));
                 }
             }
         }

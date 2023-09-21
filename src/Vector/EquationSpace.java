@@ -1,7 +1,9 @@
 package Vector;
 
 public class EquationSpace extends VectorSpace{
-    EquationSpace(int indepentdentVariableCount){
+    public int independentVariableCount = 0;
+    public EquationSpace(int indepentdentVariableCount){
         super(indepentdentVariableCount);
+        this.independentVariableCount = indepentdentVariableCount;
     }
 }
