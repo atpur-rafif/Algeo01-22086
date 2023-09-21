@@ -26,6 +26,12 @@ public class VectorSpace {
         return r;
     }
 
+    public static VectorSpace scale(VectorSpace v1, double s){
+        var r = new VectorSpace(v1.basisCount);
+        for(int i = 0; i < v1.basisCount; ++i) r.set(i, v1.get(i) * s);
+        return r;
+    }
+
     public static double innerProduct(VectorSpace v1, VectorSpace v2){
         if(v1.basisCount != v2.basisCount) throw new Error("Basis count should be equal");
         double r = 0;
