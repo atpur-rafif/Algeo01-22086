@@ -64,11 +64,30 @@ public class OBERunner {
 
 
             if (mostLeft != Integer.MAX_VALUE && this.Manipulator.M.get(i, mostLeft) != 0.0) {
-                double multipler = this.Manipulator.M.get(i, mostLeft);
+                double multipler = this.Manipulator.get(i, mostLeft);
                 if(multipler != 1) this.multiplyRow(i, 1 / multipler);
-                for (int j = i + 1; j < this.Manipulator.M.row; ++j) {
+                for (int j = i + 1; j < this.Manipulator.row; ++j) {
                     this.linearCombinationOfRow(j, i, (-1) * this.Manipulator.M.get(j, mostLeft));
                 }
+            }
+        }
+    }
+
+    public void gaussianElimination_v2(){
+        for(int i=0;i<this.Manipulator.row;i++){
+            double maks = this.Manipulator.get(i, i);
+            int idrMaks = i;
+            for(int j=i+1;j<this.Manipulator.row;j++){
+                if (maks<this.Manipulator.get(j,i)){
+                    maks = this.Manipulator.get(j,i);
+                    idrMaks = j;
+                }
+            }
+            if (idrMaks!=i){
+                this.switchRow(i, idrMaks);
+            }
+            for(int k=i+1;k<this.Manipulator.row;k++){
+                this.linearCombinationOfRow(k,i,(-1)*(this.Manipulator.get(k, i)/this.Manipulator.get(i, i)));
             }
         }
     }
@@ -87,6 +106,20 @@ public class OBERunner {
         }
     }
 
+        public void gaussJordanElimination_v2(){
+        this.gaussianElimination_v2();
+        for (int i=this.Manipulator.row-1;i>0;i--){
+            for (int j=i;j>0;j--){
+                this.linearCombinationOfRow(j-1, i, (-1)*this.Manipulator.get(j-1, i)/this.Manipulator.get(i,i));
+            }
+        }
+        for (int k=0;k<this.Manipulator.row;k++){
+            if (this.Manipulator.get(k, k)!=1){
+                this.multiplyRow(k,1/this.Manipulator.get(k,k));
+            }
+        }
+    }
+
     public Matrix getOriginal(){
         return this.origialMatrix;
     }
@@ -96,7 +129,6 @@ public class OBERunner {
     }
 
     public OBELog[] getLogs(){
-        System.out.println(this.logs.size());
         var l = new OBELog[this.logs.size()];
         for(int i = 0; i < l.length; ++i) l[i] = this.logs.get(i);
         return l;
