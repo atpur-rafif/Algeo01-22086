@@ -1,5 +1,3 @@
 package Matrix.OBE;
 
-public abstract class OBELog {
-    OBELogType type;
-}
+public abstract class OBELog {}
