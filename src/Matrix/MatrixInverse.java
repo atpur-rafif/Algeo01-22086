@@ -1,5 +1,7 @@
 package Matrix;
 
+import Matrix.OBE.OBERunner;
+
 public class MatrixInverse {
     public static Matrix calculateWithCofactor(Matrix M){
         var determinant = MatrixDeterminant.calculate(M);
@@ -45,8 +47,8 @@ public class MatrixInverse {
 
     public static Matrix calculateWithGaussJordan(Matrix M){
         var T = addIdentityMatrixToRight(M); 
-        var Manipulator = new MatrixManipulator(T); 
-        Manipulator.gausJordanElimination(); 
-        return getRightSideMatrix(Manipulator.getResult()); 
+        var OBE = new OBERunner(T); 
+        OBE.gausJordanElimination(); 
+        return getRightSideMatrix(OBE.getResult()); 
     }
 }
