@@ -1,7 +1,6 @@
 package Matrix;
 
 public class MatrixDeterminant {
-    Matrix M; 
 
     public static Matrix cofactor(Matrix M, int Row, int Col){
         var cofMatrix = new Matrix(M.row - 1, M.col - 1);

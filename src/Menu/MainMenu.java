@@ -53,7 +53,8 @@ public class MainMenu {
                     isRunning = false;
                     break; 
                 default:
-                    System.out.println("Input tidak valid");
+                System.out.print("\033\143");
+                System.out.println("Input tidak valid");
                     break;
             }
 
@@ -64,6 +65,7 @@ public class MainMenu {
     private static void InterpolasiMenu(){
 
     }
+
 
     private static void RegresiLinearMenu(){
         boolean isRegresi = true;
@@ -81,25 +83,21 @@ public class MainMenu {
             String choice = scanner.next();
             switch (choice) {
                 case "1":
-                    boolean isCLI = true; 
-                    while(isCLI == true){
-                        System.out.println("Masukkan sample Point");
-                        System.out.print("Masukkan banyak peubah: ");
+                    System.out.println("Masukkan sample Point");
+                    
+                    System.out.print("Masukkan banyak peubah: ");
+                    int n = Integer.parseInt(scanner.next()); 
 
-                        int n = Integer.parseInt(scanner.next()); 
-                        System.out.print("Masukkan banyak sampel: ");
-
-                        int m = Integer.parseInt(scanner.next());
-                        Matrix samplePoint = MatrixReader.read(m, n);
-
-                        double solvedSamplePoint[] =  MultipleLinear.solve(samplePoint); 
-                        System.out.print("Hasil: ["); 
-                        for(int i = 0; i < solvedSamplePoint.length; ++i){
-                            System.out.print(solvedSamplePoint[i]+ " ");
-                        }
-                        System.out.println("]"); 
-                        isCLI = false; 
+                    System.out.print("Masukkan banyak sampel: ");
+                    int m = Integer.parseInt(scanner.next());
+                    Matrix samplePoint = MatrixReader.read(m, n);
+                    double solvedSamplePoint[] =  MultipleLinear.solve(samplePoint); 
+                    System.out.print("Hasil: ["); 
+                    for(int i = 0; i < solvedSamplePoint.length; ++i){
+                        System.out.print(solvedSamplePoint[i]+ " ");
                     }
+                    System.out.println("]"); 
+                    
                     break;
                 
                 case "2": 
@@ -107,6 +105,7 @@ public class MainMenu {
 
                 case "3": 
                     isRegresi = false; 
+                    System.out.print("\033\143");
                     break;
 
                 default:
@@ -129,19 +128,13 @@ public class MainMenu {
     }
 
     private static void SPLMenu(){
-        PrintListMenu(new String[]{
-            "1. Metode eliminasi Gauss", 
-            "2. Metode eliminasi Gauss-jordan", 
-            "3. Metode Matriks balikan", 
-            "4. Kaidah Cramer"
-        });
+        boolean isSPL = true; 
+        while(isSPL == true){
+
+        }
     }
 
-    public static void determinantMenu(){
-        PrintListMenu(new String[]{
-            "1. Ekspansi Kofaktor",
-            "2. OBE"
-        });
+    private static void determinantMenu(){
         boolean isDeterminant = true; 
         while(isDeterminant == true){
 
@@ -149,11 +142,16 @@ public class MainMenu {
 
     }
     //Printer untuk string dari semua menu
+
+
+
+
     private static void PrintListMenu(String[] strings) {
         for (String str : strings) {
             System.out.println(str);
         }
     }
+
 
 
 
