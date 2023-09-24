@@ -1,15 +1,16 @@
 import Matrix.*;
-
-import Application.*;
-import Matrix.*;
-import Point.*;
-import Transformation.BicubicSplineTranformation;
-import Image.*;
+import Matrix.OBE.OBERunner;
 
 public class Test {
     public static void main(String[] args){
-        var image = ImageLoader.load("./tmp/debug.png");
-        var resized = Resize.resize(image, 10);
-        ImageSaver.save(resized, "./tmp/debug-res.png");
+        var m = MatrixReader.read();
+        var r = new OBERunner(m);
+        r.gausJordanElimination();
+        MatrixPrinter.print(r.getResult());
+
+        var k = r.getLogs();
+        for(int i = 0; i < k.length; ++i){
+            System.out.println(k[i]);
+        }
     }
 }

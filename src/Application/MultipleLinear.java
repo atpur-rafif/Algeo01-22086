@@ -1,6 +1,7 @@
 package Application;
 
 import Matrix.*;
+import Matrix.OBE.OBERunner;
 
 public class MultipleLinear{
 
@@ -49,9 +50,11 @@ public class MultipleLinear{
 
     public static double[] solve(double[][] samplePoint){
         var M = createMatrix(samplePoint);
-        var Manipulator = new MatrixManipulator(M); 
-        Manipulator.gausJordanElimination();
-        MatrixPrinter.print(Manipulator.getResult());
+        var OBE = new OBERunner(M); 
+        OBE.gausJordanElimination();
+        MatrixPrinter.print(OBE.getResult());
+
+        var Manipulator = new MatrixManipulator(OBE.getResult());
         return Manipulator.getCol(M.col - 1);
     }
 
