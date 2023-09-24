@@ -96,7 +96,6 @@ public class OBERunner {
     }
 
     public OBELog[] getLogs(){
-        System.out.println(this.logs.size());
         var l = new OBELog[this.logs.size()];
         for(int i = 0; i < l.length; ++i) l[i] = this.logs.get(i);
         return l;
