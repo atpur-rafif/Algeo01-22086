@@ -1,9 +1,9 @@
 package Matrix;
 
 public class MatrixManipulator {
-    public Matrix M;
-    public int col;
-    public int row;
+    public final Matrix M;
+    public final int col;
+    public final int row;
 
     public MatrixManipulator(Matrix M){
         this.M = M.copy();
