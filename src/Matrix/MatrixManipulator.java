@@ -2,9 +2,13 @@ package Matrix;
 
 public class MatrixManipulator {
     public Matrix M;
+    public int col;
+    public int row;
 
     public MatrixManipulator(Matrix M){
         this.M = M.copy();
+        this.col = M.col;
+        this.row = M.row;
     }
 
     public double get(int row, int col){
