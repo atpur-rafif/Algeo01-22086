@@ -1,4 +1,4 @@
-package Matrix.OBE.Type;
+package Matrix.OBE.LogType;
 
 import Matrix.OBE.OBELog;
 import Matrix.OBE.OBELogType;
