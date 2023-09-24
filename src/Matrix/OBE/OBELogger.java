@@ -6,10 +6,10 @@ public abstract class OBELogger {
     OBELogType type;
 
     OBELogger(){
-        OBELog p = new SwitchRow(1, 2);
+        OBELog p = new MultiplyRow(1, 2);
 
-        if(p.type == OBELogType.SwitchRow){
-            SwitchRow k = (SwitchRow) p;
+        if(p.type == OBELogType.MultiplyRow){
+            var k = (SwitchRow) p;
         }
     }
 }
