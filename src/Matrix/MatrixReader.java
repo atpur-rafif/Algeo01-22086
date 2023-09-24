@@ -12,6 +12,10 @@ public class MatrixReader {
         System.out.print("Masukkan kolom: ");
         int col = Integer.parseInt(scanner.next());
 
+        return MatrixReader.read(row, col);
+    }
+
+    public static Matrix read(int row, int col){
         var M = new Matrix(row, col);
 
         for(int i = 0; i < row; ++i){
