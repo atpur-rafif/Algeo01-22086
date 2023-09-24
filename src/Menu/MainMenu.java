@@ -4,6 +4,7 @@ import java.util.Scanner;
 import Matrix.*;
 import Application.*;
 
+
 public class MainMenu {
     static Scanner scanner = new Scanner(System.in);
     
@@ -17,7 +18,10 @@ public class MainMenu {
                 "2. Regresi Linear Berganda", 
                 "3. Bicubic Spline Interpolation",    
                 "4. Image Interpolation",   
-                "5. Quit",
+                "5. Sistem Persamaan Linear", 
+                "6. Determinan", 
+                "7. Inverse Matriks", 
+                "8. Quit",
             });
             System.out.print("input> ");
             String choice = scanner.next();
@@ -34,11 +38,18 @@ public class MainMenu {
                     BicubicSplineMenu();
                     break;
 
-                case "5": 
+                case "4": 
                     ImageInterpolation();
                     break; 
 
+                case "5":
+                    SPLMenu();
+                    break;
+                
                 case "6": 
+                    determinantMenu();
+                    break;
+                case "8": 
                     isRunning = false;
                     break; 
                 default:
@@ -57,6 +68,7 @@ public class MainMenu {
     private static void RegresiLinearMenu(){
         boolean isRegresi = true;
         while(isRegresi == true){
+            System.out.print("\033\143");
             PrintListMenu(new String[]{
                 "=============================Regresi Linear Menu=================================", 
                 "1. CLI", 
@@ -71,12 +83,21 @@ public class MainMenu {
                 case "1":
                     boolean isCLI = true; 
                     while(isCLI == true){
-                        System.out.println("Masukkan sample Point: "); 
-                        Matrix samplePoint = MatrixReader.read();
-                        double solvedSamplePoint[] =  MultipleLinear.solve(samplePoint);  
+                        System.out.println("Masukkan sample Point");
+                        System.out.print("Masukkan banyak peubah: ");
+
+                        int n = Integer.parseInt(scanner.next()); 
+                        System.out.print("Masukkan banyak sampel: ");
+
+                        int m = Integer.parseInt(scanner.next());
+                        Matrix samplePoint = MatrixReader.read(m, n);
+
+                        double solvedSamplePoint[] =  MultipleLinear.solve(samplePoint); 
+                        System.out.print("Hasil: ["); 
                         for(int i = 0; i < solvedSamplePoint.length; ++i){
-                            System.out.println(solvedSamplePoint[i]);
+                            System.out.print(solvedSamplePoint[i]+ " ");
                         }
+                        System.out.println("]"); 
                         isCLI = false; 
                     }
                     break;
@@ -102,7 +123,29 @@ public class MainMenu {
         
     }
 
+
     private static void ImageInterpolation(){
+
+    }
+
+    private static void SPLMenu(){
+        PrintListMenu(new String[]{
+            "1. Metode eliminasi Gauss", 
+            "2. Metode eliminasi Gauss-jordan", 
+            "3. Metode Matriks balikan", 
+            "4. Kaidah Cramer"
+        });
+    }
+
+    public static void determinantMenu(){
+        PrintListMenu(new String[]{
+            "1. Ekspansi Kofaktor",
+            "2. OBE"
+        });
+        boolean isDeterminant = true; 
+        while(isDeterminant == true){
+
+        }
 
     }
     //Printer untuk string dari semua menu
@@ -111,6 +154,7 @@ public class MainMenu {
             System.out.println(str);
         }
     }
+
 
 
 }
