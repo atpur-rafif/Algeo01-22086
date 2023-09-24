@@ -1,65 +1,116 @@
 package Menu;
 
 import java.util.Scanner;
-<<<<<<< HEAD
-import java.lang.Runtime;
 import Matrix.*;
-=======
-
->>>>>>> main
+import Application.*;
 
 public class MainMenu {
     static Scanner scanner = new Scanner(System.in);
     
     public static void InterfaceProgram(){
-        System.out.println("================Halo Selamat Datang==================");
-        System.out.println("=====================================================");
-<<<<<<< HEAD
-        System.out.println("\n");
-=======
-        System.out.println("\n\n");
-        System.out.println("===================List Program======================");
->>>>>>> main
-        ListProgram();
-        System.out.println("Masukkan Input: ");
-        System.out.print("> ");
-        int choice = Integer.parseInt(scanner.next());
-        while (choice >= 1 && choice < 9) {
-            System.out.println("test");
-<<<<<<< HEAD
-            ListProgram();
-            choice = Integer.parseInt(scanner.next());
-            
-=======
-            choice = Integer.parseInt(scanner.next());
+        boolean isRunning = true;
+        while(isRunning == true){
+            PrintListMenu(new String[]{
+                "================================Selamat Datang=================================", 
+                "Program Matrix Application", 
+                "1. Interpolasi Polinomial", 
+                "2. Regresi Linear Berganda", 
+                "3. Bicubic Spline Interpolation",    
+                "4. Image Interpolation",   
+                "5. Quit",
+            });
+            System.out.print("input> ");
+            String choice = scanner.next();
+            switch (choice) {
+                case "1":
+                    InterpolasiMenu();
+                    break;
+                
+                case "2": 
+                    RegresiLinearMenu();
+                    break;
 
->>>>>>> main
+                case "3": 
+                    BicubicSplineMenu();
+                    break;
+
+                case "5": 
+                    ImageInterpolation();
+                    break; 
+
+                case "6": 
+                    isRunning = false;
+                    break; 
+                default:
+                    System.out.println("Input tidak valid");
+                    break;
+            }
+
         }
+        
+    }
+    
+    private static void InterpolasiMenu(){
 
     }
 
-    private static void ListProgram(){
-<<<<<<< HEAD
-        System.out.println("===================List Program======================");
-        System.out.println("1. Gaussian Elimination");
-        System.out.println("2. Inverse Matrix");
-        System.out.println("3. Determinant");
-        System.out.println("4. Interpolinom");
-        System.out.println("5. Multiple Linear");
-        System.out.println("6. Bicubic Spline");
-        System.out.println("7. Quit");
+    private static void RegresiLinearMenu(){
+        boolean isRegresi = true;
+        while(isRegresi == true){
+            PrintListMenu(new String[]{
+                "=============================Regresi Linear Menu=================================", 
+                "1. CLI", 
+                "2. File", 
+                "3. Back",
+                "*Note: Pilih menggunakan angka yang sesuai",
+            });
 
+            System.out.print("> ");
+            String choice = scanner.next();
+            switch (choice) {
+                case "1":
+                    boolean isCLI = true; 
+                    while(isCLI == true){
+                        System.out.println("Masukkan sample Point: "); 
+                        Matrix samplePoint = MatrixReader.read();
+                        double solvedSamplePoint[] =  MultipleLinear.solve(samplePoint);  
+                        for(int i = 0; i < solvedSamplePoint.length; ++i){
+                            System.out.println(solvedSamplePoint[i]);
+                        }
+                        isCLI = false; 
+                    }
+                    break;
+                
+                case "2": 
+                    break;
+
+                case "3": 
+                    isRegresi = false; 
+                    break;
+
+                default:
+                    System.out.println("Input tidak valid");
+                    break;
+            }
+
+        }
+        
     }
 
-=======
-        System.out.println("1. Gauss Elimination");
-        System.out.println("2. GaussJordan Elimination");
-        System.out.println("3. Inverse Matrix");
-        System.out.println("4. Determinant");
-        System.out.println("5. Interpolinom");
-        System.out.println("6. Multiple Linear");
-        System.out.println("7. Bicubic Spline");
-        System.out.println("8. Quit");
+
+    private static void BicubicSplineMenu(){
+        
     }
->>>>>>> main
+
+    private static void ImageInterpolation(){
+
+    }
+    //Printer untuk string dari semua menu
+    private static void PrintListMenu(String[] strings) {
+        for (String str : strings) {
+            System.out.println(str);
+        }
+    }
+
+
 }
