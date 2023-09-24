@@ -9,13 +9,13 @@ public class MatrixDeterminantWithOBE{
     public static double determinantOBE(Matrix A){
         double det = 1;
         var R = new OBERunner(A);
-        R.gaussianElimination();
+        R.gaussianElimination_v2();
         var M = R.getResult();
-        int sign = 1;
+        int sign = 0;
         double divider = 1;
         var logs = R.getLogs();
         for(int i = 0; i < logs.length; ++i){
-            if(logs[i] instanceof SwitchRow) sign *= -1;
+            if(logs[i] instanceof SwitchRow) sign += 1;
             else if (logs[i] instanceof MultiplyRow) {
                 var log = (MultiplyRow) logs[i];
                 divider *= log.multiplier;
@@ -24,7 +24,8 @@ public class MatrixDeterminantWithOBE{
         for (int j=0;j<M.col;j++){
             det *= M.get(j, j);
         }
-        return (sign*det)/divider;
+        System.out.println(sign);
+        return det*Math.pow(-1, sign);
     }
     
 }

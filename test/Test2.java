@@ -1,5 +1,5 @@
 import Matrix.*;
-
+import Matrix.OBE.OBERunner;
 import Application.*;
 import Matrix.*;
 import Point.*;
@@ -9,6 +9,8 @@ import Image.*;
 public class Test2 {
     public static void main(String[] args){
         var M = MatrixReader.read();
-        System.out.println(MatrixDeterminantWithOBE.determinantOBE(M));
+        var O = new OBERunner(M);
+        O.gaussianElimination_v2();
+        MatrixPrinter.print(O.getResult());
     }
 }
