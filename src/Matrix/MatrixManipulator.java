@@ -7,6 +7,14 @@ public class MatrixManipulator {
         this.M = M.copy();
     }
 
+    public double get(int row, int col){
+        return this.M.get(row, col);
+    }
+
+    public void set(int row, int col, double newValue){
+        this.M.set(row, col, newValue);
+    }
+
     public double[] getRow(int row){
         var r = new double[this.M.col];
         for(int i = 0; i < this.M.col; ++i) r[i] = this.M.get(row, i);
