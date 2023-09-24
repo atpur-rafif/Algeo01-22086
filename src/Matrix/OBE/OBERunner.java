@@ -74,7 +74,7 @@ public class OBERunner {
     }
 
     public void gaussianElimination_v2(){
-        for(int i=0;i<this.Manipulator.col;i++){
+        for(int i=0;i<this.Manipulator.row;i++){
             double maks = this.Manipulator.get(i, i);
             int idrMaks = i;
             for(int j=i+1;j<this.Manipulator.row;j++){
@@ -102,6 +102,20 @@ public class OBERunner {
                 for(int j = 0; j < i; ++j){
                     this.linearCombinationOfRow(j, i, (-1) * this.Manipulator.M.get(j, mostLeft));
                 }
+            }
+        }
+    }
+
+        public void gaussJordanElimination_v2(){
+        this.gaussianElimination_v2();
+        for (int i=this.Manipulator.row-1;i>0;i--){
+            for (int j=i;j>0;j--){
+                this.linearCombinationOfRow(j-1, i, (-1)*this.Manipulator.get(j-1, i)/this.Manipulator.get(i,i));
+            }
+        }
+        for (int k=0;k<this.Manipulator.row;k++){
+            if (this.Manipulator.get(k, k)!=1){
+                this.multiplyRow(k,1/this.Manipulator.get(k,k));
             }
         }
     }

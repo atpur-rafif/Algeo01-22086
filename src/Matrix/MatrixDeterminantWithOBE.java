@@ -6,7 +6,7 @@ import Matrix.OBE.LogType.SwitchRow;
 
 public class MatrixDeterminantWithOBE{
 
-    public static double determinantOBE(Matrix A){
+    public static double calculate(Matrix A){
         double det = 1;
         var R = new OBERunner(A);
         R.gaussianElimination_v2();
@@ -24,8 +24,8 @@ public class MatrixDeterminantWithOBE{
         for (int j=0;j<M.col;j++){
             det *= M.get(j, j);
         }
-        System.out.println(sign);
-        return det*Math.pow(-1, sign);
+        
+        return (det*Math.pow(-1, sign))/divider;
     }
     
 }
