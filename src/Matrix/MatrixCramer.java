@@ -1,19 +1,38 @@
-/*package Matrix;
+package Matrix;
 
 public class MatrixCramer {
-
-
-    public static double[] cramer(Matrix M, Matrix B){
-        double[] solution; 
+    public static double[] calculateSolution(Matrix M, Matrix B){
+        Matrix matforcalculation;
+        double[] solution;
         double det;
-        det = MatrixDeterminantWithOBE.determinantOBE(M);
-        var constant = new MatrixManipulator(B).getCol(0);
+        var cons = new MatrixManipulator(B);
+        det = MatrixDeterminant.calculate(M);
         solution = new double[M.col];
         for (int i=0;i<M.col;i++){
-            var solution_i = new MatrixManipulator(M);
-            solution_i.setCol(i,constant);
-            solution[i] = (MatrixDeterminantWithOBE.determinantOBE(solution_i.getResult()))/det;
+            var edit = new MatrixManipulator(M);
+            edit.setCol(i, cons.getCol(0));
+            matforcalculation = edit.getResult();
+            solution[i] = MatrixDeterminant.calculate(matforcalculation)/det;
         }
         return solution;
     }
-}*/
+
+    public static double[] calculateAugmented(Matrix M){
+        var A = new Matrix(M.row,M.col-1);
+        var B = new Matrix(M.row,1);
+        var base = new MatrixManipulator(M);
+        var newA = new MatrixManipulator(A);
+        var newB = new MatrixManipulator(B);
+
+        for (int i=0;i<A.col;i++){
+            newA.setCol(i,base.getCol(i));
+        }
+        newB.setCol(0, base.getCol(M.col-1));
+
+        A = newA.getResult();
+        B = newB.getResult();
+
+        return calculateSolution(A, B);
+    }
+
+}
