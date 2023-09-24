@@ -50,12 +50,40 @@ public class MatrixReader {
                 isReadFileSucceed = true;
                 fileScanner.close();
             }
-            catch(IOException wrong) {
-                System.out.println("Cant Read File");
-
+            catch (IOException e) {
+                System.out.println("Tidak bisa membaca file");
+                System.out.println("Masukkan Path lagi? (Y/N)");
+                System.out.print("> ");
+                String choice = scanner.next(); 
+                if(choice.equals("Y") || choice.equals("y")){
+                    System.out.print("Masukkan Path lagi: ");
+                    fileName = scanner.next();
+                }
+                else if(choice.equals("N") || choice.equals("n")){
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Format File salah");
+                System.out.print("Masukkan Path lagi: ");
+                System.out.println("Masukkan Path lagi? (Y/N)");
+                System.out.print("> ");
+                String choice = scanner.next(); 
+                if(choice.equals("Y") || choice.equals("y")){
+                    System.out.print("Masukkan Path lagi: ");
+                    fileName = scanner.next();
+                }
+                else if(choice.equals("N") || choice.equals("n")){
+                    break;
+                }
             }
         }
 
         return M;
     }
+
+    public static Matrix readFileCLI() {
+        System.out.print("Masukkan path: ");
+        return readFile(scanner.next());
+    }
+
 }
