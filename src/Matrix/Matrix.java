@@ -1,9 +1,9 @@
 package Matrix;
 
 public class Matrix{
-    public int row;
-    public int col;
-    private double[][] data;
+    public final int row;
+    public final int col;
+    private final double[][] data;
 
     public Matrix(int row, int col){
         this.data = new double[row][col];
