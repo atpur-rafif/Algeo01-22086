@@ -6,28 +6,39 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class MatrixReader {
-    static Scanner scanner = new Scanner(System.in);
+    static Scanner cliScanner = new Scanner(System.in);
     static BufferedReader file;
-    
-    public static Matrix read(){
-        System.out.print("Masukkan baris: ");
-        int row = Integer.parseInt(scanner.next());
-        
-        System.out.print("Masukkan kolom: ");
-        int col = Integer.parseInt(scanner.next());
-        
-        return MatrixReader.read(row, col);
+
+    public static Matrix read(Scanner s){
+        int row = Integer.parseInt(s.next());
+        int col = Integer.parseInt(s.next());
+        return read(s, row, col);
     }
-    
-    public static Matrix read(int row, int col){
+
+    public static Matrix read(Scanner s, int row, int col){
         var M = new Matrix(row, col);
 
         for(int i = 0; i < row; ++i){
             for(int j = 0; j < col; ++j){
-                M.set(i, j, Double.parseDouble(scanner.next()));
+                M.set(i, j, Double.parseDouble(s.next()));
             }
         }
+
         return M;
+    }
+    
+    public static Matrix readCLI(){
+        System.out.print("Masukkan baris: ");
+        int row = Integer.parseInt(cliScanner.next());
+        
+        System.out.print("Masukkan kolom: ");
+        int col = Integer.parseInt(cliScanner.next());
+        
+        return read(cliScanner, row, col);
+    }
+    
+    public static Matrix readCLI(int row, int col){
+        return read(cliScanner, row, col);
     }
 
     public static Matrix readFile(String fileName){
@@ -37,15 +48,7 @@ public class MatrixReader {
             try {
                 file = new BufferedReader(new FileReader(fileName));
                 var fileScanner = new Scanner(file);
-                int row = Integer.parseInt(fileScanner.next());
-                int col = Integer.parseInt(fileScanner.next());
-                M = new Matrix(row, col); 
-        
-                for(int i = 0; i < row; ++i){
-                    for(int j = 0; j < col; ++j){
-                        M.set(i, j, Double.parseDouble(fileScanner.next()));
-                    }
-                }
+                M = read(fileScanner);
                 isReadFileSucceed = true;
                 fileScanner.close();
             }
@@ -53,10 +56,10 @@ public class MatrixReader {
                 System.out.println("Tidak bisa membaca file");
                 System.out.println("Masukkan Path lagi? (Y/N)");
                 System.out.print("> ");
-                String choice = scanner.next(); 
+                String choice = cliScanner.next(); 
                 if(choice.equals("Y") || choice.equals("y")){
                     System.out.print("Masukkan Path lagi: ");
-                    fileName = scanner.next();
+                    fileName = cliScanner.next();
                 }
                 else if(choice.equals("N") || choice.equals("n")){
                     break;
@@ -66,10 +69,10 @@ public class MatrixReader {
                 System.out.print("Masukkan Path lagi: ");
                 System.out.println("Masukkan Path lagi? (Y/N)");
                 System.out.print("> ");
-                String choice = scanner.next(); 
+                String choice = cliScanner.next(); 
                 if(choice.equals("Y") || choice.equals("y")){
                     System.out.print("Masukkan Path lagi: ");
-                    fileName = scanner.next();
+                    fileName = cliScanner.next();
                 }
                 else if(choice.equals("N") || choice.equals("n")){
                     break;
@@ -82,7 +85,7 @@ public class MatrixReader {
 
     public static Matrix readFileCLI() {
         System.out.print("Masukkan path: ");
-        return readFile(scanner.next());
+        return readFile(cliScanner.next());
     }
 
 }
