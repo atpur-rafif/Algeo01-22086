@@ -90,7 +90,7 @@ public class MainMenu {
 
                     System.out.print("Masukkan banyak sampel: ");
                     int m = Integer.parseInt(scanner.next());
-                    Matrix samplePoint = MatrixReader.read(m, n);
+                    Matrix samplePoint = MatrixReader.readCLI(m, n);
                     double solvedSamplePoint[] =  MultipleLinear.solve(samplePoint); 
                     System.out.print("Hasil: ["); 
                     for(int i = 0; i < solvedSamplePoint.length; ++i){

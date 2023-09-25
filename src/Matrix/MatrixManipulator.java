@@ -1,10 +1,22 @@
 package Matrix;
 
 public class MatrixManipulator {
-    public Matrix M;
+    public final Matrix M;
+    public final int col;
+    public final int row;
 
     public MatrixManipulator(Matrix M){
         this.M = M.copy();
+        this.col = M.col;
+        this.row = M.row;
+    }
+
+    public double get(int row, int col){
+        return this.M.get(row, col);
+    }
+
+    public void set(int row, int col, double newValue){
+        this.M.set(row, col, newValue);
     }
 
     public double[] getRow(int row){

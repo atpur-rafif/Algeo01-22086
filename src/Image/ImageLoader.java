@@ -10,7 +10,7 @@ public class ImageLoader {
         try {
             buff = ImageIO.read(new File(path));
         } catch (Exception e) {
-            System.out.print(e);
+            e.printStackTrace();
         }
 
         return Grayscale.fromImage(buff);

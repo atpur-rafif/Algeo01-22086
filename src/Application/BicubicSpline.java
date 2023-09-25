@@ -8,7 +8,7 @@ public class BicubicSpline{
     private static int indepentdentVariableCount = BicubicSplineSpace.indepentdentVariableCount;
     private static Transformation transformation = new BicubicSplineTranformation();
 
-    public static EquationSpace getEquation(VectorSpace v){
+    public static EquationSpace getEquation(EuclideanSpace v){
         var ev = transformation.apply(v);
         var e = new EquationSpace(indepentdentVariableCount);
         for(int i = 0; i < indepentdentVariableCount; ++i) e.set(i, ev.get(i));

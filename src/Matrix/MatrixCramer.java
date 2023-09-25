@@ -6,13 +6,13 @@ public class MatrixCramer {
         double[] solution;
         double det;
         var cons = new MatrixManipulator(B);
-        det = MatrixDeterminant.calculate(M);
+        det = MatrixDeterminantWithOBE.calculate(M);
         solution = new double[M.col];
         for (int i=0;i<M.col;i++){
             var edit = new MatrixManipulator(M);
             edit.setCol(i, cons.getCol(0));
             matforcalculation = edit.getResult();
-            solution[i] = MatrixDeterminant.calculate(matforcalculation)/det;
+            solution[i] = MatrixDeterminantWithOBE.calculate(matforcalculation)/det;
         }
         return solution;
     }
