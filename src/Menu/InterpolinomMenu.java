@@ -2,6 +2,9 @@ package Menu;
 
 
 import java.util.Scanner;
+import Matrix.MatrixReader;
+import Application.*;
+
 public class InterpolinomMenu {
     static Scanner scanner = new Scanner(System.in);
 
@@ -16,10 +19,19 @@ public class InterpolinomMenu {
                 
                 //CLI
                 case "1": 
+                    var Matriks = readPoint();
+                    double x = Double.parseDouble(scanner.next());
+                    double result= PolynomialInterp.f(Matriks, x);
+                    System.out.println("Hasil: "+ result);
+
 
                     break;
                 //FILE
                 case "2": 
+                    var MatriksFile = MatrixReader.readFileCLI();
+                    double xFile = Double.parseDouble(scanner.next());
+                    double resultFile= PolynomialInterp.f(MatriksFile, xFile);
+                    System.out.println("Hasil: "+ resultFile);
 
                     break; 
 
@@ -30,4 +42,6 @@ public class InterpolinomMenu {
             }
         }
     }
+
+ 
 }
