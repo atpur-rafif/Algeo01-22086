@@ -1,23 +1,25 @@
 package GUI;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
 
 import java.awt.event.*;
 
 public class MainApp{
-    static int counter = 0;
+    static int resetCounter = 0;
     public static void Show(){
         var frame = new JFrame("Matrix");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        var label = new JLabel("Hello");
-        var button = new JButton("Add");
+        var label = new JLabel("Reset Counter: 0");
+        var button = new JButton("Reset");
+        var textArea = new JTextArea(10, 10);
+
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                counter += 1;
-                label.setText("Count: " + counter);
+                resetCounter += 1;
+                label.setText("Reset Counter: " + resetCounter);
+                textArea.setText("");
                 frame.pack();
             }
         });
@@ -30,9 +32,12 @@ public class MainApp{
         layout.setAutoCreateContainerGaps(true);
 
         layout.setHorizontalGroup(
-            layout.createSequentialGroup()
-                .addComponent(label)
-                .addComponent(button)
+            layout.createParallelGroup()
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(label)
+                    .addComponent(button)
+                )
+                .addComponent(textArea)
         );
 
         layout.setVerticalGroup(
@@ -41,6 +46,7 @@ public class MainApp{
                     .addComponent(label)
                     .addComponent(button)
                 )
+                .addComponent(textArea)
         );
 
         frame.pack();
