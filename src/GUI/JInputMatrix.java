@@ -17,12 +17,75 @@ enum InputType{
     File
 }
 
-public class JInputMatrix extends JPanel{
-    public JTextArea textArea = new JTextArea(10, 30);
-    public JComboBox<InputType> inputType = new JComboBox<InputType>(InputType.values());
-    public JLabel output = new JLabel("Output");
+abstract class MatrixInputComponent{
+    public abstract String toString();
+    public abstract Component getComponent();
+    public abstract String getValue();
+}
 
-    static int resetCounter = 0;
+class Basic extends MatrixInputComponent{
+    Component component = new JLabel("Basic");
+
+    @Override
+    public String toString() {
+        return "Basic";
+    }
+
+    @Override
+    public Component getComponent() {
+        return this.component;
+    }
+
+    @Override
+    public String getValue() {
+        return "Basic";
+    }
+}
+
+class CLI extends MatrixInputComponent{
+    Component component = new JLabel("CLI");
+
+    @Override
+    public String toString() {
+        return "CLI";
+    }
+
+    @Override
+    public Component getComponent() {
+        return this.component;
+    }
+
+    @Override
+    public String getValue() {
+        return "CLI";
+    }
+}
+
+class File extends MatrixInputComponent{
+    Component component = new JLabel("File");
+
+    @Override
+    public String toString() {
+        return "File";
+    }
+
+    @Override
+    public Component getComponent() {
+        return this.component;
+    }
+
+    @Override
+    public String getValue() {
+        return "File";
+    }
+}
+
+public class JInputMatrix extends JPanel{
+    public MatrixInputComponent[] inputTypes = new MatrixInputComponent[]{new Basic(), new CLI(), new File()};
+
+    public JTextArea textArea = new JTextArea(10, 30);
+    public JComboBox<MatrixInputComponent> inputType = new JComboBox<MatrixInputComponent>(inputTypes);
+    public JLabel output = new JLabel("Output");
 
     void parseAndShowResult(){
         try {
