@@ -6,4 +6,9 @@ public class EquationSpace extends VectorSpace{
         super(indepentdentVariableCount);
         this.independentVariableCount = indepentdentVariableCount;
     }
+
+	@Override
+	protected EquationSpace _createNewZeroVector() {
+        return new EquationSpace(this.independentVariableCount);
+	}
 }
