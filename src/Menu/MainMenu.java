@@ -30,7 +30,6 @@ public class MainMenu {
                 case "1":
                     InterpolasiMenu();
                     break;
-                
                 case "2": 
                     RegresiLinearMenu();
                     break;
@@ -131,7 +130,25 @@ public class MainMenu {
     private static void SPLMenu(){
         boolean isSPL = true; 
         while(isSPL == true){
-
+            boolean isInput = true;
+            PrintListMenu(new String[]{
+                "=============================Sistem Persamaan Linear Menu=================================", 
+                "1. Metode Gauss", 
+                "2. Metode GaussJordan", 
+                "3. Metode Cramer",
+                "4. Back",
+                "*Note: Pilih menggunakan angka yang sesuai",
+            });
+            System.out.print("> ");
+            String choice = scanner.next(); 
+            switch(choice){
+                case "1":
+                while(isInput){
+                    RepetitivePrinter(5);
+                    System.out.print("> ");
+                    
+                }
+            }
         }
     }
 
@@ -257,19 +274,16 @@ public class MainMenu {
                                 System.out.println("Matris Inverse: ");
                                 MatrixPrinter.print(inversedMatrix);
                                 break;
-
                             case "2":
                                 Matrix = MatrixReader.readFileCLI(); 
                                 inversedMatrix = MatrixInverse.calculateWithGaussJordan(Matrix);
                                 System.out.println("Matris Inverse: ");
                                 MatrixPrinter.print(inversedMatrix);
                                 break;
-
                             case "3": 
                                 clear();
                                 isInput = false;
                                 break;
-
                             default: 
                                 clear();
                                 System.out.println("Input tidak valid");
@@ -317,12 +331,9 @@ public class MainMenu {
             }
         }
     }
+
+
     //Printer untuk string dari semua menu
-
-
-
-
-
     private static void PrintListMenu(String[] strings) {
         for (String str : strings) {
             System.out.println(str);
@@ -341,6 +352,9 @@ public class MainMenu {
         if(Menu == 2){
             printerMenu[0] = "==============================Regresi Linear Berganda================================";
         }
+        else if(Menu == 5){
+            printerMenu[0] = "=============================Sistem Persamaan Linear Menu=================================";
+        }
         else if(Menu == 6){
             printerMenu[0] = "================================Determinant Menu======================================";
         }
@@ -353,8 +367,4 @@ public class MainMenu {
     private static void clear(){
         System.out.print("\033\143");
     }
-
-
-
-
 }
