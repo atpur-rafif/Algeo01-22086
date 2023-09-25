@@ -2,6 +2,7 @@ package Matrix;
 
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -41,27 +42,33 @@ public class MatrixReader {
         return read(cliScanner, row, col);
     }
 
-    public static Matrix readFile(String fileName){
+    public static Matrix readFile(String fileName) throws FileNotFoundException{
         var M = new Matrix(0, 0);
-        boolean isReadFileSucceed = false; 
-        while(!isReadFileSucceed) {
+        file = new BufferedReader(new FileReader(fileName));
+        var fileScanner = new Scanner(file);
+        M = read(fileScanner);
+        fileScanner.close();
+        return M;
+    }
+
+    public static Matrix readFileCLI() {
+        System.out.print("Masukkan path: ");
+        var fileName = cliScanner.next();
+        var M = new Matrix(0, 0);
+        boolean isReadFileSucceed = false;
+        while (!isReadFileSucceed) {
             try {
-                file = new BufferedReader(new FileReader(fileName));
-                var fileScanner = new Scanner(file);
-                M = read(fileScanner);
+                M = readFile(fileName);
                 isReadFileSucceed = true;
-                fileScanner.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 System.out.println("Tidak bisa membaca file");
                 System.out.println("Masukkan Path lagi? (Y/N)");
                 System.out.print("> ");
-                String choice = cliScanner.next(); 
-                if(choice.equals("Y") || choice.equals("y")){
+                String choice = cliScanner.next();
+                if (choice.equals("Y") || choice.equals("y")) {
                     System.out.print("Masukkan Path lagi: ");
                     fileName = cliScanner.next();
-                }
-                else if(choice.equals("N") || choice.equals("n")){
+                } else if (choice.equals("N") || choice.equals("n")) {
                     break;
                 }
             } catch (NumberFormatException e) {
@@ -69,12 +76,11 @@ public class MatrixReader {
                 System.out.print("Masukkan Path lagi: ");
                 System.out.println("Masukkan Path lagi? (Y/N)");
                 System.out.print("> ");
-                String choice = cliScanner.next(); 
-                if(choice.equals("Y") || choice.equals("y")){
+                String choice = cliScanner.next();
+                if (choice.equals("Y") || choice.equals("y")) {
                     System.out.print("Masukkan Path lagi: ");
                     fileName = cliScanner.next();
-                }
-                else if(choice.equals("N") || choice.equals("n")){
+                } else if (choice.equals("N") || choice.equals("n")) {
                     break;
                 }
             }
@@ -82,10 +88,4 @@ public class MatrixReader {
 
         return M;
     }
-
-    public static Matrix readFileCLI() {
-        System.out.print("Masukkan path: ");
-        return readFile(cliScanner.next());
-    }
-
 }
