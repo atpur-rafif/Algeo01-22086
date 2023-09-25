@@ -15,6 +15,5 @@ public class Test {
         var image = ImageLoader.load("./test/debug.png");
         var resized = Resize.resize(image, 100);
         ImageSaver.save(resized, "./tmp/debug-res.png");
-        */
     }
 }
