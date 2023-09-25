@@ -19,18 +19,19 @@ public class VectorSpace{
     }
 
     @SuppressWarnings("unchecked")
-    private static <T extends VectorSpace> T createBase(T t){
+    public static <T extends VectorSpace> T createNewBase(T t){
         try {
             var clazz = t.getClass();
             t = (T) clazz.getDeclaredConstructor(int.class).newInstance(t.basisCount);
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return t;
     }
 
     public static <T extends VectorSpace> T add(T v1, T v2){
         if(v1.basisCount != v2.basisCount) throw new Error("Basis count should be equal");
-        var r = createBase(v1);
+        var r = createNewBase(v1);
         for (int i = 0; i < v1.basisCount; ++i) {
             r.set(i, v1.get(i) + v2.get(i));
         }
@@ -38,7 +39,7 @@ public class VectorSpace{
     }
 
     public static <T extends VectorSpace> T scale(T v, double s){
-        var r = createBase(v);
+        var r = createNewBase(v);
         for(int i = 0; i < v.basisCount; ++i) r.set(i, v.get(i) * s);
         return r;
     }
