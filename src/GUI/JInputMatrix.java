@@ -11,9 +11,17 @@ import java.awt.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+enum InputType{
+    Basic,
+    CLI,
+    File
+}
+
 public class JInputMatrix extends JPanel{
     public JTextArea textArea = new JTextArea(10, 30);
+    public JComboBox<InputType> inputType = new JComboBox<InputType>(InputType.values());
     public JLabel output = new JLabel("Output");
+
     static int resetCounter = 0;
 
     void parseAndShowResult(){
@@ -61,6 +69,7 @@ public class JInputMatrix extends JPanel{
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addComponent(titleLabel)
+                .addComponent(inputType)
                 .addComponent(textArea)
                 .addComponent(output)
         );
@@ -68,6 +77,7 @@ public class JInputMatrix extends JPanel{
         layout.setVerticalGroup(
             layout.createSequentialGroup()
                 .addComponent(titleLabel)
+                .addComponent(inputType)
                 .addComponent(textArea)
                 .addComponent(output)
         );
