@@ -8,13 +8,8 @@ import Vector.VectorSpace;
 
 public class Test {
     public static void main(String[] args){
-        var m = MatrixReader.readCLI();
-        MatrixPrinter.print(m);
-
-        /*
         var image = ImageLoader.load("./test/debug.png");
         var resized = Resize.resize(image, 100);
         ImageSaver.save(resized, "./tmp/debug-res.png");
-        */
     }
 }
