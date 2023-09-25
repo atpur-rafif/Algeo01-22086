@@ -2,28 +2,25 @@ package GUI;
 
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.*;
 
 import Matrix.MatrixPrinter;
 import Matrix.MatrixReader;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-enum InputType{
-    Basic,
-    CLI,
-    File
-}
-
-abstract class MatrixInputComponent{
+abstract class MatrixInputField{
     public abstract String toString();
     public abstract Component getComponent();
     public abstract String getValue();
 }
 
-class Basic extends MatrixInputComponent{
+class Basic extends MatrixInputField{
     Component component = new JLabel("Basic");
 
     @Override
@@ -33,16 +30,16 @@ class Basic extends MatrixInputComponent{
 
     @Override
     public Component getComponent() {
-        return this.component;
+        return component;
     }
 
     @Override
     public String getValue() {
-        return "Basic";
+        return "Basic duls";
     }
 }
 
-class CLI extends MatrixInputComponent{
+class CLI extends MatrixInputField{
     Component component = new JLabel("CLI");
 
     @Override
@@ -52,16 +49,16 @@ class CLI extends MatrixInputComponent{
 
     @Override
     public Component getComponent() {
-        return this.component;
+        return component;
     }
 
     @Override
     public String getValue() {
-        return "CLI";
+        return "CLI duls";
     }
 }
 
-class File extends MatrixInputComponent{
+class File extends MatrixInputField{
     Component component = new JLabel("File");
 
     @Override
@@ -71,25 +68,43 @@ class File extends MatrixInputComponent{
 
     @Override
     public Component getComponent() {
-        return this.component;
+        return component;
     }
 
     @Override
     public String getValue() {
-        return "File";
+        return "File duls";
     }
 }
 
 public class JInputMatrix extends JPanel{
-    public MatrixInputComponent[] inputTypes = new MatrixInputComponent[]{new Basic(), new CLI(), new File()};
+    public MatrixInputField[] inputTypes = new MatrixInputField[]{new Basic(), new CLI(), new File()};
 
-    public JTextArea textArea = new JTextArea(10, 30);
-    public JComboBox<MatrixInputComponent> inputType = new JComboBox<MatrixInputComponent>(inputTypes);
+    public JComboBox<MatrixInputField> inputType = new JComboBox<MatrixInputField>(inputTypes);
+    public JPanel inputPanel = new JPanel();
     public JLabel output = new JLabel("Output");
+
+    MatrixInputField getSelectedInputField(){
+        return (MatrixInputField) inputType.getSelectedItem();
+    }
+
+    void repack(){
+        var frame = SwingUtilities.getWindowAncestor(this);
+        if(frame != null) frame.pack();
+    }
+
+    void refreshInputType(){
+        var c = getSelectedInputField().getComponent();
+        inputPanel.removeAll();
+        inputPanel.add(c);
+        inputPanel.revalidate();
+        inputPanel.repaint();
+        repack();
+    }
 
     void parseAndShowResult(){
         try {
-            var s = new Scanner(textArea.getText());
+            var s = new Scanner(getSelectedInputField().getValue());
             var m = MatrixReader.read(s);
             MatrixPrinter.print(m);
             output.setForeground(Color.BLACK);
@@ -113,27 +128,22 @@ public class JInputMatrix extends JPanel{
         var titleLabel = new JLabel("Matrix Input");
 
         var layout = new GroupLayout(this);
-        this.setLayout(layout);
+        setLayout(layout);
 
-        textArea.getDocument().addDocumentListener(new DocumentListener() {
+        refreshInputType();
+        inputType.addActionListener(new ActionListener() {
 			@Override
-			public void insertUpdate(DocumentEvent e) { update(e); }
-			@Override
-			public void removeUpdate(DocumentEvent e) { update(e); }
-			@Override
-			public void changedUpdate(DocumentEvent e) { update(e); }
-
-            protected void update(DocumentEvent e){
-                parseAndShowResult();
-                SwingUtilities.getWindowAncestor(textArea).pack();
-            }
+			public void actionPerformed(ActionEvent e) { refreshInputType(); }
         });
+
+        Border blackline = BorderFactory.createLineBorder(Color.black);
+        inputPanel.setBorder(blackline);
 
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addComponent(titleLabel)
                 .addComponent(inputType)
-                .addComponent(textArea)
+                .addComponent(inputPanel)
                 .addComponent(output)
         );
 
@@ -141,7 +151,7 @@ public class JInputMatrix extends JPanel{
             layout.createSequentialGroup()
                 .addComponent(titleLabel)
                 .addComponent(inputType)
-                .addComponent(textArea)
+                .addComponent(inputPanel)
                 .addComponent(output)
         );
     }
