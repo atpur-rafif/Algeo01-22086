@@ -11,7 +11,7 @@ public class ImageSaver {
         try {
             ImageIO.write(Grayscale.toImage(image), "jpg", file);
         } catch (IOException e) {
-            System.out.print(file);
+            e.printStackTrace();
         }
     }
 }
