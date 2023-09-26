@@ -9,7 +9,7 @@ public class MainApp{
         var frame = new JFrame("Matrix");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        var matrix = new JMatrix(new Matrix(3, 3));
+        var matrix = new JInputMatrix();
         frame.getContentPane().add(matrix);
 
         frame.setSize(400, 300);

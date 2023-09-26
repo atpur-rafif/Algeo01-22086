@@ -4,11 +4,12 @@ package GUI;
 import javax.swing.*;
 
 import GUI.InputMatrix.*;
-import Matrix.MatrixPrinter;
 import Matrix.MatrixReader;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -19,11 +20,11 @@ public class JInputMatrix extends JPanel{
     public Preview previewPanel;
     public JComboBox<MatrixInputField> inputTypeSelection;
 
-    void parseAndShowResult(){
+    void parseAndShowResult(String text){
         try {
-            var s = new Scanner("");
+            var s = new Scanner(text);
             var m = MatrixReader.read(s);
-            MatrixPrinter.print(m);
+            previewPanel.setMatrix(m);
         } catch (Exception err) {
             String msg = "";
             if (err instanceof NumberFormatException) {
@@ -34,18 +35,29 @@ public class JInputMatrix extends JPanel{
             } else {
                 msg = "Unknown error";
             }
-            System.out.println(msg);
+            previewPanel.setError(msg);
         }
     }
 
-    private JPanel getSelectedInputType(){
-        return (JPanel) inputTypeSelection.getSelectedItem();
+    private MatrixInputField getSelectedInputType(){
+        return (MatrixInputField) inputTypeSelection.getSelectedItem();
     }
+
+    public PropertyChangeListener propertyChangeListener = new PropertyChangeListener() {
+		@Override
+		public void propertyChange(PropertyChangeEvent evt) {
+            String text = (String) evt.getNewValue();
+            parseAndShowResult(text);
+		}
+    };
 
     JInputMatrix(){
         inputPanel = new Input();
         previewPanel = new Preview();
         inputTypeSelection = new JComboBox<MatrixInputField>(inputTypes);
+        for(int i = 0; i < inputTypeSelection.getItemCount(); ++i) inputTypeSelection.getItemAt(i).addPropertyChangeListener("input", propertyChangeListener);
+
+        inputTypeSelection.setSelectedIndex(1);
         inputPanel.changeComponent(getSelectedInputType());
         inputTypeSelection.addActionListener(new ActionListener() {
             @Override

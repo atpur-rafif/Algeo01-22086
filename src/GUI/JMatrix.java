@@ -7,16 +7,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Matrix.Matrix;
+import Matrix.MatrixInverse;
 
 public class JMatrix extends JPanel{
     public JMatrix(Matrix m){
         var c = new GridBagConstraints();
         setLayout(new GridBagLayout());
+        m = MatrixInverse.calculateWithGaussJordan(m);
 
         for(int i = 0; i < m.row; ++i){
             for(int j = 0; j < m.col; ++j){
-                c.gridx = i;
-                c.gridy = j;
+                c.gridx = j;
+                c.gridy = i;
                 c.fill = GridBagConstraints.CENTER;
                 c.ipadx = 20;
                 c.ipady = 20;
