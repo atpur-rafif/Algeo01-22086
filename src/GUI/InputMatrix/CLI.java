@@ -1,7 +1,6 @@
 package GUI.InputMatrix;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class CLI extends MatrixInputField {
 

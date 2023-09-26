@@ -2,13 +2,15 @@ package GUI;
 
 import javax.swing.*;
 
+import Matrix.Matrix;
+
 public class MainApp{
     public static void Show(){
         var frame = new JFrame("Matrix");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        var matrixInput = new JInputMatrix();
-        frame.getContentPane().add(matrixInput);
+        var matrix = new JMatrix(new Matrix(3, 3));
+        frame.getContentPane().add(matrix);
 
         frame.setSize(400, 300);
         //frame.pack();
