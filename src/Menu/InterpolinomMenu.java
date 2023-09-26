@@ -19,7 +19,7 @@ public class InterpolinomMenu {
                 
                 //CLI
                 case "1": 
-                    var Matriks = readPoint();
+                    var Matriks = MatrixReader.readCLI();
                     double x = Double.parseDouble(scanner.next());
                     double result= PolynomialInterp.f(Matriks, x);
                     System.out.println("Hasil: "+ result);
