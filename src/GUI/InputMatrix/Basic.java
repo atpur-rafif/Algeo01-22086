@@ -1,8 +1,12 @@
 package GUI.InputMatrix;
 
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 
-public class Basic extends JPanel implements MatrixInputField {
+public class Basic extends MatrixInputField {
+
+    public Basic(){
+        add(new JLabel("Basic"));
+    }
 
     @Override
     public String toString() {
