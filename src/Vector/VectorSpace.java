@@ -52,4 +52,5 @@ public abstract class VectorSpace{
         for(int i = 0; i < v1.basisCount; ++i) r += v1.get(i) * v2.get(i);
         return r;
     }
+
 }

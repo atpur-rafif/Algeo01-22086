@@ -23,25 +23,19 @@ public class RegresiLinearMenu {
                     System.out.print("Masukkan banyak sampel: ");
                     int m = Integer.parseInt(scanner.next());
                     Matrix samplePoint = MatrixReader.readCLI(m, n);
-                    EquationSpace solvedSamplePoint =  MultipleLinear.solve(samplePoint); 
+                    double[] solvedSamplePoint =  MultipleLinear.solve(samplePoint); 
 
                     System.out.print("Hasil: ");
-                    for(int i = 0; i < solvedSamplePoint.basisCount; ++i){
-                        System.out.print(solvedSamplePoint.get(i) + " ");
-                    }
-                    System.out.println("\n");
+                    MultipleLinear.Display(solvedSamplePoint);
                     
                     break; 
                 case "2": 
                     System.out.println("Masukkan sample Point");
                     Matrix samplePointFile = MatrixReader.readFileCLI();
-                    EquationSpace solvedSamplePointFile =  MultipleLinear.solve(samplePointFile); 
+                    double[] solvedSamplePointFile =  MultipleLinear.solve(samplePointFile); 
 
-                    for(int i = 0; i < solvedSamplePointFile.basisCount; ++i){
-                        System.out.print(solvedSamplePointFile.get(i) + " ");
-                    }
-                    System.out.println("\n");
-                    break;
+                    System.out.print("Hasil: ");
+                    MultipleLinear.Display(solvedSamplePointFile);
                     
                 case "3": 
                     isRegresi = false; 

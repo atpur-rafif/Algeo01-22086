@@ -49,17 +49,23 @@ public class MultipleLinear{
         return matrix;
     }
 
-    public static EquationSpace solve(Matrix samplePoint){
+    public static double[] solve(Matrix samplePoint){
         var M = createMatrix(samplePoint);
         var OBE = new OBERunner(M); 
         OBE.gausJordanElimination();
         var Manipulator = new MatrixManipulator(OBE.getResult());
-        var R = new EquationSpace(M.col-1);
-        for(int i = 0; i < R.basisCount; ++i){
-            R.set(i, Manipulator.get(i, 0));
-        }
-        return R;
+        return Manipulator.getCol(M.col - 1);
     }
 
-
+    public static void Display(double[] result){
+        String plus = " + ";
+        for(int i = 0; i < result.length; ++i){
+            String currentSubscript = String.valueOf((char)('\u2080' + (i + 1)));
+            if(i == result.length - 1){
+                plus = "";
+            }
+            System.out.print(result[i] + "x" + currentSubscript + plus);
+        }
+        System.out.println("");
+    }
 }
