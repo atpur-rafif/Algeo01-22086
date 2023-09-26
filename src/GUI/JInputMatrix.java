@@ -125,11 +125,6 @@ public class JInputMatrix extends JPanel{
     }
 
     JInputMatrix(){
-        var titleLabel = new JLabel("Matrix Input");
-
-        var layout = new GroupLayout(this);
-        setLayout(layout);
-
         refreshInputType();
         inputType.addActionListener(new ActionListener() {
 			@Override
@@ -139,20 +134,5 @@ public class JInputMatrix extends JPanel{
         Border blackline = BorderFactory.createLineBorder(Color.black);
         inputPanel.setBorder(blackline);
 
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addComponent(titleLabel)
-                .addComponent(inputType)
-                .addComponent(inputPanel)
-                .addComponent(output)
-        );
-
-        layout.setVerticalGroup(
-            layout.createSequentialGroup()
-                .addComponent(titleLabel)
-                .addComponent(inputType)
-                .addComponent(inputPanel)
-                .addComponent(output)
-        );
     }
 }

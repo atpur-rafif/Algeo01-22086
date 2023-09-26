@@ -10,7 +10,8 @@ public class MainApp{
         var matrixInput = new JInputMatrix();
         frame.getContentPane().add(matrixInput);
 
-        frame.pack();
+        frame.setSize(400, 300);
+        //frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
