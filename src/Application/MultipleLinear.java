@@ -60,15 +60,11 @@ public class MultipleLinear{
     public static void Display(double[] result){
         String plus = " + ";
         for(int i = 0; i < result.length; ++i){
+            String currentSubscript = String.valueOf((char)('\u2080' + (i + 1)));
             if(i == result.length - 1){
                 plus = "";
             }
-            if(i > 0){
-                System.out.print(result[i] + "x^" + (i+1) + plus);
-            }
-            else{
-                System.out.print(result[i] + "x" + plus);
-            }
+            System.out.print(result[i] + "X" + currentSubscript + plus);
         }
         System.out.println("");
     }
