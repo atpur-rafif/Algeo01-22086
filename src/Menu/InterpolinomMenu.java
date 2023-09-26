@@ -52,7 +52,6 @@ public class InterpolinomMenu {
                     double xFile = Double.parseDouble(scanner.next());
                     double resultFile= PolynomialInterp.f(MatriksFile, xFile);
                     System.out.println("f("+xFile+") = "+ resultFile);
-                    System.out.println("Hasil: "+ resultFile);
 
                     break; 
 
