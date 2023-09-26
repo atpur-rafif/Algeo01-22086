@@ -32,7 +32,7 @@ public class File extends MatrixInputField {
 
     public void startDialog(){
         JFileChooser fileDialog = new JFileChooser(".");
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "txt");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text File", "txt");
         fileDialog.setFileFilter(filter);
         int returnVal = fileDialog.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
