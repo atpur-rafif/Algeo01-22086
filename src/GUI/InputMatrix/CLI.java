@@ -1,7 +1,6 @@
 package GUI.InputMatrix;
 
 import java.awt.BorderLayout;
-import java.beans.PropertyChangeEvent;
 
 import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
@@ -28,12 +27,8 @@ public class CLI extends MatrixInputField {
             public void changedUpdate(DocumentEvent e) { update(e); }
 
             private void update(DocumentEvent e){
-                var listeners = getPropertyChangeListeners("input");
                 var newText = getValue();
-                for(int i = 0; i < listeners.length; ++i){
-                    var listener = listeners[i];
-                    listener.propertyChange(new PropertyChangeEvent(textArea, "input", oldText, newText));
-                }
+                notifyChange(textArea, oldText, newText);
                 oldText = newText;
             }
         });

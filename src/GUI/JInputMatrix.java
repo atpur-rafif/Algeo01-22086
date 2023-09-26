@@ -57,7 +57,7 @@ public class JInputMatrix extends JPanel{
         inputTypeSelection = new JComboBox<MatrixInputField>(inputTypes);
         for(int i = 0; i < inputTypeSelection.getItemCount(); ++i) inputTypeSelection.getItemAt(i).addPropertyChangeListener("input", propertyChangeListener);
 
-        inputTypeSelection.setSelectedIndex(1);
+        inputTypeSelection.setSelectedIndex(2);
         inputPanel.changeComponent(getSelectedInputType());
         inputTypeSelection.addActionListener(new ActionListener() {
             @Override

@@ -2,8 +2,6 @@ package GUI;
 
 import javax.swing.*;
 
-import Matrix.Matrix;
-
 public class MainApp{
     public static void Show(){
         var frame = new JFrame("Matrix");
