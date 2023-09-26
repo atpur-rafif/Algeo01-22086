@@ -64,7 +64,7 @@ public class MultipleLinear{
             if(i == result.length - 1){
                 plus = "";
             }
-            System.out.print(result[i] + "X" + currentSubscript + plus);
+            System.out.print(result[i] + "x" + currentSubscript + plus);
         }
         System.out.println("");
     }
