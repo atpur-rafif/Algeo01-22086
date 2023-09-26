@@ -2,6 +2,7 @@ package Application;
 
 import Matrix.*;
 import Matrix.OBE.OBERunner;
+import Vector.EquationSpace;
 
 public class MultipleLinear{
 
@@ -52,7 +53,6 @@ public class MultipleLinear{
         var M = createMatrix(samplePoint);
         var OBE = new OBERunner(M); 
         OBE.gausJordanElimination();
-        // MatrixPrinter.print(OBE.getResult());
         var Manipulator = new MatrixManipulator(OBE.getResult());
         return Manipulator.getCol(M.col - 1);
     }
