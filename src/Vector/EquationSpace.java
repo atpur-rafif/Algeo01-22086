@@ -11,4 +11,6 @@ public class EquationSpace extends VectorSpace{
 	protected EquationSpace _createNewZeroVector() {
         return new EquationSpace(this.independentVariableCount);
 	}
+
+    
 }

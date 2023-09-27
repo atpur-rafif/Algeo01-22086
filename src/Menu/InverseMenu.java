@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class InverseMenu {
     static Scanner scanner = new Scanner(System.in);
     
-    public static void Display(){
+    public static void Run(){
         PrintListMenu.clear();
         boolean isInverse = true; 
         boolean isInput = true;

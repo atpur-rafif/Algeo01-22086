@@ -1,7 +1,10 @@
 package Menu;
 import java.util.Scanner;
 import Matrix.*;
+import Vector.EquationSpace;
+import Vector.VectorSpace;
 import FilePrinter.*;
+
 
 public class SaveResult {
     static Scanner scanner = new Scanner(System.in);
@@ -41,7 +44,7 @@ public class SaveResult {
             SinglePrinterwithMatrix.printFileCLI(matrix, Result);
         }
     }
-    public static void multipleValue(double[] Result){
+    public static void multipleValue(EquationSpace Result){
         while(true){
             PrintListMenu.Print(new String[]{
                 "====================================Saving=====================================", 

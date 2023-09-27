@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ImageResizing {
     static Scanner scanner = new Scanner(System.in);
-    public static void Display(){
+    public static void Run(){
         System.out.println("===================================Menu Image Resizing====================================");
         System.out.print("Masukkan path image: ");
         String pathImage = scanner.next(); 

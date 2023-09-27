@@ -2,7 +2,7 @@ package Menu;
 
 public class BicubicSplineMenu {
 
-    public static void Display(){
+    public static void Run(){
         
     }
     

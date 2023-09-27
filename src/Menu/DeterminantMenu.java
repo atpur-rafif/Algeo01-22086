@@ -5,14 +5,11 @@ import Matrix.MatrixDeterminant;
 import Matrix.MatrixDeterminantWithOBE;
 import Matrix.MatrixReader;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class DeterminantMenu {
     static Scanner scanner = new Scanner(System.in);
-    public static void Display(){
+    public static void Run(){
         PrintListMenu.clear();
         boolean isDeterminant = true; 
         String inputChoice;

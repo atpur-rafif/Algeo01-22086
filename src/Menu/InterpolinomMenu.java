@@ -8,7 +8,7 @@ import Application.*;
 public class InterpolinomMenu {
     static Scanner scanner = new Scanner(System.in);
 
-    public static void Display(){
+    public static void Run(){
         boolean isInterp = true; 
         PrintListMenu.clear(); 
         while(isInterp){

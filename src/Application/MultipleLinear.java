@@ -2,7 +2,7 @@ package Application;
 
 import Matrix.*;
 import Matrix.OBE.OBERunner;
-import Vector.EquationSpace;
+import Vector.*;
 
 public class MultipleLinear{
 
@@ -49,23 +49,35 @@ public class MultipleLinear{
         return matrix;
     }
 
-    public static double[] solve(Matrix samplePoint){
+    public static EquationSpace solve(Matrix samplePoint){
         var M = createMatrix(samplePoint);
         var OBE = new OBERunner(M); 
         OBE.gausJordanElimination();
-        var Manipulator = new MatrixManipulator(OBE.getResult());
-        return Manipulator.getCol(M.col - 1);
+        M = OBE.getResult();
+        var R = new EquationSpace(M.col - 1);
+        for(int i = 0; i < R.basisCount; ++i){
+            R.set(i, M.get(i, M.col - 1));
+        }
+        return R;
     }
 
-    public static void Display(double[] result){
+
+    public static void DisplayEquation(EquationSpace result){
         String plus = " + ";
-        for(int i = 0; i < result.length; ++i){
-            String currentSubscript = String.valueOf((char)('\u2080' + (i + 1)));
-            if(i == result.length - 1){
+        for(int i = 0; i < result.basisCount; ++i){
+            if(i == result.basisCount - 1){
                 plus = "";
             }
-            System.out.print(result[i] + "x" + currentSubscript + plus);
+            if(i == 0){
+                System.out.print(result.get(i) + plus);
+            }
+            else{
+                String currentSubscript = String.valueOf((char)('\u2080' + (i)));
+                System.out.print(result.get(i) + "x" + currentSubscript + plus);
+            }
         }
         System.out.println("");
     }
+
+
 }

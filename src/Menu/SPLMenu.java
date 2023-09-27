@@ -3,7 +3,7 @@ package Menu;
 import java.util.Scanner;
 public class SPLMenu {
     static Scanner scanner = new Scanner(System.in);
-    public static void Display(){
+    public static void Run(){
         boolean isSPL = true; 
         while(isSPL == true){
             boolean isInput = true;

@@ -25,32 +25,32 @@ public class MainMenu {
             String choice = scanner.next();
             switch (choice) {
                 case "1":
-                    InterpolinomMenu.Display();
+                    InterpolinomMenu.Run();
                     break;
                 case "2": 
-                    RegresiLinearMenu.Display();
+                    RegresiLinearMenu.Run();
                     break;
                 case "3": 
-                    BicubicSplineMenu.Display();
+                    BicubicSplineMenu.Run();
                     break;
                 case "4": 
-                    ImageResizing.Display();
+                    ImageResizing.Run();
                     break; 
                 case "5":
-                    SPLMenu.Display();
+                    SPLMenu.Run();
                     break;
                 case "6": 
-                    DeterminantMenu.Display();
+                    DeterminantMenu.Run();
                     break;
                 case "7": 
-                    InverseMenu.Display();
+                    InverseMenu.Run();
                     break;
                 case "8": 
                     isRunning = false;
                     break; 
                 default:
-                PrintListMenu.clear();
-                System.out.println("Input tidak valid");
+                    PrintListMenu.clear();
+                    System.out.println("Input tidak valid");
                     break;
             }
         }
