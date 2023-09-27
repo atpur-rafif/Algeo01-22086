@@ -46,6 +46,7 @@ public class MainMenu {
                     InverseMenu.Run();
                     break;
                 case "8": 
+                    PrintListMenu.clear();
                     isRunning = false;
                     break; 
                 default:
