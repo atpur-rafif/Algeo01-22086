@@ -7,6 +7,7 @@ import Vector.EquationSpace;
 import java.util.Scanner;
 import FilePrinter.*;
 
+
 public class RegresiLinearMenu {
     static Scanner scanner = new Scanner(System.in);
     public static void Display(){

@@ -16,7 +16,6 @@ public class Resize {
                 V.set(p, image.getPixelCartesian(x + lx, y + ly));
             }
         }
-
         return V;
     }
 
@@ -61,6 +60,7 @@ public class Resize {
             }
             System.out.printf("%.2f", (100 * y) / (double) newHeight);
             System.out.print("%\n");
+            
         }
 
         return resized;

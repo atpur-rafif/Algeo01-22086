@@ -34,7 +34,7 @@ public class MainMenu {
                     BicubicSplineMenu.Display();
                     break;
                 case "4": 
-                    ImageInterpolation.Display();
+                    ImageResizing.Display();
                     break; 
                 case "5":
                     SPLMenu.Display();
@@ -53,8 +53,6 @@ public class MainMenu {
                 System.out.println("Input tidak valid");
                     break;
             }
-
         }
-        
     }
 }
