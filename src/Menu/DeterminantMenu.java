@@ -4,6 +4,10 @@ import Matrix.Matrix;
 import Matrix.MatrixDeterminant;
 import Matrix.MatrixDeterminantWithOBE;
 import Matrix.MatrixReader;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class DeterminantMenu {
@@ -38,11 +42,13 @@ public class DeterminantMenu {
                                 DeterminantMatrix = MatrixReader.readCLI(); 
                                 Result = MatrixDeterminantWithOBE.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
+                                SaveResult.saveResultSingleValue(DeterminantMatrix, Result);
                                 break;
                             case "2":
                                 DeterminantMatrix = MatrixReader.readFileCLI(); 
                                 Result = MatrixDeterminantWithOBE.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
+                                SaveResult.saveResultSingleValue(DeterminantMatrix, Result);
                                 break;
                             case "3": 
                                 PrintListMenu.clear();
@@ -67,11 +73,13 @@ public class DeterminantMenu {
                                 DeterminantMatrix = MatrixReader.readCLI(); 
                                 Result = MatrixDeterminant.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
+                                SaveResult.saveResultSingleValue(DeterminantMatrix,Result);
                                 break;
                             case "2":
                                 DeterminantMatrix = MatrixReader.readFileCLI(); 
                                 Result = MatrixDeterminant.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
+                                SaveResult.saveResultSingleValue(DeterminantMatrix, Result);
                                 break;
                             case "3": 
                                 isInput = false;
@@ -95,4 +103,6 @@ public class DeterminantMenu {
             }
         }
     }
+
+    
 }

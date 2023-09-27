@@ -5,12 +5,15 @@ import Matrix.Matrix;
 import Matrix.MatrixReader;
 import Vector.EquationSpace;
 import java.util.Scanner;
+import FilePrinter.*;
 
 public class RegresiLinearMenu {
     static Scanner scanner = new Scanner(System.in);
     public static void Display(){
         boolean isRegresi = true;
         PrintListMenu.clear();
+        double[] solvedSamplePoint;
+
         while(isRegresi == true){
             PrintListMenu.Repetitive(2);
             System.out.print("> ");
@@ -23,10 +26,11 @@ public class RegresiLinearMenu {
                     System.out.print("Masukkan banyak sampel: ");
                     int m = Integer.parseInt(scanner.next());
                     Matrix samplePoint = MatrixReader.readCLI(m, n);
-                    double[] solvedSamplePoint =  MultipleLinear.solve(samplePoint); 
+                    solvedSamplePoint =  MultipleLinear.solve(samplePoint); 
 
                     System.out.print("Hasil: ");
                     MultipleLinear.Display(solvedSamplePoint);
+                    SaveResult.multipleValue(solvedSamplePoint);
                     
                     break; 
                 case "2": 

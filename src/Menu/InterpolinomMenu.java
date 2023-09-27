@@ -24,7 +24,6 @@ public class InterpolinomMenu {
                     double result= PolynomialInterp.f(Matriks, x);
                     System.out.println("Hasil: "+ result);
 
-
                     break;
                 //FILE
                 case "2": 

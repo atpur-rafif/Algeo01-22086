@@ -33,21 +33,23 @@ public class InverseMenu {
                 case "1": 
                     PrintListMenu.clear();
                     while(isInput){
-                        PrintListMenu.Repetitive(6);   
+                        PrintListMenu.Repetitive(7);   
                         System.out.print("> "); 
                         inputChoice = scanner.next();
                         switch(inputChoice){
                             case "1": 
                                 Matrix = MatrixReader.readCLI(); 
                                 inversedMatrix = MatrixInverse.calculateWithGaussJordan(Matrix);
-                                System.out.println("Matris Inverse: ");
+                                System.out.println("Matriks Inverse: ");
                                 MatrixPrinter.print(inversedMatrix);
+                                SaveResult.saveResultMatrix(inversedMatrix);
                                 break;
                             case "2":
                                 Matrix = MatrixReader.readFileCLI(); 
                                 inversedMatrix = MatrixInverse.calculateWithGaussJordan(Matrix);
-                                System.out.println("Matris Inverse: ");
+                                System.out.println("Matriks Inverse: ");
                                 MatrixPrinter.print(inversedMatrix);
+                                SaveResult.saveResultMatrix(inversedMatrix);
                                 break;
                             case "3": 
                                 PrintListMenu.clear();
@@ -63,21 +65,23 @@ public class InverseMenu {
                 case "2": 
                     PrintListMenu.clear();
                     while(isInput){
-                        PrintListMenu.Repetitive(6);   
+                        PrintListMenu.Repetitive(7);   
                         System.out.print("> "); 
                         inputChoice = scanner.next();
                         switch(inputChoice){
                             case "1": 
                                 Matrix = MatrixReader.readCLI(); 
                                 inversedMatrix = MatrixInverse.calculateWithCofactor(Matrix);
-                                System.out.println("Matris Inverse: ");
+                                System.out.println("Matriks Inverse: ");
                                 MatrixPrinter.print(inversedMatrix);
+                                SaveResult.saveResultMatrix(inversedMatrix);
                                 break;
                             case "2":
                                 Matrix = MatrixReader.readFileCLI(); 
                                 inversedMatrix = MatrixInverse.calculateWithCofactor(Matrix);
-                                System.out.println("Matris Inverse: ");
+                                System.out.println("Matriks Inverse: ");
                                 MatrixPrinter.print(inversedMatrix);
+                                SaveResult.saveResultMatrix(inversedMatrix);
                                 break;
                             case "3": 
                                 PrintListMenu.clear();
