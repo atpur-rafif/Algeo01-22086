@@ -3,7 +3,6 @@ package Menu;
 import Application.MultipleLinear;
 import Matrix.Matrix;
 import Matrix.MatrixReader;
-import Vector.EquationSpace;
 import java.util.Scanner;
 
 public class RegresiLinearMenu {

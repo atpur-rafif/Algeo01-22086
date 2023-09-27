@@ -2,7 +2,6 @@ package Application;
 
 import Matrix.*;
 import Matrix.OBE.OBERunner;
-import Vector.EquationSpace;
 
 public class MultipleLinear{
 
