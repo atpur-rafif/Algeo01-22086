@@ -8,15 +8,15 @@ import java.util.Scanner;
 
 public class InverseMenu {
     static Scanner scanner = new Scanner(System.in);
+    private static boolean isInverse = true; 
+    private static boolean isInput = true;
+    private static String choice;
+    private static String inputChoice;
+    private static Matrix inversedMatrix; 
+    private static Matrix Matrix;
     
     public static void Run(){
         PrintListMenu.clear();
-        boolean isInverse = true; 
-        boolean isInput = true;
-        String choice;
-        String inputChoice;
-        Matrix inversedMatrix; 
-        var Matrix = new Matrix(0, 0); 
         
         while(isInverse){
             PrintListMenu.Print(new String[]{
@@ -42,14 +42,14 @@ public class InverseMenu {
                                 inversedMatrix = MatrixInverse.calculateWithGaussJordan(Matrix);
                                 System.out.println("Matriks Inverse: ");
                                 MatrixPrinter.print(inversedMatrix);
-                                SaveResult.saveResultMatrix(inversedMatrix);
+                                Save.ResultMatrix(inversedMatrix);
                                 break;
                             case "2":
                                 Matrix = MatrixReader.readFileCLI(); 
                                 inversedMatrix = MatrixInverse.calculateWithGaussJordan(Matrix);
                                 System.out.println("Matriks Inverse: ");
                                 MatrixPrinter.print(inversedMatrix);
-                                SaveResult.saveResultMatrix(inversedMatrix);
+                                Save.ResultMatrix(inversedMatrix);
                                 break;
                             case "3": 
                                 PrintListMenu.clear();
@@ -74,14 +74,14 @@ public class InverseMenu {
                                 inversedMatrix = MatrixInverse.calculateWithCofactor(Matrix);
                                 System.out.println("Matriks Inverse: ");
                                 MatrixPrinter.print(inversedMatrix);
-                                SaveResult.saveResultMatrix(inversedMatrix);
+                                Save.ResultMatrix(inversedMatrix);
                                 break;
                             case "2":
                                 Matrix = MatrixReader.readFileCLI(); 
                                 inversedMatrix = MatrixInverse.calculateWithCofactor(Matrix);
                                 System.out.println("Matriks Inverse: ");
                                 MatrixPrinter.print(inversedMatrix);
-                                SaveResult.saveResultMatrix(inversedMatrix);
+                                Save.ResultMatrix(inversedMatrix);
                                 break;
                             case "3": 
                                 PrintListMenu.clear();

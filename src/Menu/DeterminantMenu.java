@@ -9,11 +9,12 @@ import java.util.Scanner;
 
 public class DeterminantMenu {
     static Scanner scanner = new Scanner(System.in);
+    private static boolean isDeterminant = true; 
+    private static String inputChoice;
+    private static double Result; 
+
     public static void Run(){
         PrintListMenu.clear();
-        boolean isDeterminant = true; 
-        String inputChoice;
-        double Result; 
         var DeterminantMatrix = new Matrix(0, 0); 
         while(isDeterminant == true){
             boolean isInput = true;
@@ -39,13 +40,13 @@ public class DeterminantMenu {
                                 DeterminantMatrix = MatrixReader.readCLI(); 
                                 Result = MatrixDeterminantWithOBE.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
-                                SaveResult.saveResultSingleValue(DeterminantMatrix, Result);
+                                Save.ResultSingleValue(DeterminantMatrix, Result);
                                 break;
                             case "2":
                                 DeterminantMatrix = MatrixReader.readFileCLI(); 
                                 Result = MatrixDeterminantWithOBE.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
-                                SaveResult.saveResultSingleValue(DeterminantMatrix, Result);
+                                Save.ResultSingleValue(DeterminantMatrix, Result);
                                 break;
                             case "3": 
                                 PrintListMenu.clear();
@@ -70,13 +71,13 @@ public class DeterminantMenu {
                                 DeterminantMatrix = MatrixReader.readCLI(); 
                                 Result = MatrixDeterminant.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
-                                SaveResult.saveResultSingleValue(DeterminantMatrix,Result);
+                                Save.ResultSingleValue(DeterminantMatrix,Result);
                                 break;
                             case "2":
                                 DeterminantMatrix = MatrixReader.readFileCLI(); 
                                 Result = MatrixDeterminant.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
-                                SaveResult.saveResultSingleValue(DeterminantMatrix, Result);
+                                Save.ResultSingleValue(DeterminantMatrix, Result);
                                 break;
                             case "3": 
                                 isInput = false;

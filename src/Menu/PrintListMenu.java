@@ -20,7 +20,7 @@ public class PrintListMenu {
         if(Menu == 1){
             printerMenu[0] = "==============================Interpolasi Polinomial Menu================================";
         }
-        if(Menu == 2){
+        else if(Menu == 2){
             printerMenu[0] = "==============================Regresi Linear Berganda================================";
         }
         else if(Menu == 5){
