@@ -17,6 +17,6 @@ public class Test {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args){
         MainApp.Run();
-        MainMenu.InterfaceProgram();
+        //MainMenu.InterfaceProgram();
     }
 }
