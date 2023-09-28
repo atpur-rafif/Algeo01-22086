@@ -1,14 +1,7 @@
 package GUI;
 
 
-import javax.swing.*;
-
-import GUI.InputMatrix.*;
-import Matrix.MatrixReader;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -16,7 +9,22 @@ import java.beans.PropertyChangeListener;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
+
+import GUI.InputMatrix.Basic;
+import GUI.InputMatrix.CLI;
+import GUI.InputMatrix.File;
+import GUI.InputMatrix.InputPanel;
+import GUI.InputMatrix.MatrixInputField;
+import Matrix.Matrix;
+import Matrix.MatrixPrinter;
+import Matrix.MatrixReader;
+
 public class JInputMatrix extends JPanel{
+    private Matrix currentValue;
     public MatrixInputField[] inputTypes = new MatrixInputField[]{new Basic(), new CLI(), new File()};
 
     public InputPanel inputPanel;
@@ -28,22 +36,20 @@ public class JInputMatrix extends JPanel{
     void clearError(){ errorLabel.setText(""); refresh(); }
 
     void parseAndShowResult(String text){
+        clearError();
         try {
             var s = new Scanner(text);
             var m = MatrixReader.read(s);
-            clearError();
+            MatrixPrinter.print(m);
+            this.currentValue = m;
         } catch (Exception err) {
-            String msg = "";
-            if (err instanceof NumberFormatException) {
-                String cause = err.getMessage().replace("For input string: ", "");
-                msg = "Invalid string: " + cause ;
-            } else if (err instanceof NoSuchElementException) {
-                msg = "Invalid format";
-            } else {
-                msg = "Unknown error";
-            }
-            setError(msg);
+            setError("Parse Error");
+            this.currentValue = new Matrix(0, 0);
         }
+    }
+
+    Matrix getValue(){
+        return this.currentValue;
     }
 
     private MatrixInputField getSelectedInputType(){
@@ -64,10 +70,14 @@ public class JInputMatrix extends JPanel{
     }
 
     JInputMatrix(){
+        titleLabel = new JLabel("Matrix 1");
+        errorLabel = new JLabel();
+        errorLabel.setForeground(Color.RED);
         inputPanel = new InputPanel();
         inputTypeSelection = new JComboBox<MatrixInputField>(inputTypes);
         for(int i = 0; i < inputTypeSelection.getItemCount(); ++i) inputTypeSelection.getItemAt(i).addPropertyChangeListener("input", propertyChangeListener);
 
+        parseAndShowResult("");
         inputPanel.changeComponent(getSelectedInputType());
         inputTypeSelection.addActionListener(new ActionListener() {
             @Override
@@ -79,18 +89,18 @@ public class JInputMatrix extends JPanel{
         var layout = new SpringLayout();
         setLayout(layout);
 
-        titleLabel = new JLabel("Matrix 1");
-        errorLabel = new JLabel();
-        errorLabel.setForeground(Color.RED);
-
         var pad = 10;
 
         add(titleLabel);
         layout.putConstraint(SpringLayout.NORTH, titleLabel, pad, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, titleLabel, -pad, SpringLayout.HORIZONTAL_CENTER, this);
 
+        add(errorLabel);
+        layout.putConstraint(SpringLayout.NORTH, errorLabel, 0, SpringLayout.SOUTH, titleLabel);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, errorLabel, -pad, SpringLayout.HORIZONTAL_CENTER, this);
+
         add(inputTypeSelection);
-        layout.putConstraint(SpringLayout.NORTH, inputTypeSelection, 0, SpringLayout.SOUTH, titleLabel);
+        layout.putConstraint(SpringLayout.NORTH, inputTypeSelection, 0, SpringLayout.SOUTH, errorLabel);
         layout.putConstraint(SpringLayout.WEST, inputTypeSelection, pad, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, inputTypeSelection, -pad, SpringLayout.EAST, this);
 
