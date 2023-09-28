@@ -8,12 +8,13 @@ import Vector.EuclideanSpace;
 import Vector.VectorSpace;
 import Menu.*;
 import Application.*;
+import GUI.MainApp;
+
 import java.util.Scanner;
 
 public class Test {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args){
         MainMenu.InterfaceProgram();
-
     }
 }

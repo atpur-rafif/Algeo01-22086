@@ -2,6 +2,7 @@ package Application;
 
 import Matrix.*;
 import Matrix.OBE.OBERunner;
+import Menu.StringFormatter;
 import Vector.*;
 
 public class MultipleLinear{
@@ -72,8 +73,7 @@ public class MultipleLinear{
                 System.out.print(result.get(i) + plus);
             }
             else{
-                String currentSubscript = String.valueOf((char)('\u2080' + (i)));
-                System.out.print(result.get(i) + "x" + currentSubscript + plus);
+                System.out.print(result.get(i) + "x" + StringFormatter.createSubscript(i) + plus);
             }
         }
         System.out.println("");

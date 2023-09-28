@@ -86,8 +86,7 @@ public class RegresiLinearMenu {
             System.out.println("Masukkan nilai tiap x");
             variable.set(0, 1);
             for(int i = 1 ; i < variable.basisCount; ++i){
-                String currentSubscript = String.valueOf((char)('\u2080' + (i)));
-                System.out.print("Masukkan nilai " + "X" + currentSubscript+": ");
+                System.out.print("Masukkan nilai " + "x" + StringFormatter.createSubscript(i)+": ");
                 var value = Double.parseDouble(scanner.next());
                 variable.set(i, value);
             }  

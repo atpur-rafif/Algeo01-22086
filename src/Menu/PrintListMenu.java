@@ -32,6 +32,7 @@ public class PrintListMenu {
         else if(Menu == 7){
             printerMenu[0] = "================================Inverse Menu==========================================";
         }
+        
         Print(printerMenu);
     }
 

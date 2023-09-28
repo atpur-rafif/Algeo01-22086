@@ -1,10 +1,10 @@
 package FilePrinter;
 
-import Matrix.*;
 import Menu.Save;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import Matrix.*;
 
 
 public class DeterminantPrinter {
