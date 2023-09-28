@@ -21,13 +21,13 @@ public class MainMenu {
                 "8. Quit",
             }, 1, 8);
 
-            if(choice == 1) InterpolinomMenu.Run();
+            if     (choice == 1) InterpolinomMenu.Run();
             else if(choice == 2) RegresiLinearMenu.Run();
-            else if(choice == 3) RegresiLinearMenu.Run();
-            else if(choice == 4) RegresiLinearMenu.Run();
-            else if(choice == 5) RegresiLinearMenu.Run();
-            else if(choice == 6) RegresiLinearMenu.Run();
-            else if(choice == 7) RegresiLinearMenu.Run();
+            else if(choice == 3) BicubicSplineMenu.Run();
+            else if(choice == 4) ImageResizing.Run();
+            else if(choice == 5) SPLMenu.Run();
+            else if(choice == 6) DeterminantMenu.Run();
+            else if(choice == 7) InverseMenu.Run();
             else if(choice == 8) break;
             PrintListMenu.clear();
         }

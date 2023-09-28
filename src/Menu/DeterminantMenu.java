@@ -40,13 +40,13 @@ public class DeterminantMenu {
                                 DeterminantMatrix = MatrixReader.readCLI(); 
                                 Result = MatrixDeterminantWithOBE.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
-                                Save.ResultSingleValue(DeterminantMatrix, Result);
+                                IOFile.ResultSingleValue(DeterminantMatrix, Result);
                                 break;
                             case "2":
                                 DeterminantMatrix = MatrixReader.readFileCLI(); 
                                 Result = MatrixDeterminantWithOBE.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
-                                Save.ResultSingleValue(DeterminantMatrix, Result);
+                                IOFile.ResultSingleValue(DeterminantMatrix, Result);
                                 break;
                             case "3": 
                                 PrintListMenu.clear();
@@ -71,13 +71,13 @@ public class DeterminantMenu {
                                 DeterminantMatrix = MatrixReader.readCLI(); 
                                 Result = MatrixDeterminant.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
-                                Save.ResultSingleValue(DeterminantMatrix,Result);
+                                IOFile.ResultSingleValue(DeterminantMatrix,Result);
                                 break;
                             case "2":
                                 DeterminantMatrix = MatrixReader.readFileCLI(); 
                                 Result = MatrixDeterminant.calculate(DeterminantMatrix);
                                 System.out.println("Determinan: " + Result);
-                                Save.ResultSingleValue(DeterminantMatrix, Result);
+                                IOFile.ResultSingleValue(DeterminantMatrix, Result);
                                 break;
                             case "3": 
                                 isInput = false;

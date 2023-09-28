@@ -4,8 +4,22 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 public class Prompter {
-    private static String ask = "> ";
+    private static String inputPrompt = "> ";
     private static Scanner scanner = new Scanner(System.in);
+
+    public static void printListOfString(String[] strings){
+        for(int i = 0; i < strings.length; ++i){
+            System.out.print(strings[i]);
+            if(i != strings.length - 1) System.out.print("\n");
+        }
+    }
+
+    public static String getInlineString(String prompt){
+        System.out.print(prompt);
+        var s = scanner.next();
+        System.out.print("\n");
+        return s;
+    }
 
     public static boolean getBoolean(String prompt){
         prompt += " (Y/N)?";
@@ -47,10 +61,8 @@ public class Prompter {
     public static <T> T get(String[] prompt, Function<String, T> checkFn, Function<String, String> onFalse){
         T result = null;
 
-        for(int i = 0; i < prompt.length; ++i){
-            System.out.print(prompt[i] + "\n");
-        }
-        System.out.print(ask);
+        printListOfString(prompt);
+        System.out.print("\n" + inputPrompt);
 
         while(true){
             String input = scanner.next();
@@ -61,7 +73,7 @@ public class Prompter {
                 break;
             } else {
                 System.out.println(onFalse.apply(input));
-                System.out.print(ask);
+                System.out.print(inputPrompt);
             }
         }
 

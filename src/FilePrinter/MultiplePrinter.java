@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.util.Scanner;
 import Menu.StringFormatter;
 
-import Menu.Save;
+import Menu.IOFile;
 import Vector.VectorSpace;
 
 public class MultiplePrinter {
     static Scanner scanner = new Scanner(System.in);
  
     public static void PrintFileVectorSpace(VectorSpace Result, String fileName){
-        Save.CreateFile(fileName);
+        IOFile.createFile(fileName);
         try{
             FileWriter myRegWrite = new FileWriter(fileName);
             String plus = " + ";
