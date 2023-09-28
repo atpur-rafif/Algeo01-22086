@@ -51,6 +51,15 @@ public class MatrixReader {
         return M;
     }
 
+        public static Matrix readFile(String fileName, int row, int col) throws FileNotFoundException{
+        var M = new Matrix(row, col);
+        file = new BufferedReader(new FileReader(fileName));
+        var fileScanner = new Scanner(file);
+        M = read(fileScanner,row,col);
+        fileScanner.close();
+        return M;
+    }
+
     public static Matrix readFileCLI() {
         System.out.print("Masukkan path: ");
         var fileName = cliScanner.next();
@@ -88,4 +97,43 @@ public class MatrixReader {
 
         return M;
     }
+
+    public static Matrix readFileCLI(int row, int col) {
+        System.out.print("Masukkan path: ");
+        var fileName = cliScanner.next();
+        var M = new Matrix(row, col);
+        boolean isReadFileSucceed = false;
+        while (!isReadFileSucceed) {
+            try {
+                M = readFile(fileName,row,col);
+                isReadFileSucceed = true;
+            } catch (IOException e) {
+                System.out.println("Tidak bisa membaca file");
+                System.out.println("Masukkan Path lagi? (Y/N)");
+                System.out.print("> ");
+                String choice = cliScanner.next();
+                if (choice.equals("Y") || choice.equals("y")) {
+                    System.out.print("Masukkan Path lagi: ");
+                    fileName = cliScanner.next();
+                } else if (choice.equals("N") || choice.equals("n")) {
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Format File salah");
+                System.out.print("Masukkan Path lagi: ");
+                System.out.println("Masukkan Path lagi? (Y/N)");
+                System.out.print("> ");
+                String choice = cliScanner.next();
+                if (choice.equals("Y") || choice.equals("y")) {
+                    System.out.print("Masukkan Path lagi: ");
+                    fileName = cliScanner.next();
+                } else if (choice.equals("N") || choice.equals("n")) {
+                    break;
+                }
+            }
+        }
+
+        return M;
+    }
+
 }
