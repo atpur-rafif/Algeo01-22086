@@ -14,9 +14,6 @@ import java.util.Scanner;
 public class Test {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args){
-        var eq = new EquationSpace(16);
-        for(int i = 0; i < 16; ++i) eq.set(i, i + 1); 
-
-        System.out.println(StringFormatter.polynomialEquation(eq));
+        MainMenu.InterfaceProgram();
     }
 }
