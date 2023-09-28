@@ -9,96 +9,30 @@ import java.util.Scanner;
 
 public class DeterminantMenu {
     static Scanner scanner = new Scanner(System.in);
-    private static boolean isDeterminant = true; 
-    private static String inputChoice;
-    private static double Result; 
 
     public static void Run(){
-        PrintListMenu.clear();
-        var DeterminantMatrix = new Matrix(0, 0); 
-        while(isDeterminant == true){
-            boolean isInput = true;
-            PrintListMenu.Print(new String[]{
+        while(true){
+            var choice = Prompter.getBoundedInt(new String[]{
                 "=============================Determinant Menu=================================", 
                 "1. Metode OBE", 
                 "2. Metode Kofaktor", 
                 "3. Back",
-                "*Note: Pilih menggunakan angka yang sesuai",
-            });
+            }, 1, 3);
 
-            System.out.print("> ");
-            String choice = scanner.next(); 
-            switch(choice){
-                case "1": 
-                    PrintListMenu.clear();
-                    while(isInput){
-                        PrintListMenu.Repetitive(6);   
-                        System.out.print("> "); 
-                        inputChoice = scanner.next();
-                        switch(inputChoice){
-                            case "1": 
-                                DeterminantMatrix = MatrixReader.readCLI(); 
-                                Result = MatrixDeterminantWithOBE.calculate(DeterminantMatrix);
-                                System.out.println("Determinan: " + Result);
-                                IOFile.ResultSingleValue(DeterminantMatrix, Result);
-                                break;
-                            case "2":
-                                DeterminantMatrix = MatrixReader.readFileCLI(); 
-                                Result = MatrixDeterminantWithOBE.calculate(DeterminantMatrix);
-                                System.out.println("Determinan: " + Result);
-                                IOFile.ResultSingleValue(DeterminantMatrix, Result);
-                                break;
-                            case "3": 
-                                PrintListMenu.clear();
-                                isInput = false;
-                                break;
-                            default: 
-                                PrintListMenu.clear();
-                                System.out.println("Input tidak valid");
-                                break;
-                            }
-                        }
-                    break;
+            if(choice == 3) break;
 
-                case "2":
-                    PrintListMenu.clear();
-                    while(isInput){
-                        PrintListMenu.Repetitive(6);   
-                        System.out.print("> "); 
-                        inputChoice = scanner.next();
-                        switch(inputChoice){
-                            case "1": 
-                                DeterminantMatrix = MatrixReader.readCLI(); 
-                                Result = MatrixDeterminant.calculate(DeterminantMatrix);
-                                System.out.println("Determinan: " + Result);
-                                IOFile.ResultSingleValue(DeterminantMatrix,Result);
-                                break;
-                            case "2":
-                                DeterminantMatrix = MatrixReader.readFileCLI(); 
-                                Result = MatrixDeterminant.calculate(DeterminantMatrix);
-                                System.out.println("Determinan: " + Result);
-                                IOFile.ResultSingleValue(DeterminantMatrix, Result);
-                                break;
-                            case "3": 
-                                isInput = false;
-                                PrintListMenu.clear();
-                                break;
-                            default: 
-                                PrintListMenu.clear();
-                                System.out.println("Input tidak valid");
-                                break;
-                        }
-                    }
-                    break;
-                case "3":
-                    PrintListMenu.clear();
-                    isDeterminant = false;
-                    break;
-                default: 
-                    PrintListMenu.clear();
-                    System.out.println("Input tidak Valid");
-                    break;
-            }
+            Matrix matrix = null;
+
+            var ioType = Prompter.getIOType();
+            if     (ioType == IOType.CLI) matrix = MatrixReader.readCLI();
+            else if(ioType == IOType.File) matrix = MatrixReader.readFileCLI();
+
+            Double determinant = null;
+            if     (choice == 1) determinant = MatrixDeterminant.calculateWithOBE(matrix);
+            else if(choice == 2) determinant = MatrixDeterminant.calculateWithCofactor(matrix);
+
+            System.out.println("\nDeterminan matrix: " + determinant + "\n");
+            IOFile.askToSave(Double.toString(determinant));
         }
     }
 }

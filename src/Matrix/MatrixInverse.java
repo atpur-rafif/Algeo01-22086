@@ -4,7 +4,7 @@ import Matrix.OBE.OBERunner;
 
 public class MatrixInverse {
     public static Matrix calculateWithCofactor(Matrix M){
-        var determinant = MatrixDeterminant.calculate(M);
+        var determinant = MatrixDeterminant.calculateWithOBE(M);
         return MatrixArithmetic.MultiplyByConst(adjoin(M), 1/determinant); 
     }
 
@@ -14,7 +14,7 @@ public class MatrixInverse {
             for(int j = 0; j < M.row; ++j){
                 var cof = MatrixDeterminant.cofactor(M, i, j);
                 var sign = (i + j) % 2 == 0 ? 1 : -1;
-                adjoin.set(i, j, sign * MatrixDeterminant.calculate(cof));
+                adjoin.set(i, j, sign * MatrixDeterminant.calculateWithOBE(cof));
             }
         }
         var DimensionManipulator = new MatrixDimensionManipulator(adjoin);

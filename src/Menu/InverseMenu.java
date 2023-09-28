@@ -1,17 +1,11 @@
 package Menu;
 
-import java.util.Scanner;
-
 import Matrix.Matrix;
 import Matrix.MatrixInverse;
 import Matrix.MatrixReader;
 
 public class InverseMenu {
-    static Scanner scanner = new Scanner(System.in);
-    
     public static void Run(){
-        PrintListMenu.clear();
-        
         while(true){
             var choice = Prompter.getBoundedInt(new String[]{
                 "=============================Inverse Menu=================================", 
@@ -25,11 +19,8 @@ public class InverseMenu {
             Matrix matrix = null;
 
             var ioType = Prompter.getIOType();
-            if(ioType == IOType.CLI){
-                matrix = MatrixReader.readCLI();
-            } else if(ioType == IOType.File){
-                matrix = MatrixReader.readFileCLI();
-            }
+            if     (ioType == IOType.CLI) matrix = MatrixReader.readCLI();
+            else if(ioType == IOType.File) matrix = MatrixReader.readFileCLI();
 
             Matrix inversedMatrix = null;
             if     (choice == 1) inversedMatrix = MatrixInverse.calculateWithGaussJordan(matrix);

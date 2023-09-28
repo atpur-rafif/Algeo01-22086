@@ -52,7 +52,7 @@ public class Prompter {
                 var i = Integer.parseInt(v);
                 if(min <= i && i <= max) return i;
             } catch (Exception e) {}
-            throw new Error("FDSF");
+            return null;
         }, (var u) -> {
             return "Input tidak valid";
         });

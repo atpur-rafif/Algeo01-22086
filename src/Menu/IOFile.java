@@ -38,6 +38,9 @@ public class IOFile {
     }
 
     public static void askToSave(String content){
+        var confirmation = Prompter.getBoolean("Save dalam file");
+        if(!confirmation) return;
+
         Path path = null;
 
         do {

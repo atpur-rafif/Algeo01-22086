@@ -21,6 +21,7 @@ public class MainMenu {
                 "8. Quit",
             }, 1, 8);
 
+            PrintListMenu.clear();
             if     (choice == 1) InterpolinomMenu.Run();
             else if(choice == 2) RegresiLinearMenu.Run();
             else if(choice == 3) BicubicSplineMenu.Run();
@@ -29,7 +30,6 @@ public class MainMenu {
             else if(choice == 6) DeterminantMenu.Run();
             else if(choice == 7) InverseMenu.Run();
             else if(choice == 8) break;
-            PrintListMenu.clear();
         }
     }
 }
