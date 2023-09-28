@@ -39,13 +39,7 @@ public class SPLMenu {
                                 System.out.println(result);
                                 break;
                             case "2":
-                                System.out.print("Masukkan baris : ");
-                                int row = Integer.parseInt(scanner.next());
-
-                                System.out.print("Masukkan kolom : ");
-                                int col = Integer.parseInt(scanner.next());
-
-                                var MatriksFile = MatrixReader.readFileCLI(row,col);
+                                var MatriksFile = MatrixReader.readFileCLI();
                                 if (MatriksFile.row==0||MatriksFile.col==0){
                                     break;
                                 }
@@ -81,13 +75,7 @@ public class SPLMenu {
                                 System.out.println(result);
                                 break;
                             case "2":
-                                System.out.print("Masukkan baris : ");
-                                int row = Integer.parseInt(scanner.next());
-
-                                System.out.print("Masukkan kolom : ");
-                                int col = Integer.parseInt(scanner.next());
-
-                                var MatriksFile = MatrixReader.readFileCLI(row,col);
+                                var MatriksFile = MatrixReader.readFileCLI();
                                 if (MatriksFile.row==0||MatriksFile.col==0){
                                     break;
                                 }
@@ -123,13 +111,7 @@ public class SPLMenu {
                                 System.out.println(result);
                                 break;
                             case "2":
-                                System.out.print("Masukkan baris : ");
-                                int row = Integer.parseInt(scanner.next());
-
-                                System.out.print("Masukkan kolom : ");
-                                int col = Integer.parseInt(scanner.next());
-
-                                var MatriksFile = MatrixReader.readFileCLI(row,col);
+                                var MatriksFile = MatrixReader.readFileCLI();
                                 if (MatriksFile.row==0||MatriksFile.col==0){
                                     break;
                                 }
