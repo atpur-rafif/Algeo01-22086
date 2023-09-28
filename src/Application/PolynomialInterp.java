@@ -3,6 +3,7 @@ package Application;
 import Matrix.Matrix;
 import Matrix.MatrixPrinter;
 import Matrix.OBE.OBERunner;
+import Menu.StringFormatter;
 import Vector.EquationSpace;
 
 public class PolynomialInterp {
@@ -50,8 +51,8 @@ public class PolynomialInterp {
                 output += (result.get(i) + plus);
             }
             else{
-                int currentPower = i;
-                output += (result.get(i) + "x^" + currentPower + plus);
+                String currentPower = StringFormatter.createSuperscript(i);
+                output += (result.get(i) + "x" + currentPower + plus);
             }
         }
         output += ("\n");
