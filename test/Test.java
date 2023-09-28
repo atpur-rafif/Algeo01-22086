@@ -8,7 +8,6 @@ import Vector.EuclideanSpace;
 import Vector.VectorSpace;
 import Menu.*;
 import Application.*;
-import GUI.MainApp;
 
 import java.util.Scanner;
 

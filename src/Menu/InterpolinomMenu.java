@@ -1,7 +1,11 @@
 package Menu;
 
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import Matrix.Matrix;
+import Matrix.MatrixPrinter;
 import Matrix.MatrixReader;
 import Application.*;
 
@@ -19,17 +23,52 @@ public class InterpolinomMenu {
                 
                 //CLI
                 case "1": 
-                    var Matriks = MatrixReader.readCLI();
+                    System.out.print("Masukkan banyak titik : ");
+                    int n = Integer.parseInt(scanner.next());
+                    System.out.println("Masukkan x dan y dari titik : ");
+                    var Matriks = MatrixReader.readCLI(n,2);
+                    System.out.print("Masukkan nilai x : ");
                     double x = Double.parseDouble(scanner.next());
-                    double result= PolynomialInterp.f(Matriks, x);
-                    System.out.println("Hasil: "+ result);
+                    var interpolatedfunction = PolynomialInterp.EquationString(PolynomialInterp.calculate(Matriks));
+                    var interpolatedX = PolynomialInterp.interpolatedXString(Matriks, x);
+                    System.out.print(interpolatedfunction);
+                    System.out.print(interpolatedX);
                     break;
                 //FILE
                 case "2": 
-                    var MatriksFile = MatrixReader.readFileCLI();
-                    double xFile = Double.parseDouble(scanner.next());
-                    double resultFile= PolynomialInterp.f(MatriksFile, xFile);
-                    System.out.println("Hasil: "+ resultFile);
+                    System.out.print("Masukkan path: ");
+                    var fileName = scanner.next();
+                    int row = 0;
+                    try {
+                        row = MatrixReader.fileRow(fileName)-1;
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    int col = 0;
+                    try {
+                        col = MatrixReader.fileCol(fileName);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    var MatriksFile = new Matrix(row, col);
+                    try {
+                        MatriksFile = MatrixReader.readFile(fileName,row,col);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    double[] xFile = new double[1];
+                    try {
+                        xFile = MatrixReader.readLastLine(fileName);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    MatrixPrinter.print(MatriksFile);
+                    System.out.println("x = "+xFile[0]+"\n");
+                    var interpolatedfunctionFile = PolynomialInterp.EquationString(PolynomialInterp.calculate(MatriksFile));
+                    var interpolatedXFile = PolynomialInterp.interpolatedXString(MatriksFile, xFile[0]);
+                    System.out.print(interpolatedfunctionFile);
+                    System.out.print(interpolatedXFile);
                     break; 
 
                 case "3": 
