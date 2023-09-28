@@ -5,8 +5,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-public class Input extends JPanel{
-    public Input(){
+public class InputPanel extends JPanel{
+    public InputPanel(){
         setLayout(new GridLayout(1, 1));
     }
 

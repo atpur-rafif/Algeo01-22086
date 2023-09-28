@@ -1,9 +1,11 @@
 package GUI.InputMatrix;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -70,36 +72,26 @@ public class Basic extends MatrixInputField {
         
         gridInput = new JPanel();
 
-        var rowLabel = new JLabel("Row: ");
         rowInput = new JComboBox<Integer>(dimensionOption.clone());
         rowInput.addActionListener(dimensionListener);
-        var colLabel = new JLabel("Col: ");
         colInput = new JComboBox<Integer>(dimensionOption.clone());
         colInput.addActionListener(dimensionListener);
         dimensionHandler();
 
-        add(rowLabel);
-        layout.putConstraint(SpringLayout.WEST, rowLabel, 0, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.VERTICAL_CENTER, rowLabel, 0, SpringLayout.VERTICAL_CENTER, rowInput);
-
         add(rowInput);
-        layout.putConstraint(SpringLayout.WEST, rowInput, 0, SpringLayout.EAST, rowLabel);
         layout.putConstraint(SpringLayout.EAST, rowInput, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.WEST, rowInput, 0, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, rowInput, 0, SpringLayout.NORTH, this);
 
-        add(colLabel);
-        layout.putConstraint(SpringLayout.WEST, colLabel, 0, SpringLayout.HORIZONTAL_CENTER, this);
-        layout.putConstraint(SpringLayout.VERTICAL_CENTER, colLabel, 0, SpringLayout.VERTICAL_CENTER, colInput);
-
         add(colInput);
-        layout.putConstraint(SpringLayout.WEST, colInput, 0, SpringLayout.EAST, colLabel);
+        layout.putConstraint(SpringLayout.WEST, colInput, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.EAST, colInput, 0, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, colInput, 0, SpringLayout.NORTH, this);
 
         add(gridInput);
         layout.putConstraint(SpringLayout.WEST, gridInput, 0, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, gridInput, 0, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.NORTH, gridInput, 5, SpringLayout.SOUTH, rowLabel);
+        layout.putConstraint(SpringLayout.NORTH, gridInput, 0, SpringLayout.SOUTH, rowInput);
         layout.putConstraint(SpringLayout.SOUTH, gridInput, 0, SpringLayout.SOUTH, this);
     }
 
