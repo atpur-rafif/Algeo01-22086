@@ -19,17 +19,33 @@ public class InverseMenu {
         PrintListMenu.clear();
         
         while(isInverse){
-            PrintListMenu.Print(new String[]{
+            var choice = Prompter.getBoundedInt(new String[]{
                 "=============================Inverse Menu=================================", 
                 "1. Metode OBE", 
                 "2. Metode Adjoin", 
                 "3. Back",
-                "*Note: Pilih menggunakan angka yang sesuai",
-            });
-            isInput = true;
-            System.out.print("> ");
-            choice = scanner.next(); 
-            switch(choice){
+            }, 1, 3);
+
+            Matrix matrix = null;
+
+            var ioType = Prompter.getIOType();
+            if(ioType == IOType.CLI){
+                matrix = MatrixReader.readCLI();
+            } else if(ioType == IOType.File){
+                matrix = MatrixReader.readFileCLI();
+            }
+
+            Matrix inversedMatrix = null;
+            if     (choice == 1) inversedMatrix = MatrixInverse.calculateWithGaussJordan(matrix);
+            else if(choice == 2) inversedMatrix = MatrixInverse.calculateWithCofactor(matrix);
+
+            Save.ResultMatrix(inversedMatrix);
+
+
+
+            /* 
+
+            switch("1"){
                 case "1": 
                     PrintListMenu.clear();
                     while(isInput){
@@ -102,6 +118,8 @@ public class InverseMenu {
                     PrintListMenu.clear();
                     break;
             }
+            
+            */
         }
     }
 }
