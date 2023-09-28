@@ -8,7 +8,7 @@ import Application.*;
 public class InterpolinomMenu {
     static Scanner scanner = new Scanner(System.in);
 
-    public static void Display(){
+    public static void Run(){
         boolean isInterp = true; 
         PrintListMenu.clear(); 
         while(isInterp){
@@ -23,7 +23,6 @@ public class InterpolinomMenu {
                     double x = Double.parseDouble(scanner.next());
                     double result= PolynomialInterp.f(Matriks, x);
                     System.out.println("Hasil: "+ result);
-
                     break;
                 //FILE
                 case "2": 
@@ -31,12 +30,11 @@ public class InterpolinomMenu {
                     double xFile = Double.parseDouble(scanner.next());
                     double resultFile= PolynomialInterp.f(MatriksFile, xFile);
                     System.out.println("Hasil: "+ resultFile);
-
                     break; 
 
                 case "3": 
-                    isInterp = false;
                     PrintListMenu.clear();
+                    isInterp = false;
                     break; 
             }
         }

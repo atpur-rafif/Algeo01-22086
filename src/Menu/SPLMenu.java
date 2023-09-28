@@ -6,7 +6,7 @@ import Matrix.MatrixLinearEquation;
 import Matrix.MatrixPrinter;
 public class SPLMenu {
     static Scanner scanner = new Scanner(System.in);
-    public static void Display(){
+    public static void Run(){
         PrintListMenu.clear();
         boolean isSPL = true; 
         String inputChoice;

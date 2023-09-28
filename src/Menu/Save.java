@@ -1,12 +1,29 @@
 package Menu;
+import java.io.File;
 import java.util.Scanner;
 import Matrix.*;
+import Vector.EquationSpace;
 import FilePrinter.*;
 
-public class SaveResult {
+
+public class Save {
     static Scanner scanner = new Scanner(System.in);
     static String choice;
-    public static void saveResultMatrix(Matrix M){
+
+    public static void CreateFile(String fileName){
+        fileName = fileName + ".txt";
+        File myMatrix = new File(fileName); 
+        while (myMatrix.exists()){
+            System.out.println("Nama file sudah ada, silahkan ganti namanya");
+            System.out.print("Nama file: ");
+            fileName = scanner.next();
+            fileName = fileName + ".txt";
+            myMatrix = new File(fileName); 
+        }
+        System.out.println("File " + myMatrix.getName() + " dibuat");
+    }
+
+    public static void ResultMatrix(Matrix M){
         while(true){
             PrintListMenu.Print(new String[]{
                 "====================================Saving=====================================", 
@@ -24,7 +41,7 @@ public class SaveResult {
         }
     }
 
-    public static void saveResultSingleValue(Matrix matrix, Double Result){
+    public static void ResultSingleValue(Matrix matrix, Double Result){
         while(true){
             PrintListMenu.Print(new String[]{
                 "====================================Saving=====================================", 
@@ -38,10 +55,10 @@ public class SaveResult {
             System.out.println("Input invalid, masukkan lagi");
         }
         if(choice.equalsIgnoreCase("Y")){
-            SinglePrinterwithMatrix.printFileCLI(matrix, Result);
+            DeterminantPrinter.printFileCLI(matrix, Result);
         }
     }
-    public static void multipleValue(double[] Result){
+    public static void EquationValue(EquationSpace Result){
         while(true){
             PrintListMenu.Print(new String[]{
                 "====================================Saving=====================================", 
@@ -58,5 +75,4 @@ public class SaveResult {
             MultiplePrinter.printFileCLI(Result);
         }
     }
-
 }

@@ -1,4 +1,3 @@
-import Application.MultipleLinear;
 import Image.ImageLoader;
 import Image.ImageSaver;
 import Image.Resize;
@@ -8,6 +7,9 @@ import Vector.EquationSpace;
 import Vector.EuclideanSpace;
 import Vector.VectorSpace;
 import Menu.*;
+import Application.*;
+import GUI.MainApp;
+
 import java.util.Scanner;
 
 public class Test {
