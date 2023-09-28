@@ -24,7 +24,6 @@ public class MatrixDeterminantWithOBE{
         for (int j=0;j<M.col;j++){
             det *= M.get(j, j);
         }
-        
         return (det*Math.pow(-1, sign))/divider;
     }
     
