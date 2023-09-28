@@ -1,7 +1,6 @@
 package Menu;
 
 import java.util.Scanner;
-import Matrix.*;
 import Transformation.LocalSplineTransformation;
 import Vector.EquationSpace;
 import Vector.EuclideanSpace;
