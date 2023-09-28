@@ -1,6 +1,7 @@
 package Matrix;
 
 import Matrix.OBE.OBERunner;
+import Menu.StringFormatter;
 
 public class MatrixLinearEquation {
 
@@ -42,7 +43,7 @@ public class MatrixLinearEquation {
                 case 1:
                     System.out.println("\nMatrix hasil OBE : ");
                     MatrixPrinter.print(OBEResult.getResult());
-                    output += "Solusi parametrik : \n";
+                    output += "\nSolusi parametrik : \n";
                     output += MatrixLinearEquation.parametricSolution(OBEResult.getResult());
                     break;
                 case 2:
@@ -50,7 +51,7 @@ public class MatrixLinearEquation {
                     OBEResult2.gausJordanElimination();
                     System.out.println("\nMatrix hasil OBE : ");
                     MatrixPrinter.print(OBEResult2.getResult());
-                    output += "Solusi parametrik : \n";
+                    output += "\nSolusi parametrik : \n";
                     output += MatrixLinearEquation.parametricSolution(OBEResult2.getResult());
                     break;
                 case 3:
@@ -112,8 +113,10 @@ public class MatrixLinearEquation {
         String output = "";
         for (int j=0;j<M1.row-1;j++){
             first = false;
-            String currentSubscript = String.valueOf((char)('\u2080' + (j+1)));
-            output += ("x"+(currentSubscript)+" = ");
+            if (M1.get(j,j)!=0){
+                String currentSubscript =  StringFormatter.createSubscript(j);
+                output += ("x"+(currentSubscript)+" = ");
+            }
             if ((M1.get(j, M1.col-1))!=0){
                 output += ("("+(M1.get(j, M1.col-1))*1+")");
                 first = true;
@@ -124,11 +127,13 @@ public class MatrixLinearEquation {
                         output += (" + ");
                     }
                     output += ("("+M1.get(j, k)*(-1));
-                    String currentSubscript2 = String.valueOf((char)('\u2080' + (k+1)));
+                    String currentSubscript2 = StringFormatter.createSubscript(k);
                     output += (")x"+(currentSubscript2));
                 }
             }
+            if (M1.get(j,j)!=0){
             output += ("\n");
+            }
         }
         return output;
     }
@@ -139,7 +144,7 @@ public class MatrixLinearEquation {
         String output = "";
         for (int i=M1.row-1;i>=0;i--){
             count[i] = M1.get(i, M1.col-1);
-            String currentSubscript = String.valueOf((char)('\u2080' + (i)));
+            String currentSubscript = StringFormatter.createSubscript(i);
             output += "x"+currentSubscript+" = ";
             if(i==M1.row-1){
                     output += M1.get(i,M1.col-1);
@@ -149,7 +154,7 @@ public class MatrixLinearEquation {
             }
             for (int j=M1.col-2;j>i;j--){
                 if(i!=M1.row-1){
-                    String currentSubscript3 = String.valueOf((char)('\u2080' + (j)));
+                    String currentSubscript3 = StringFormatter.createSubscript(j);
                     output += "("+M1.get(i, j)+")x"+currentSubscript3;
                     count[i] -= M1.get(i, j)*count[j];
                     if (j-1!=i){
@@ -158,7 +163,7 @@ public class MatrixLinearEquation {
                 }
             }
             if (i!=M1.row-1){
-                String currentSubscript2 = String.valueOf((char)('\u2080' + (i)));
+                String currentSubscript2 = StringFormatter.createSubscript(i);
                 output += "\nx"+currentSubscript2+" = "+count[i];
             }
             output += "\n";
@@ -169,7 +174,7 @@ public class MatrixLinearEquation {
     private static String gaussJordanEliminationSolution(Matrix M1){
         String output = "";
         for (int i=0;i<M1.row;i++){
-            String currentSubscript = String.valueOf((char)('\u2080' + (i)));
+            String currentSubscript = StringFormatter.createSubscript(i);
             output += "x"+currentSubscript+" = "+M1.get(i, M1.col-1)+"\n";
         }
         return output;
@@ -180,11 +185,11 @@ public class MatrixLinearEquation {
         var solution = MatrixCramer.calculateSolution(koefisien,konstanta);
         output += "det = "+ MatrixDeterminantWithOBE.calculate(koefisien)+"\n";
         for (int i=0;i<koefisien.row;i++){
-            String currentSubscript = String.valueOf((char)('\u2080' + (i)));
+            String currentSubscript = StringFormatter.createSubscript(i);
             output += "d"+currentSubscript+" = "+solution[i][0]+"\n";
         }
         for (int i=0;i<koefisien.row;i++){
-            String currentSubscript = String.valueOf((char)('\u2080' + (i)));
+            String currentSubscript = StringFormatter.createSubscript(i);
             output += "x"+currentSubscript+" = "+solution[i][1]+"\n";
         }
         return output;
