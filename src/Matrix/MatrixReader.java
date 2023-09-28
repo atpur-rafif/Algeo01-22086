@@ -88,6 +88,29 @@ public class MatrixReader {
         return col;
         
     }
+    
+       public static double[] readLastLine(String filename) throws FileNotFoundException{
+        String line = "";
+        file = new BufferedReader(new FileReader(filename));
+        for (int i=0;i<fileRow(filename)-1;i++){
+            try {
+                file.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            line = file.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String lastline[] = line.split(" ");
+        double[] lastlinearray = new double[lastline.length];
+        for (int i=0;i<lastline.length;i++){
+            lastlinearray[i] = Double.parseDouble(lastline[i]);
+        }
+        return lastlinearray;
+    }
 
         public static Matrix readFile(String fileName, int row, int col) throws FileNotFoundException{
         var M = new Matrix(row, col);
