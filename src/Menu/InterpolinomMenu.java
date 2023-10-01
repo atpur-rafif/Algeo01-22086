@@ -1,8 +1,6 @@
 package Menu;
 
-
 import java.util.Scanner;
-
 import Matrix.Matrix;
 import Matrix.MatrixReader;
 import Application.*;

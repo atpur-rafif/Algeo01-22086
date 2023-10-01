@@ -1,8 +1,12 @@
 package Matrix;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class MatrixCramer {
     public static double[][] calculateSolution(Matrix M, Matrix B){
         Matrix matforcalculation;
+        BigDecimal rounder;
         double[][] solution;
         double det;
         var cons = new MatrixManipulator(B);
@@ -12,8 +16,10 @@ public class MatrixCramer {
             var edit = new MatrixManipulator(M);
             edit.setCol(i, cons.getCol(0));
             matforcalculation = edit.getResult();
-            solution[i][0] = MatrixDeterminantWithOBE.calculate(matforcalculation);
-            solution[i][1] = MatrixDeterminantWithOBE.calculate(matforcalculation)/det;
+            rounder = new BigDecimal(Double.toString(MatrixDeterminantWithOBE.calculate(matforcalculation)));
+            rounder = rounder.setScale(5, RoundingMode.HALF_DOWN); 
+            solution[i][0] = rounder.doubleValue();
+            solution[i][1] = solution[i][0]/det;
         }
         return solution;
     }
