@@ -2,102 +2,33 @@ package Menu;
 
 import Matrix.Matrix;
 import Matrix.MatrixInverse;
-import Matrix.MatrixPrinter;
 import Matrix.MatrixReader;
-import java.util.Scanner;
 
 public class InverseMenu {
-    static Scanner scanner = new Scanner(System.in);
-    
-    public static void Display(){
-        PrintListMenu.clear();
-        boolean isInverse = true; 
-        boolean isInput = true;
-        String choice;
-        String inputChoice;
-        Matrix inversedMatrix; 
-        var Matrix = new Matrix(0, 0); 
-        
-        while(isInverse){
-            PrintListMenu.Print(new String[]{
+    public static void Run(){
+        while(true){
+            var choice = Prompter.getBoundedInt(new String[]{
                 "=============================Inverse Menu=================================", 
                 "1. Metode OBE", 
                 "2. Metode Adjoin", 
                 "3. Back",
-                "*Note: Pilih menggunakan angka yang sesuai",
-            });
-            isInput = true;
-            System.out.print("> ");
-            choice = scanner.next(); 
-            switch(choice){
-                case "1": 
-                    PrintListMenu.clear();
-                    while(isInput){
-                        PrintListMenu.Repetitive(6);   
-                        System.out.print("> "); 
-                        inputChoice = scanner.next();
-                        switch(inputChoice){
-                            case "1": 
-                                Matrix = MatrixReader.readCLI(); 
-                                inversedMatrix = MatrixInverse.calculateWithGaussJordan(Matrix);
-                                System.out.println("Matris Inverse: ");
-                                MatrixPrinter.print(inversedMatrix);
-                                break;
-                            case "2":
-                                Matrix = MatrixReader.readFileCLI(); 
-                                inversedMatrix = MatrixInverse.calculateWithGaussJordan(Matrix);
-                                System.out.println("Matris Inverse: ");
-                                MatrixPrinter.print(inversedMatrix);
-                                break;
-                            case "3": 
-                                PrintListMenu.clear();
-                                isInput = false;
-                                break;
-                            default: 
-                                PrintListMenu.clear();
-                                System.out.println("Input tidak valid");
-                                break;
-                            }
-                        }
-                    break; 
-                case "2": 
-                    PrintListMenu.clear();
-                    while(isInput){
-                        PrintListMenu.Repetitive(6);   
-                        System.out.print("> "); 
-                        inputChoice = scanner.next();
-                        switch(inputChoice){
-                            case "1": 
-                                Matrix = MatrixReader.readCLI(); 
-                                inversedMatrix = MatrixInverse.calculateWithCofactor(Matrix);
-                                System.out.println("Matris Inverse: ");
-                                MatrixPrinter.print(inversedMatrix);
-                                break;
-                            case "2":
-                                Matrix = MatrixReader.readFileCLI(); 
-                                inversedMatrix = MatrixInverse.calculateWithCofactor(Matrix);
-                                System.out.println("Matris Inverse: ");
-                                MatrixPrinter.print(inversedMatrix);
-                                break;
-                            case "3": 
-                                PrintListMenu.clear();
-                                isInput = false;
-                                break;
-                            default: 
-                                PrintListMenu.clear();
-                                System.out.println("Input tidak valid");
-                                break;
-                            }
-                        }
-                    break; 
-                case "3": 
-                    isInverse = false;
-                    PrintListMenu.clear();
-                    break;
-                default: 
-                    PrintListMenu.clear();
-                    break;
-            }
+            }, 1, 3);
+
+            if(choice == 3) break;
+
+            Matrix matrix = null;
+
+            var ioType = Prompter.getIOType();
+            if     (ioType == IOType.CLI) matrix = MatrixReader.readCLI();
+            else if(ioType == IOType.File) matrix = MatrixReader.readFileCLI();
+
+            Matrix inversedMatrix = null;
+            if     (choice == 1) inversedMatrix = MatrixInverse.calculateWithGaussJordan(matrix);
+            else if(choice == 2) inversedMatrix = MatrixInverse.calculateWithCofactor(matrix);
+
+            System.out.println(StringFormatter.matrix(inversedMatrix));
+            IOFile.askToSave(StringFormatter.matrix(inversedMatrix));
+        
         }
     }
 }

@@ -1,47 +1,33 @@
 package Menu;
 
-
 import java.util.Scanner;
+import Matrix.Matrix;
 import Matrix.MatrixReader;
 import Application.*;
 
 public class InterpolinomMenu {
     static Scanner scanner = new Scanner(System.in);
 
-    public static void Display(){
-        boolean isInterp = true; 
-        PrintListMenu.clear(); 
-        while(isInterp){
-            PrintListMenu.Repetitive(1);
-            System.out.print("> ");
-            String choice = scanner.next(); 
-            switch (choice){
-                
-                //CLI
-                case "1": 
-                    var Matriks = MatrixReader.readCLI();
-                    double x = Double.parseDouble(scanner.next());
-                    double result= PolynomialInterp.f(Matriks, x);
-                    System.out.println("Hasil: "+ result);
+    public static void Run(){
+        while(true){
+            var choice = Prompter.getBoundedInt(new String[]{
+                "====Polimonial Interpolation====",
+                "1. CLI",
+                "2. File",
+                "3. Back"
+            }, 1, 3);
 
+            if(choice == 3) break;
 
-                    break;
-                //FILE
-                case "2": 
-                    var MatriksFile = MatrixReader.readFileCLI();
-                    double xFile = Double.parseDouble(scanner.next());
-                    double resultFile= PolynomialInterp.f(MatriksFile, xFile);
-                    System.out.println("Hasil: "+ resultFile);
+            Matrix matrix = null;
+            if(choice == 1) matrix = MatrixReader.readCLI();
+            else if(choice == 2);
 
-                    break; 
+            var x = Prompter.getDoubleInline("LMAO");
+            double result = PolynomialInterp.f(matrix, x);
+            System.out.println("Hasil: " + result);
 
-                case "3": 
-                    isInterp = false;
-                    PrintListMenu.clear();
-                    break; 
-            }
+            IOFile.askToSave(Double.toString(result));
         }
     }
-
- 
 }

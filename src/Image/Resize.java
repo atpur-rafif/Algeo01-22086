@@ -16,7 +16,6 @@ public class Resize {
                 V.set(p, image.getPixelCartesian(x + lx, y + ly));
             }
         }
-
         return V;
     }
 
@@ -24,7 +23,6 @@ public class Resize {
         var newHeight = (int) (image.height * size);
         var newWidth = (int) (image.width * size);
         var resized = new Grayscale(newWidth, newHeight);
-
         var cache = new EquationSpace[image.height][image.width];
         var cacheStatus = new boolean[image.height][image.width];
         for(int i = 0; i < image.height; ++i){
@@ -32,7 +30,6 @@ public class Resize {
                 cacheStatus[i][j] = false;
             }
         }
-
         int x, y;
         for(y = 0; y < newHeight; ++y){
             for(x = 0; x < newWidth; ++x){
@@ -61,6 +58,7 @@ public class Resize {
             }
             System.out.printf("%.2f", (100 * y) / (double) newHeight);
             System.out.print("%\n");
+
         }
 
         return resized;

@@ -78,7 +78,11 @@ public class OBERunner {
             double maks = this.Manipulator.get(i, i);
             int idrMaks = i;
             for(int j=i+1;j<this.Manipulator.row;j++){
-                if (maks<this.Manipulator.get(j,i)){
+                if (maks==0&&maks<Math.abs(this.Manipulator.get(j,i))){
+                    maks = this.Manipulator.get(j,i);
+                    idrMaks = j;
+                }
+                else if (maks<(this.Manipulator.get(j,i))){
                     maks = this.Manipulator.get(j,i);
                     idrMaks = j;
                 }

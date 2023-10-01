@@ -1,23 +1,30 @@
 package Matrix;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class MatrixCramer {
-    public static double[] calculateSolution(Matrix M, Matrix B){
+    public static double[][] calculateSolution(Matrix M, Matrix B){
         Matrix matforcalculation;
-        double[] solution;
+        BigDecimal rounder;
+        double[][] solution;
         double det;
         var cons = new MatrixManipulator(B);
         det = MatrixDeterminantWithOBE.calculate(M);
-        solution = new double[M.col];
+        solution = new double[M.col][2];
         for (int i=0;i<M.col;i++){
             var edit = new MatrixManipulator(M);
             edit.setCol(i, cons.getCol(0));
             matforcalculation = edit.getResult();
-            solution[i] = MatrixDeterminantWithOBE.calculate(matforcalculation)/det;
+            rounder = new BigDecimal(Double.toString(MatrixDeterminantWithOBE.calculate(matforcalculation)));
+            rounder = rounder.setScale(5, RoundingMode.HALF_DOWN); 
+            solution[i][0] = rounder.doubleValue();
+            solution[i][1] = solution[i][0]/det;
         }
         return solution;
     }
 
-    public static double[] calculateAugmented(Matrix M){
+    public static double[][] calculateAugmented(Matrix M){
         var A = new Matrix(M.row,M.col-1);
         var B = new Matrix(M.row,1);
         var base = new MatrixManipulator(M);

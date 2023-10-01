@@ -19,40 +19,47 @@ public class MatrixPrinter {
         }
     }
 
-    public static void printMatrixFile(Matrix M, String fileName){
-            try{
-                File myMatrix = new File(fileName); 
-                fileName = fileName + ".txt";
-                while (myMatrix.createNewFile()){
-                    System.out.println("Nama file sudah ada, silahkan ganti namanya");
-                    fileName = scanner.next();
-                }
-                System.out.println("Result Generated in " + myMatrix.getName());
-            }
-            catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
+    public static void createMatrixFile(Matrix M, String fileName){
+        fileName = fileName + ".txt";
+        File myMatrix = new File(fileName); 
+        while (myMatrix.exists()){
+            System.out.println("Nama file sudah ada, silahkan ganti namanya");
+            System.out.print("Nama file: ");
+            fileName = scanner.next();
+            fileName = fileName + ".txt";
+            myMatrix = new File(fileName); 
+        }
+        System.out.println("File " + myMatrix.getName() + " dibuat");
+        writeMatrixfile(M, fileName);
+        
+    }
 
-            //tulis hasil di file
-            try{
-                FileWriter myMatrix = new FileWriter(fileName);
-                int n = M.row, m = M.col;
+    public static void writeMatrixfile(Matrix M, String fileName){
+        try{
+            FileWriter myMatrixWrite = new FileWriter(fileName);
+            int n = M.row, m = M.col;
 
-                    for(int i = 0; i < n; ++i){
-                        for(int j = 0; j < m; ++j){
-                            myMatrix.write(String.format("%.2f ", M.get(i, j)));
-                        }
-                        myMatrix.write("\n");
+                for(int i = 0; i < n; ++i){
+                    for(int j = 0; j < m; ++j){
+                        myMatrixWrite.write(String.format("%.2f ", M.get(i, j)));
                     }
-                
-                myMatrix.close();
-                System.out.println("Matrix sudah ditulis");
-            } 
-            catch (IOException e){
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
+                    myMatrixWrite.write("\n");
+                }
+            
+            myMatrixWrite.close();
+            System.out.println("\nHasil matrix sudah ditulis di file " + fileName);
+        } 
+        catch (IOException e){
+            System.out.println("Ada error");
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void printMatrixFileCLI(Matrix M){
+        System.out.print("Masukkan nama file: ");
+        String fileName = scanner.next();
+        createMatrixFile(M, fileName);
     }
 
 }

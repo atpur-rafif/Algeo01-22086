@@ -6,8 +6,15 @@ import Vector.*;
 import Point.Point;
 
 public class LocalSplineTransformation extends Transformation{
-    private static int pointCount = 4;
-    private static int equationCount = GradientEquation.equationCount;
+    public static Point[] points = {
+        new Point(0, 0),
+        new Point(1, 0),
+        new Point(0, 1),
+        new Point(1, 1)
+    };
+    
+    public static int pointCount = points.length;
+    public static int equationCount = GradientEquation.equationCount;
     private static int sideMatrixCount = pointCount * equationCount;
 
     public LocalSplineTransformation(Function<Point, GradientEquation> equation){
@@ -21,11 +28,4 @@ public class LocalSplineTransformation extends Transformation{
             }
         }
     }
-
-    private static Point[] points = {
-        new Point(0, 0),
-        new Point(1, 0),
-        new Point(0, 1),
-        new Point(1, 1)
-    };
 }

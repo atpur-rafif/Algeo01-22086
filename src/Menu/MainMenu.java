@@ -7,9 +7,8 @@ public class MainMenu {
     static Scanner scanner = new Scanner(System.in);
     
     public static void InterfaceProgram(){
-        boolean isRunning = true;
-        while(isRunning == true){
-            PrintListMenu.Print(new String[]{
+        while(true){
+            var choice = Prompter.getBoundedInt(new String[]{
                 "================================Selamat Datang=================================", 
                 "Program Matrix Application", 
                 "1. Interpolasi Polinomial", 
@@ -20,41 +19,17 @@ public class MainMenu {
                 "6. Determinan", 
                 "7. Inverse Matriks", 
                 "8. Quit",
-            });
-            System.out.print("input> ");
-            String choice = scanner.next();
-            switch (choice) {
-                case "1":
-                    InterpolinomMenu.Display();
-                    break;
-                case "2": 
-                    RegresiLinearMenu.Display();
-                    break;
-                case "3": 
-                    BicubicSplineMenu.Display();
-                    break;
-                case "4": 
-                    ImageInterpolation.Display();
-                    break; 
-                case "5":
-                    SPLMenu.Display();
-                    break;
-                case "6": 
-                    DeterminantMenu.Display();
-                    break;
-                case "7": 
-                    InverseMenu.Display();
-                    break;
-                case "8": 
-                    isRunning = false;
-                    break; 
-                default:
-                PrintListMenu.clear();
-                System.out.println("Input tidak valid");
-                    break;
-            }
+            }, 1, 8);
 
+            PrintListMenu.clear();
+            if     (choice == 1) InterpolinomMenu.Run();
+            else if(choice == 2) RegresiLinearMenu.Run();
+            else if(choice == 3) BicubicSplineMenu.Run();
+            else if(choice == 4) ImageResizing.Run();
+            else if(choice == 5) SPLMenu.Run();
+            else if(choice == 6) DeterminantMenu.Run();
+            else if(choice == 7) InverseMenu.Run();
+            else if(choice == 8) break;
         }
-        
     }
 }
