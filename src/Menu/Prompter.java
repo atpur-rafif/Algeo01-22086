@@ -3,6 +3,8 @@ package Menu;
 import java.util.Scanner;
 import java.util.function.Function;
 
+import Vector.EuclideanSpace;
+
 public class Prompter {
     private static String inputPrompt = "> ";
     private static Scanner scanner = new Scanner(System.in);
@@ -19,6 +21,26 @@ public class Prompter {
         var s = scanner.next();
         System.out.print("\n");
         return s;
+    }
+
+    public static EuclideanSpace getEuclideanVectorInline(String prompt, int dimension){
+        EuclideanSpace r = null;
+        System.out.print(prompt);
+
+        while(r == null){
+            try {
+                var tmp = new EuclideanSpace(dimension);
+                for(int i = 0; i < dimension; ++i){
+                    var value = scanner.nextDouble();
+                    tmp.set(i, value);
+                }
+                r = tmp;
+            } catch (Exception e) {
+                System.out.println("Input tidak valid");
+            }
+        }
+
+        return r;
     }
 
     public static boolean getBoolean(String prompt){
