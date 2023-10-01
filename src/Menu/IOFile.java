@@ -56,7 +56,7 @@ public class IOFile {
 
                 if(b == 1) break;
                 if(b == 3) return;
-            }
+            } else { break; }
         } while (true);
 
         try {

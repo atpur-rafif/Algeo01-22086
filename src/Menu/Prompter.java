@@ -79,6 +79,9 @@ public class Prompter {
             return "Input tidak valid";
         });
     }
+    public static <T> T get(String prompt, Function<String, T> checkFn, Function<String, String> onFalse){
+        return get(new String[]{prompt}, checkFn, onFalse);
+    }
 
     public static <T> T get(String[] prompt, Function<String, T> checkFn, Function<String, String> onFalse){
         T result = null;
