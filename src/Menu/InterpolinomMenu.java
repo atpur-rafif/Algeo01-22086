@@ -2,6 +2,8 @@ package Menu;
 
 
 import java.util.Scanner;
+
+import Matrix.Matrix;
 import Matrix.MatrixReader;
 import Application.*;
 
@@ -9,36 +11,25 @@ public class InterpolinomMenu {
     static Scanner scanner = new Scanner(System.in);
 
     public static void Run(){
-        boolean isInterp = true; 
-        PrintListMenu.clear(); 
-        while(isInterp){
-            PrintListMenu.Repetitive(1);
-            System.out.print("> ");
-            String choice = scanner.next(); 
-            switch (choice){
-                
-                //CLI
-                case "1": 
-                    var Matriks = MatrixReader.readCLI();
-                    double x = Double.parseDouble(scanner.next());
-                    double result= PolynomialInterp.f(Matriks, x);
-                    System.out.println("Hasil: "+ result);
-                    break;
-                //FILE
-                case "2": 
-                    var MatriksFile = MatrixReader.readFileCLI();
-                    double xFile = Double.parseDouble(scanner.next());
-                    double resultFile= PolynomialInterp.f(MatriksFile, xFile);
-                    System.out.println("Hasil: "+ resultFile);
-                    break; 
+        while(true){
+            var choice = Prompter.getBoundedInt(new String[]{
+                "====Polimonial Interpolation====",
+                "1. CLI",
+                "2. File",
+                "3. Back"
+            }, 1, 3);
 
-                case "3": 
-                    PrintListMenu.clear();
-                    isInterp = false;
-                    break; 
-            }
+            if(choice == 3) break;
+
+            Matrix matrix = null;
+            if(choice == 1) matrix = MatrixReader.readCLI();
+            else if(choice == 2);
+
+            var x = Prompter.getDoubleInline("LMAO");
+            double result = PolynomialInterp.f(matrix, x);
+            System.out.println("Hasil: " + result);
+
+            IOFile.askToSave(Double.toString(result));
         }
     }
-
- 
 }

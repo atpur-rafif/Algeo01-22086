@@ -22,6 +22,12 @@ public class Prompter {
         System.out.print("\n");
         return s;
     }
+    
+    public static Double getDoubleInline(String prompt){
+        System.out.print(prompt);
+        var s = scanner.next();
+        return Double.parseDouble(s);
+    }
 
     public static EuclideanSpace getEuclideanVectorInline(String prompt, int dimension){
         EuclideanSpace r = null;
