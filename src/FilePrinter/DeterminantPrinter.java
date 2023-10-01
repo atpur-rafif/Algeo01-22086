@@ -1,6 +1,6 @@
 package FilePrinter;
 
-import Menu.Save;
+import Menu.IOFile;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ import Matrix.*;
 public class DeterminantPrinter {
     static Scanner scanner = new Scanner(System.in);
     public static void printFileDeterminant(Matrix matrix, double Result, String fileName){
-        Save.CreateFile(fileName);
+        IOFile.createFile(fileName);
         try{
             FileWriter myMatrixWrite = new FileWriter(fileName);
             //print hasil determinant

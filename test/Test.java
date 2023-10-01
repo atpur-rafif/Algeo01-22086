@@ -1,13 +1,15 @@
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.regex.Pattern;
-
-import GUI.Window;
+import Menu.IOFile;
+import Menu.MainMenu;
+import Menu.StringFormatter;
+import Vector.EquationSpace;
 
 public class Test {
-    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args){
-        MainMenu.InterfaceProgram();
+        //MainMenu.InterfaceProgram();
+        EquationSpace eq = new EquationSpace(16);
+        for(int i = 0; i < 16; ++i){
+            eq.set(i, i);
+        }
+        System.out.println(StringFormatter.polynomialEquation(eq));
     }
 }

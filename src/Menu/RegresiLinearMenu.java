@@ -35,7 +35,7 @@ public class RegresiLinearMenu {
                     MultipleLinear.DisplayEquation(coefficient);
 
                     tryMultipleEquation(coefficient);
-                    Save.EquationValue(coefficient); //perlu diperbaiki savenya dengan hasil persamaan
+                    IOFile.EquationValue(coefficient); //perlu diperbaiki savenya dengan hasil persamaan
                     break; 
                 case "2": 
                     System.out.println("Masukkan sample Point");
@@ -46,7 +46,7 @@ public class RegresiLinearMenu {
                     MultipleLinear.DisplayEquation(coefficient);
 
                     tryMultipleEquation(coefficient);
-                    Save.EquationValue(coefficient);
+                    IOFile.EquationValue(coefficient);
                 case "3": 
                     isRegresi = false; 
                     System.out.print("\033\143");
