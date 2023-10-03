@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import CLI.IO.IOFile;
-import CLI.IO.StringFormatter;
+import CLI.IO.IOStringFormatter;
 import Vector.VectorSpace;
 
 public class MultiplePrinter {
@@ -18,7 +18,7 @@ public class MultiplePrinter {
             String plus = " + ";
             for(int i = 0; i < Result.basisCount; ++i){
 
-                myRegWrite.write(Result.get(i) + "x" + StringFormatter.createSubscript(i) + plus);
+                myRegWrite.write(Result.get(i) + "x" + IOStringFormatter.createSubscript(i) + plus);
             }  
         
             //print hasil determinant              

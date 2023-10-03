@@ -15,12 +15,13 @@ public class DeterminantMenu {
 
     public static void Run(){
         while(true){
-            var choice = IOPrompter.getBoundedInt(new String[]{
+            IOPrompter.print(new String[]{
                 "Determinant Menu", 
                 "1. Metode OBE", 
                 "2. Metode Kofaktor", 
-                "3. Back",
-            }, 1, 3);
+                "3. Back"
+            });
+            var choice = IOPrompter.getBoundedInt("", 1, 3);
 
             if(choice == 3) break;
 

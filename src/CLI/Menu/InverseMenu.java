@@ -2,7 +2,7 @@ package CLI.Menu;
 
 import CLI.IO.IOFile;
 import CLI.IO.IOType;
-import CLI.IO.StringFormatter;
+import CLI.IO.IOStringFormatter;
 import CLI.IO.IOPrompter;
 import Matrix.Matrix;
 import Matrix.MatrixDeterminant;
@@ -12,12 +12,13 @@ import Matrix.MatrixReader;
 public class InverseMenu {
     public static void Run(){
         while(true){
-            var choice = IOPrompter.getBoundedInt(new String[]{
+            IOPrompter.print(new String[]{
                 "Inverse Menu", 
                 "1. Metode OBE", 
                 "2. Metode Adjoin", 
                 "3. Back",
-            }, 1, 3);
+            });
+            var choice = IOPrompter.getBoundedInt("", 1, 3);
 
             if(choice == 3) break;
 
@@ -37,8 +38,8 @@ public class InverseMenu {
             if     (choice == 1) inversedMatrix = MatrixInverse.calculateWithGaussJordan(matrix);
             else if(choice == 2) inversedMatrix = MatrixInverse.calculateWithCofactor(matrix);
 
-            System.out.println(StringFormatter.matrix(inversedMatrix));
-            IOFile.askToSave(StringFormatter.matrix(inversedMatrix));
+            System.out.println(IOStringFormatter.matrix(inversedMatrix));
+            IOFile.askToSave(IOStringFormatter.matrix(inversedMatrix));
         
         }
     }

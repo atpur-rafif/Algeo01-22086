@@ -1,6 +1,6 @@
 package Matrix;
 
-import CLI.IO.StringFormatter;
+import CLI.IO.IOStringFormatter;
 import Matrix.OBE.OBERunner;
 
 public class MatrixLinearEquation {
@@ -114,7 +114,7 @@ public class MatrixLinearEquation {
         for (int j=0;j<M1.row-1;j++){
             first = false;
             if (M1.get(j,j)!=0){
-                String currentSubscript =  StringFormatter.createSubscript(j);
+                String currentSubscript =  IOStringFormatter.createSubscript(j);
                 output += ("x"+(currentSubscript)+" = ");
             }
             if ((M1.get(j, M1.col-1))!=0){
@@ -127,7 +127,7 @@ public class MatrixLinearEquation {
                         output += (" + ");
                     }
                     output += ("("+M1.get(j, k)*(-1));
-                    String currentSubscript2 = StringFormatter.createSubscript(k);
+                    String currentSubscript2 = IOStringFormatter.createSubscript(k);
                     output += (")x"+(currentSubscript2));
                 }
             }
@@ -144,7 +144,7 @@ public class MatrixLinearEquation {
         String output = "";
         for (int i=M1.row-1;i>=0;i--){
             count[i] = M1.get(i, M1.col-1);
-            String currentSubscript = StringFormatter.createSubscript(i);
+            String currentSubscript = IOStringFormatter.createSubscript(i);
             output += "x"+currentSubscript+" = ";
             if(i==M1.row-1){
                     output += M1.get(i,M1.col-1);
@@ -154,7 +154,7 @@ public class MatrixLinearEquation {
             }
             for (int j=M1.col-2;j>i;j--){
                 if(i!=M1.row-1){
-                    String currentSubscript3 = StringFormatter.createSubscript(j);
+                    String currentSubscript3 = IOStringFormatter.createSubscript(j);
                     output += "("+M1.get(i, j)+")x"+currentSubscript3;
                     count[i] -= M1.get(i, j)*count[j];
                     if (j-1!=i){
@@ -163,7 +163,7 @@ public class MatrixLinearEquation {
                 }
             }
             if (i!=M1.row-1){
-                String currentSubscript2 = StringFormatter.createSubscript(i);
+                String currentSubscript2 = IOStringFormatter.createSubscript(i);
                 output += "\nx"+currentSubscript2+" = "+count[i];
             }
             output += "\n";
@@ -174,7 +174,7 @@ public class MatrixLinearEquation {
     private static String gaussJordanEliminationSolution(Matrix M1){
         String output = "";
         for (int i=0;i<M1.row;i++){
-            String currentSubscript = StringFormatter.createSubscript(i);
+            String currentSubscript = IOStringFormatter.createSubscript(i);
             output += "x"+currentSubscript+" = "+M1.get(i, M1.col-1)+"\n";
         }
         return output;
@@ -185,11 +185,11 @@ public class MatrixLinearEquation {
         var solution = MatrixCramer.calculateSolution(koefisien,konstanta);
         output += "det = "+ MatrixDeterminantWithOBE.calculate(koefisien)+"\n";
         for (int i=0;i<koefisien.row;i++){
-            String currentSubscript = StringFormatter.createSubscript(i);
+            String currentSubscript = IOStringFormatter.createSubscript(i);
             output += "d"+currentSubscript+" = "+solution[i][0]+"\n";
         }
         for (int i=0;i<koefisien.row;i++){
-            String currentSubscript = StringFormatter.createSubscript(i);
+            String currentSubscript = IOStringFormatter.createSubscript(i);
             output += "x"+currentSubscript+" = "+solution[i][1]+"\n";
         }
         return output;

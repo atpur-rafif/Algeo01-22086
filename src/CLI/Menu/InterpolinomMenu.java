@@ -12,12 +12,13 @@ public class InterpolinomMenu {
 
     public static void Run(){
         while(true){
-            var choice = IOPrompter.getBoundedInt(new String[]{
+            IOPrompter.print(new String[]{
                 "Polimonial Interpolation",
                 "1. CLI",
                 "2. File",
                 "3. Back"
-            }, 1, 3);
+            });
+            var choice = IOPrompter.getBoundedInt("", 1, 3);
 
             if(choice == 3) break;
 
@@ -25,8 +26,8 @@ public class InterpolinomMenu {
             if(choice == 1) matrix = MatrixReader.readCLI();
             else if(choice == 2);
 
-            var x = IOPrompter.getDoubleInline("LMAO");
-            double result = PolynomialInterp.f(matrix, x);
+            var x = IOPrompter.getDouble("LMAO");
+            double result = PolynomialInterpolation.f(matrix, x);
             System.out.println("Hasil: " + result);
 
             IOFile.askToSave(Double.toString(result));

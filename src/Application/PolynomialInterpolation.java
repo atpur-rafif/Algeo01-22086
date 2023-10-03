@@ -1,11 +1,11 @@
 package Application;
 
-import CLI.IO.StringFormatter;
+import CLI.IO.IOStringFormatter;
 import Matrix.Matrix;
 import Matrix.OBE.OBERunner;
 import Vector.EquationSpace;
 
-public class PolynomialInterp {
+public class PolynomialInterpolation {
 
     private static Matrix pointInput(Matrix points){
         var Mat = new Matrix(points.row,points.row+1);
@@ -32,7 +32,7 @@ public class PolynomialInterp {
 
     public static double f(Matrix points,double x){
         double result=0;
-        var Mat = PolynomialInterp.calculate(points);
+        var Mat = PolynomialInterpolation.calculate(points);
         for (int i=0;i<points.row;i++){
             result += Math.pow(x, i)*(Mat.get(i))*Math.pow(10, 10);
         }
@@ -50,7 +50,7 @@ public class PolynomialInterp {
                 output += (result.get(i) + plus);
             }
             else{
-                String currentPower = StringFormatter.createSuperscript(i);
+                String currentPower = IOStringFormatter.createSuperscript(i);
                 output += (result.get(i) + "x" + currentPower + plus);
             }
         }

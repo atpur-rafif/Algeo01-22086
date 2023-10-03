@@ -4,7 +4,7 @@ import Matrix.*;
 import Matrix.OBE.OBERunner;
 import Vector.*;
 
-public class MultipleLinear{
+public class MultipleRegression{
 
     private static Matrix createMatrix(Matrix samplePoints) {
         int m = samplePoints.row;

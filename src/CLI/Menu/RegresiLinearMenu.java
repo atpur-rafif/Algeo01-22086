@@ -1,9 +1,9 @@
 package CLI.Menu;
 
-import Application.MultipleLinear;
+import Application.MultipleRegression;
 import CLI.IO.IOFile;
 import CLI.IO.IOPrompter;
-import CLI.IO.StringFormatter;
+import CLI.IO.IOStringFormatter;
 import Matrix.Matrix;
 import Matrix.MatrixReader;
 import Vector.*;
@@ -11,12 +11,13 @@ import Vector.*;
 public class RegresiLinearMenu {
     public static void Run(){
         while(true){
-            var input = IOPrompter.getBoundedInt(new String[]{
+            IOPrompter.print(new String[]{
                 "Multiple Regression",
                 "1. CLI",
                 "2. File",
                 "3. Back"
-            }, 1, 3);
+            });
+            var input = IOPrompter.getBoundedInt("", 1, 3);
 
             if(input == 3) break;
 
@@ -24,8 +25,8 @@ public class RegresiLinearMenu {
             Matrix samplePoint = null;
             EuclideanSpace testPoint = null;
             if(input == 1){
-                var n = IOPrompter.getIntegerInline("Masukkan banyak peubah: ");
-                var m = IOPrompter.getIntegerInline("Masukkan banyak sampel: ");
+                var n = IOPrompter.getInteger("Masukkan banyak peubah: ");
+                var m = IOPrompter.getInteger("Masukkan banyak sampel: ");
                 System.out.println("Masukkan sample point");
                 samplePoint = MatrixReader.readCLI(m, n + 1);
                 testPoint = IOPrompter.getEuclideanVectorInline("Masukkan test point: ", n);
@@ -36,9 +37,9 @@ public class RegresiLinearMenu {
             }
 
 
-            var equation = MultipleLinear.solve(samplePoint);
-            var result = MultipleLinear.approximate(equation, testPoint);
-            var out = StringFormatter.multipleRegression(equation) + "\n" + "Hasil regresi: " + result;
+            var equation = MultipleRegression.solve(samplePoint);
+            var result = MultipleRegression.approximate(equation, testPoint);
+            var out = IOStringFormatter.multipleRegression(equation) + "\n" + "Hasil regresi: " + result;
             System.out.println(out);
 
             IOFile.askToSave(out);

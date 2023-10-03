@@ -6,8 +6,7 @@ import Matrix.Matrix;
 import Vector.BicubicSplineSpace;
 import Vector.EquationSpace;
 
-public class StringFormatter {
-
+public class IOStringFormatter {
     private static String offsetIntString(int value, Function<Character, Character> fn){
         String r = "";
         if(value < 0) return r;

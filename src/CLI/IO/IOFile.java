@@ -104,7 +104,7 @@ public class IOFile {
     public static ObscureFormat readObscureFormat(){
         Path path = null;
         do{
-            var input = IOPrompter.getInlineString("Masukkan path: ");
+            var input = IOPrompter.getString("Masukkan path: ");
             path = Path.of(input);
             if(Files.exists(path)){
                 String str = null;
@@ -133,15 +133,16 @@ public class IOFile {
         Path path = null;
 
         do {
-            var input = IOPrompter.getInlineString("Masukkan path: ");
+            var input = IOPrompter.getString("Masukkan path: ");
             path = Path.of(input);
             if(Files.exists(path)){
-                var b = IOPrompter.getBoundedInt(new String[]{
+                IOPrompter.print(new String[]{
                     "File sudah ada, lakukan: ",
                     "1. Overwrite",
                     "2. Masukan ulang path",
                     "3. Back"
-                }, 1, 3);
+                });
+                var b = IOPrompter.getBoundedInt("", 1, 3);
 
                 if(b == 1) break;
                 if(b == 3) return;

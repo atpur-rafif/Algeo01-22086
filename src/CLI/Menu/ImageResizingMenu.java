@@ -40,13 +40,14 @@ public class ImageResizingMenu {
 
         String savePath = null;
         do{
-            savePath = IOPrompter.getInlineString("Masukkan path: ");
+            savePath = IOPrompter.getString("Masukkan path: ");
             if(Files.exists(Path.of(savePath))){
-                var b = IOPrompter.getBoundedInt(new String[]{
+                IOPrompter.print(new String[]{
                     "File sudah ada, lakukan: ",
                     "1. Overwrite",
                     "2. Masukan ulang path",
-                }, 1, 2);
+                });
+                var b = IOPrompter.getBoundedInt("", 1, 2);
 
                 if(b == 1) break;
             } else { break; };
