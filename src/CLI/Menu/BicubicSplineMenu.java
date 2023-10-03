@@ -30,7 +30,7 @@ public class BicubicSplineMenu {
     public static void Run() {
         while(true){
             var choice = IOPrompter.getBoundedInt(new String[]{
-                "===============================================Bicubic Spline Menu===============================================",
+                "Bicubic Spline Menu",
                 "1. CLI", 
                 "2. File",
                 "3. Back",

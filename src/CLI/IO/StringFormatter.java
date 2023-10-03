@@ -1,4 +1,4 @@
-package CLI;
+package CLI.IO;
 
 import java.util.function.Function;
 

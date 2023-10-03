@@ -1,9 +1,9 @@
 package CLI.Menu;
 
 import Application.MultipleLinear;
-import CLI.StringFormatter;
 import CLI.IO.IOFile;
 import CLI.IO.IOPrompter;
+import CLI.IO.StringFormatter;
 import Matrix.Matrix;
 import Matrix.MatrixReader;
 import Vector.*;

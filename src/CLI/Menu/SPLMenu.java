@@ -15,12 +15,11 @@ public class SPLMenu {
         while(isSPL == true){
             boolean isInput = true;
             PrintListMenu.Print(new String[]{
-                "=============================Sistem Persamaan Linear Menu=================================", 
+                "Sistem Persamaan Linear Menu", 
                 "1. Metode Gauss", 
                 "2. Metode GaussJordan", 
                 "3. Metode Cramer",
                 "4. Back",
-                "*Note: Pilih menggunakan angka yang sesuai",
             });
             System.out.print("> ");
             String choice = scanner.next(); 

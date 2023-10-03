@@ -15,7 +15,7 @@ public class ImageResizingMenu {
     static Scanner scanner = new Scanner(System.in);
 
     public static void Run(){
-        System.out.println("===================================Menu Image Resizing====================================");
+        System.out.println("Menu Image Resizing");
         System.out.print("Masukkan path image: ");
         var imagePath = IOPrompter.get("Image Path?", (var p) -> {
             if(!(new File(p)).exists()) return null;

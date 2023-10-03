@@ -13,7 +13,7 @@ public class InterpolinomMenu {
     public static void Run(){
         while(true){
             var choice = IOPrompter.getBoundedInt(new String[]{
-                "====Polimonial Interpolation====",
+                "Polimonial Interpolation",
                 "1. CLI",
                 "2. File",
                 "3. Back"

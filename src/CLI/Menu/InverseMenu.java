@@ -1,8 +1,8 @@
 package CLI.Menu;
 
-import CLI.StringFormatter;
 import CLI.IO.IOFile;
 import CLI.IO.IOType;
+import CLI.IO.StringFormatter;
 import CLI.IO.IOPrompter;
 import Matrix.Matrix;
 import Matrix.MatrixDeterminant;
@@ -13,7 +13,7 @@ public class InverseMenu {
     public static void Run(){
         while(true){
             var choice = IOPrompter.getBoundedInt(new String[]{
-                "=============================Inverse Menu=================================", 
+                "Inverse Menu", 
                 "1. Metode OBE", 
                 "2. Metode Adjoin", 
                 "3. Back",

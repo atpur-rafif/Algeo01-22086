@@ -16,7 +16,7 @@ public class DeterminantMenu {
     public static void Run(){
         while(true){
             var choice = IOPrompter.getBoundedInt(new String[]{
-                "=============================Determinant Menu=================================", 
+                "Determinant Menu", 
                 "1. Metode OBE", 
                 "2. Metode Kofaktor", 
                 "3. Back",

@@ -1,6 +1,6 @@
 package Application;
 
-import CLI.StringFormatter;
+import CLI.IO.StringFormatter;
 import Matrix.Matrix;
 import Matrix.OBE.OBERunner;
 import Vector.EquationSpace;

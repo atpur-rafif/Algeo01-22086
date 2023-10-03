@@ -1,6 +1,6 @@
 package Matrix;
 
-import CLI.StringFormatter;
+import CLI.IO.StringFormatter;
 import Matrix.OBE.OBERunner;
 
 public class MatrixLinearEquation {
