@@ -1,6 +1,15 @@
-package Menu;
+package CLI;
 
 import java.util.Scanner;
+
+import CLI.IO.IOPrompter;
+import CLI.Menu.BicubicSplineMenu;
+import CLI.Menu.DeterminantMenu;
+import CLI.Menu.ImageResizingMenu;
+import CLI.Menu.InterpolinomMenu;
+import CLI.Menu.InverseMenu;
+import CLI.Menu.RegresiLinearMenu;
+import CLI.Menu.SPLMenu;
 
 
 public class MainMenu {
@@ -8,7 +17,7 @@ public class MainMenu {
     
     public static void InterfaceProgram(){
         while(true){
-            var choice = Prompter.getBoundedInt(new String[]{
+            var choice = IOPrompter.getBoundedInt(new String[]{
                 "================================Selamat Datang=================================", 
                 "Program Matrix Application", 
                 "1. Interpolasi Polinomial", 
@@ -25,7 +34,7 @@ public class MainMenu {
             if     (choice == 1) InterpolinomMenu.Run();
             else if(choice == 2) RegresiLinearMenu.Run();
             else if(choice == 3) BicubicSplineMenu.Run();
-            else if(choice == 4) ImageResizing.Run();
+            else if(choice == 4) ImageResizingMenu.Run();
             else if(choice == 5) SPLMenu.Run();
             else if(choice == 6) DeterminantMenu.Run();
             else if(choice == 7) InverseMenu.Run();

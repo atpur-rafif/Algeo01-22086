@@ -1,10 +1,12 @@
-package Menu;
+package CLI.Menu;
 
 import java.util.Scanner;
 import Transformation.LocalSplineTransformation;
 import Vector.EquationSpace;
 import Vector.EuclideanSpace;
 import Application.BicubicSpline;
+import CLI.IO.IOFile;
+import CLI.IO.IOPrompter;
 import Matrix.MatrixPrinter;
 
 public class BicubicSplineMenu {
@@ -27,7 +29,7 @@ public class BicubicSplineMenu {
 
     public static void Run() {
         while(true){
-            var choice = Prompter.getBoundedInt(new String[]{
+            var choice = IOPrompter.getBoundedInt(new String[]{
                 "===============================================Bicubic Spline Menu===============================================",
                 "1. CLI", 
                 "2. File",
@@ -50,7 +52,7 @@ public class BicubicSplineMenu {
                         gradient.set(poCount * i + j, val);
                     }
                 }
-                vector = Prompter.getEuclideanVectorInline("Masukkan titik: ", 2);
+                vector = IOPrompter.getEuclideanVectorInline("Masukkan titik: ", 2);
             } else if(choice == 2){
                 var t = IOFile.readObscureFormat();
                 var m = t.matrix;

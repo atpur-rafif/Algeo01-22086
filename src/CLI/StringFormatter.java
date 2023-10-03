@@ -1,4 +1,4 @@
-package Menu;
+package CLI;
 
 import java.util.function.Function;
 

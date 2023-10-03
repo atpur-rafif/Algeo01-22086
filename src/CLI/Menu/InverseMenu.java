@@ -1,5 +1,9 @@
-package Menu;
+package CLI.Menu;
 
+import CLI.StringFormatter;
+import CLI.IO.IOFile;
+import CLI.IO.IOType;
+import CLI.IO.IOPrompter;
 import Matrix.Matrix;
 import Matrix.MatrixDeterminant;
 import Matrix.MatrixInverse;
@@ -8,7 +12,7 @@ import Matrix.MatrixReader;
 public class InverseMenu {
     public static void Run(){
         while(true){
-            var choice = Prompter.getBoundedInt(new String[]{
+            var choice = IOPrompter.getBoundedInt(new String[]{
                 "=============================Inverse Menu=================================", 
                 "1. Metode OBE", 
                 "2. Metode Adjoin", 
@@ -19,7 +23,7 @@ public class InverseMenu {
 
             Matrix matrix = null;
 
-            var ioType = Prompter.getIOType();
+            var ioType = IOPrompter.getIOType();
             if     (ioType == IOType.CLI) matrix = MatrixReader.readCLI();
             else if(ioType == IOType.File) matrix = MatrixReader.readFileCLI();
 

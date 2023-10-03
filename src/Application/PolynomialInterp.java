@@ -1,8 +1,8 @@
 package Application;
 
+import CLI.StringFormatter;
 import Matrix.Matrix;
 import Matrix.OBE.OBERunner;
-import Menu.StringFormatter;
 import Vector.EquationSpace;
 
 public class PolynomialInterp {

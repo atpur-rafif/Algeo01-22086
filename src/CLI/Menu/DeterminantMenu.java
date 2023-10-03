@@ -1,4 +1,4 @@
-package Menu;
+package CLI.Menu;
 
 import Matrix.Matrix;
 import Matrix.MatrixDeterminant;
@@ -6,12 +6,16 @@ import Matrix.MatrixReader;
 
 import java.util.Scanner;
 
+import CLI.IO.IOFile;
+import CLI.IO.IOType;
+import CLI.IO.IOPrompter;
+
 public class DeterminantMenu {
     static Scanner scanner = new Scanner(System.in);
 
     public static void Run(){
         while(true){
-            var choice = Prompter.getBoundedInt(new String[]{
+            var choice = IOPrompter.getBoundedInt(new String[]{
                 "=============================Determinant Menu=================================", 
                 "1. Metode OBE", 
                 "2. Metode Kofaktor", 
@@ -22,7 +26,7 @@ public class DeterminantMenu {
 
             Matrix matrix = null;
 
-            var ioType = Prompter.getIOType();
+            var ioType = IOPrompter.getIOType();
             if     (ioType == IOType.CLI) matrix = MatrixReader.readCLI();
             else if(ioType == IOType.File) matrix = MatrixReader.readFileCLI();
 

@@ -3,9 +3,9 @@ package FilePrinter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import Menu.StringFormatter;
 
-import Menu.IOFile;
+import CLI.StringFormatter;
+import CLI.IO.IOFile;
 import Vector.VectorSpace;
 
 public class MultiplePrinter {

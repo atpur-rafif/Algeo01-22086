@@ -1,21 +1,23 @@
-package Menu;
+package CLI.Menu;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+import CLI.IO.IOPrompter;
 import Image.Grayscale;
 import Image.ImageLoader;
 import Image.ImageSaver;
 import Image.Resize;
 
-public class ImageResizing {
+public class ImageResizingMenu {
     static Scanner scanner = new Scanner(System.in);
+
     public static void Run(){
         System.out.println("===================================Menu Image Resizing====================================");
         System.out.print("Masukkan path image: ");
-        var imagePath = Prompter.get("Image Path?", (var p) -> {
+        var imagePath = IOPrompter.get("Image Path?", (var p) -> {
             if(!(new File(p)).exists()) return null;
             else return p;
         }, (var t) -> {
@@ -23,7 +25,7 @@ public class ImageResizing {
         });
 
 
-        var scale = Prompter.get("Scaling?", (var i) -> {
+        var scale = IOPrompter.get("Scaling?", (var i) -> {
             try {
                 return Double.parseDouble(i);
             } catch (Exception e) {
@@ -38,9 +40,9 @@ public class ImageResizing {
 
         String savePath = null;
         do{
-            savePath = Prompter.getInlineString("Masukkan path: ");
+            savePath = IOPrompter.getInlineString("Masukkan path: ");
             if(Files.exists(Path.of(savePath))){
-                var b = Prompter.getBoundedInt(new String[]{
+                var b = IOPrompter.getBoundedInt(new String[]{
                     "File sudah ada, lakukan: ",
                     "1. Overwrite",
                     "2. Masukan ulang path",

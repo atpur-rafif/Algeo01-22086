@@ -1,11 +1,11 @@
-package Menu;
+package CLI.IO;
 
 import java.util.Scanner;
 import java.util.function.Function;
 
 import Vector.EuclideanSpace;
 
-public class Prompter {
+public class IOPrompter {
     private static String inputPrompt = "> ";
     private static Scanner scanner = new Scanner(System.in);
 

@@ -1,6 +1,8 @@
-package Menu;
+package CLI.Menu;
 
 import java.util.Scanner;
+
+import CLI.PrintListMenu;
 import Matrix.MatrixReader;
 import Matrix.MatrixLinearEquation;
 import Matrix.MatrixPrinter;

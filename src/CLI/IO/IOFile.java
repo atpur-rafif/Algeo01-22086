@@ -1,4 +1,4 @@
-package Menu;
+package CLI.IO;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import Vector.EquationSpace;
 import Vector.EuclideanSpace;
-import FilePrinter.*;
 import Matrix.Matrix;
 
 public class IOFile {
@@ -106,7 +104,7 @@ public class IOFile {
     public static ObscureFormat readObscureFormat(){
         Path path = null;
         do{
-            var input = Prompter.getInlineString("Masukkan path: ");
+            var input = IOPrompter.getInlineString("Masukkan path: ");
             path = Path.of(input);
             if(Files.exists(path)){
                 String str = null;
@@ -129,16 +127,16 @@ public class IOFile {
     }
 
     public static void askToSave(String content){
-        var confirmation = Prompter.getBoolean("Save dalam file");
+        var confirmation = IOPrompter.getBoolean("Save dalam file");
         if(!confirmation) return;
 
         Path path = null;
 
         do {
-            var input = Prompter.getInlineString("Masukkan path: ");
+            var input = IOPrompter.getInlineString("Masukkan path: ");
             path = Path.of(input);
             if(Files.exists(path)){
-                var b = Prompter.getBoundedInt(new String[]{
+                var b = IOPrompter.getBoundedInt(new String[]{
                     "File sudah ada, lakukan: ",
                     "1. Overwrite",
                     "2. Masukan ulang path",
@@ -168,23 +166,5 @@ public class IOFile {
             myMatrix = new File(fileName); 
         }
         System.out.println("File " + myMatrix.getName() + " dibuat");
-    }
-
-    public static void EquationValue(EquationSpace Result){
-        while(true){
-            PrintListMenu.Print(new String[]{
-                "====================================Saving=====================================", 
-                "Simpan dalam file?(Y/N)", 
-            });
-            System.out.print("> ");
-            choice = scanner.next(); 
-            if(choice.equalsIgnoreCase("Y") || choice.equalsIgnoreCase("N")){
-                break;
-            }
-            System.out.println("Input invalid, masukkan lagi");
-        }
-        if(choice.equalsIgnoreCase("Y")){
-            MultiplePrinter.printFileCLI(Result);
-        }
     }
 }

@@ -1,7 +1,7 @@
 package Matrix;
 
+import CLI.StringFormatter;
 import Matrix.OBE.OBERunner;
-import Menu.StringFormatter;
 
 public class MatrixLinearEquation {
 

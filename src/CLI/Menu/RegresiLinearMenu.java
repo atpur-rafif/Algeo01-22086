@@ -1,6 +1,9 @@
-package Menu;
+package CLI.Menu;
 
 import Application.MultipleLinear;
+import CLI.StringFormatter;
+import CLI.IO.IOFile;
+import CLI.IO.IOPrompter;
 import Matrix.Matrix;
 import Matrix.MatrixReader;
 import Vector.*;
@@ -8,7 +11,7 @@ import Vector.*;
 public class RegresiLinearMenu {
     public static void Run(){
         while(true){
-            var input = Prompter.getBoundedInt(new String[]{
+            var input = IOPrompter.getBoundedInt(new String[]{
                 "Multiple Regression",
                 "1. CLI",
                 "2. File",
@@ -21,11 +24,11 @@ public class RegresiLinearMenu {
             Matrix samplePoint = null;
             EuclideanSpace testPoint = null;
             if(input == 1){
-                var n = Prompter.getIntegerInline("Masukkan banyak peubah: ");
-                var m = Prompter.getIntegerInline("Masukkan banyak sampel: ");
+                var n = IOPrompter.getIntegerInline("Masukkan banyak peubah: ");
+                var m = IOPrompter.getIntegerInline("Masukkan banyak sampel: ");
                 System.out.println("Masukkan sample point");
                 samplePoint = MatrixReader.readCLI(m, n + 1);
-                testPoint = Prompter.getEuclideanVectorInline("Masukkan test point: ", n);
+                testPoint = IOPrompter.getEuclideanVectorInline("Masukkan test point: ", n);
             } else if(input == 2){
                 var t = IOFile.readObscureFormat();
                 samplePoint = t.matrix;

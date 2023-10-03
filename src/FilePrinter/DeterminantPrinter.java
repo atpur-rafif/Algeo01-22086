@@ -1,9 +1,10 @@
 package FilePrinter;
 
-import Menu.IOFile;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import CLI.IO.IOFile;
 import Matrix.*;
 
 

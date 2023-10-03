@@ -1,4 +1,4 @@
-package Menu;
+package CLI;
 
 public class PrintListMenu {
     
