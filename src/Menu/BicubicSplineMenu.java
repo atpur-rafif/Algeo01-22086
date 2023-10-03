@@ -5,6 +5,7 @@ import Transformation.LocalSplineTransformation;
 import Vector.EquationSpace;
 import Vector.EuclideanSpace;
 import Application.BicubicSpline;
+import Matrix.MatrixPrinter;
 
 public class BicubicSplineMenu {
     static Scanner scanner = new Scanner(System.in);
@@ -20,6 +21,7 @@ public class BicubicSplineMenu {
                 v.set(LocalSplineTransformation.pointCount * i + j, val);
             }
         }
+
         return v;
     }
 
@@ -34,17 +36,36 @@ public class BicubicSplineMenu {
 
             if(choice == 3) break;
 
-            EuclideanSpace gradient = null;
+            int eqCount = LocalSplineTransformation.equationCount;
+            int poCount = LocalSplineTransformation.pointCount;
+            EuclideanSpace gradient = new EuclideanSpace(16);
+            EuclideanSpace vector = null;
             if(choice == 1){
-                gradient = inputCLI();
+                String[] funcFormat = new String[] { "f", "f_x", "f_y", "f_xy" };
+                for (int i = 0; i < eqCount; ++i) {
+                    for (int j = 0; j < poCount; ++j) {
+                        var p = LocalSplineTransformation.points[j];
+                        System.out.print(funcFormat[i] + "(" + (int) p.x + "," + (int) p.y + ") = ");
+                        double val = Double.parseDouble(scanner.next());
+                        gradient.set(poCount * i + j, val);
+                    }
+                }
+                vector = Prompter.getEuclideanVectorInline("Masukkan titik: ", 2);
             } else if(choice == 2){
-
+                var t = IOFile.readObscureFormat();
+                var m = t.matrix;
+                MatrixPrinter.print(m);
+                for(int i = 0; i < eqCount; ++i){
+                    for(int j = 0; j < poCount; ++j){
+                        gradient.set(poCount * i + j, m.get(i, j));
+                    }
+                }
+                vector = t.vector;
             };
 
             EquationSpace eq = BicubicSpline.getEquation(gradient);
-            EuclideanSpace p = Prompter.getEuclideanVectorInline("Masukkan titik: ", 2);
-            double x = p.get(0);
-            double y = p.get(1);
+            double x = vector.get(0);
+            double y = vector.get(1);
             double r = BicubicSpline.approximate(eq, x, y);
             System.out.println("Hasil aproximasi f(" + x + "," + y + ")" + " = " + r + "\n");
 
