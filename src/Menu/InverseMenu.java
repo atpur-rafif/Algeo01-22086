@@ -1,6 +1,7 @@
 package Menu;
 
 import Matrix.Matrix;
+import Matrix.MatrixDeterminant;
 import Matrix.MatrixInverse;
 import Matrix.MatrixReader;
 
@@ -21,6 +22,12 @@ public class InverseMenu {
             var ioType = Prompter.getIOType();
             if     (ioType == IOType.CLI) matrix = MatrixReader.readCLI();
             else if(ioType == IOType.File) matrix = MatrixReader.readFileCLI();
+
+            var det = MatrixDeterminant.calculateWithOBE(matrix);
+            if(det == 0){
+                System.out.println("Matrix tidak memliki invers karena determinan = 0");
+                break;
+            }
 
             Matrix inversedMatrix = null;
             if     (choice == 1) inversedMatrix = MatrixInverse.calculateWithGaussJordan(matrix);

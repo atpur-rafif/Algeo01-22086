@@ -12,8 +12,6 @@ import Vector.EquationSpace;
 import Vector.EuclideanSpace;
 import FilePrinter.*;
 import Matrix.Matrix;
-import Matrix.MatrixPrinter;
-
 
 public class IOFile {
     static Scanner scanner = new Scanner(System.in);
