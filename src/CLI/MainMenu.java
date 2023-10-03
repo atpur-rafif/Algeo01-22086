@@ -6,9 +6,9 @@ import CLI.IO.IOPrompter;
 import CLI.Menu.BicubicSplineMenu;
 import CLI.Menu.DeterminantMenu;
 import CLI.Menu.ImageResizingMenu;
-import CLI.Menu.InterpolinomMenu;
+import CLI.Menu.PolynomialInterpolationMenu;
 import CLI.Menu.InverseMenu;
-import CLI.Menu.RegresiLinearMenu;
+import CLI.Menu.MultipleRegressionMenu;
 import CLI.Menu.SPLMenu;
 
 
@@ -32,8 +32,8 @@ public class MainMenu {
             var choice = IOPrompter.getBoundedInt("", 1, 8);
 
             PrintListMenu.clear();
-            if     (choice == 1) InterpolinomMenu.Run();
-            else if(choice == 2) RegresiLinearMenu.Run();
+            if     (choice == 1) PolynomialInterpolationMenu.Run();
+            else if(choice == 2) MultipleRegressionMenu.Run();
             else if(choice == 3) BicubicSplineMenu.Run();
             else if(choice == 4) ImageResizingMenu.Run();
             else if(choice == 5) SPLMenu.Run();

@@ -7,7 +7,7 @@ import CLI.IO.IOFile;
 import CLI.IO.IOPrompter;
 import CLI.IO.MatrixReader;
 
-public class InterpolinomMenu {
+public class PolynomialInterpolationMenu {
     static Scanner scanner = new Scanner(System.in);
 
     public static void Run(){
@@ -22,11 +22,15 @@ public class InterpolinomMenu {
 
             if(choice == 3) break;
 
+            double x = 0.0;
             Matrix matrix = null;
-            if(choice == 1) matrix = MatrixReader.readCLI();
-            else if(choice == 2);
+            if(choice == 1){
+                var row = IOPrompter.getInteger("Masukkan banyaknya sampel: ");
+                var col = 2;
+                matrix = MatrixReader.readCLI(row, col);
+                x = IOPrompter.getDouble("Tes: ");
+            } else if(choice == 2);
 
-            var x = IOPrompter.getDouble("LMAO");
             double result = PolynomialInterpolation.f(matrix, x);
             System.out.println("Hasil: " + result);
 

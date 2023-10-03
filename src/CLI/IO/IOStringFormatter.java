@@ -51,6 +51,15 @@ public class IOStringFormatter {
         });
     }
 
+    public static String combineString(String[] strings, String delimiter){
+        var r = "";
+        for(int i = 0; i < strings.length; ++i){
+            r += strings[i];
+            if(i != strings.length - 1) r += delimiter;
+        }
+        return r;
+    }
+
     public static String matrix(Matrix m){
         String r = "";
         for(int i = 0; i < m.row; ++i){

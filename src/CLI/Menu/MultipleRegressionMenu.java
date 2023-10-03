@@ -8,7 +8,7 @@ import CLI.IO.MatrixReader;
 import Matrix.Matrix;
 import Vector.*;
 
-public class RegresiLinearMenu {
+public class MultipleRegressionMenu {
     public static void Run(){
         while(true){
             IOPrompter.print(new String[]{
