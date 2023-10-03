@@ -2,6 +2,7 @@ package CLI.Menu;
 
 import Application.MultipleRegression;
 import CLI.IO.IOFile;
+import CLI.IO.IONavigator;
 import CLI.IO.IOPrompter;
 import CLI.IO.IOStringFormatter;
 import CLI.IO.MatrixReader;
@@ -11,13 +12,13 @@ import Vector.*;
 public class MultipleRegressionMenu {
     public static void Run(){
         while(true){
-            IOPrompter.print(new String[]{
-                "Multiple Regression",
+            IONavigator.next("Multiple Linear Regression");
+            IOPrompter.printMultiLine(new String[]{
                 "1. CLI",
                 "2. File",
                 "3. Back"
             });
-            var input = IOPrompter.getBoundedInt("", 1, 3);
+            var input = IOPrompter.getBoundedInt("Input Type> ", 1, 3);
 
             if(input == 3) break;
 
@@ -43,6 +44,7 @@ public class MultipleRegressionMenu {
             System.out.println(out);
 
             IOFile.askToSave(out);
+            IONavigator.back();
         }
     }
 }

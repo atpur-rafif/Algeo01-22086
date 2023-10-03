@@ -6,6 +6,7 @@ import Matrix.MatrixDeterminant;
 import java.util.Scanner;
 
 import CLI.IO.IOFile;
+import CLI.IO.IONavigator;
 import CLI.IO.IOType;
 import CLI.IO.MatrixReader;
 import CLI.IO.IOPrompter;
@@ -15,13 +16,13 @@ public class DeterminantMenu {
 
     public static void Run(){
         while(true){
-            IOPrompter.print(new String[]{
-                "Determinant Menu", 
+            IONavigator.next("Determinant");
+            IOPrompter.printMultiLine(new String[]{
                 "1. Metode OBE", 
                 "2. Metode Kofaktor", 
                 "3. Back"
             });
-            var choice = IOPrompter.getBoundedInt("", 1, 3);
+            var choice = IOPrompter.getBoundedInt("Metode> ", 1, 3);
 
             if(choice == 3) break;
 
@@ -37,6 +38,7 @@ public class DeterminantMenu {
 
             System.out.println("\nDeterminan matrix: " + determinant + "\n");
             IOFile.askToSave(Double.toString(determinant));
+            IONavigator.back();
         }
     }
 }

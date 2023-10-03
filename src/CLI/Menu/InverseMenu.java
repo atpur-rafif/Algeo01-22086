@@ -1,6 +1,7 @@
 package CLI.Menu;
 
 import CLI.IO.IOFile;
+import CLI.IO.IONavigator;
 import CLI.IO.IOType;
 import CLI.IO.MatrixReader;
 import CLI.IO.IOStringFormatter;
@@ -12,13 +13,13 @@ import Matrix.MatrixInverse;
 public class InverseMenu {
     public static void Run(){
         while(true){
-            IOPrompter.print(new String[]{
-                "Inverse Menu", 
+            IONavigator.next("Inverse");
+            IOPrompter.printMultiLine(new String[]{
                 "1. Metode OBE", 
                 "2. Metode Adjoin", 
                 "3. Back",
             });
-            var choice = IOPrompter.getBoundedInt("", 1, 3);
+            var choice = IOPrompter.getBoundedInt("Metode> ", 1, 3);
 
             if(choice == 3) break;
 
@@ -40,7 +41,7 @@ public class InverseMenu {
 
             System.out.println(IOStringFormatter.matrix(inversedMatrix));
             IOFile.askToSave(IOStringFormatter.matrix(inversedMatrix));
-        
+            IONavigator.back();
         }
     }
 }

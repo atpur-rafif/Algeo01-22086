@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+import CLI.IO.IONavigator;
 import CLI.IO.IOPrompter;
 import Image.Grayscale;
 import Image.ImageLoader;
@@ -15,9 +16,9 @@ public class ImageResizingMenu {
     static Scanner scanner = new Scanner(System.in);
 
     public static void Run(){
-        System.out.println("Menu Image Resizing");
-        System.out.print("Masukkan path image: ");
-        var imagePath = IOPrompter.get("Image Path?", (var p) -> {
+        IONavigator.next("Image Resizing");
+
+        var imagePath = IOPrompter.get("Masukkan path gambar: ", (var p) -> {
             if(!(new File(p)).exists()) return null;
             else return p;
         }, (var t) -> {
@@ -25,7 +26,7 @@ public class ImageResizingMenu {
         });
 
 
-        var scale = IOPrompter.get("Scaling?", (var i) -> {
+        var scale = IOPrompter.get("Masukkan skala gambar: ", (var i) -> {
             try {
                 return Double.parseDouble(i);
             } catch (Exception e) {
@@ -42,7 +43,7 @@ public class ImageResizingMenu {
         do{
             savePath = IOPrompter.getString("Masukkan path: ");
             if(Files.exists(Path.of(savePath))){
-                IOPrompter.print(new String[]{
+                IOPrompter.printMultiLine(new String[]{
                     "File sudah ada, lakukan: ",
                     "1. Overwrite",
                     "2. Masukan ulang path",
@@ -54,9 +55,8 @@ public class ImageResizingMenu {
         } while(true);
 
         ImageSaver.save(resized, savePath);
+
+        IONavigator.back();
     }
-        // var image = ImageLoader.load("./test/debug.png");
-        // var resized = Resize.resize(image, 100);
-        // ImageSaver.save(resized, "./debug-res.png");
 }
 

@@ -127,7 +127,7 @@ public class IOFile {
     }
 
     public static void askToSave(String content){
-        var confirmation = IOPrompter.getBoolean("Save dalam file");
+        var confirmation = IOPrompter.getBoolean("Save dalam file (Y/N)? ");
         if(!confirmation) return;
 
         Path path = null;
@@ -136,7 +136,7 @@ public class IOFile {
             var input = IOPrompter.getString("Masukkan path: ");
             path = Path.of(input);
             if(Files.exists(path)){
-                IOPrompter.print(new String[]{
+                IOPrompter.printMultiLine(new String[]{
                     "File sudah ada, lakukan: ",
                     "1. Overwrite",
                     "2. Masukan ulang path",

@@ -8,10 +8,10 @@ import Vector.EuclideanSpace;
 public class IOPrompter {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void print(String[] strings){
+    public static void printMultiLine(String[] strings){
         for(int i = 0; i < strings.length; ++i){
             System.out.print(strings[i]);
-            if(i != strings.length - 1) System.out.print("\n");
+            System.out.print("\n");
         }
     }
 
@@ -44,12 +44,12 @@ public class IOPrompter {
     }
 
     public static IOType getIOType(){
-        print(new String[]{
+        printMultiLine(new String[]{
             "Metode input",
             "1. CLI",
             "2. File"
         });
-        return get("", (String v) -> {
+        return get("Input Type>", (String v) -> {
             if(v.equals("1")) return IOType.CLI;
             else if(v.equals(v)) return IOType.File;
             else return null;

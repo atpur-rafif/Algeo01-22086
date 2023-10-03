@@ -2,6 +2,7 @@ package CLI;
 
 import java.util.Scanner;
 
+import CLI.IO.IONavigator;
 import CLI.IO.IOPrompter;
 import CLI.Menu.BicubicSplineMenu;
 import CLI.Menu.DeterminantMenu;
@@ -16,22 +17,20 @@ public class MainMenu {
     static Scanner scanner = new Scanner(System.in);
     
     public static void InterfaceProgram(){
+        IONavigator.next("Matrix");
         while(true){
-            IOPrompter.print(new String[]{
-                "================================selamat datang=================================", 
-                "program matrix application", 
-                "1. interpolasi polinomial", 
-                "2. regresi linear berganda", 
-                "3. bicubic spline interpolation",    
-                "4. image interpolation",   
-                "5. sistem persamaan linear", 
-                "6. determinan", 
-                "7. inverse matriks", 
-                "8. quit",
+            IOPrompter.printMultiLine(new String[]{
+                "1. Interpolasi Polinomial", 
+                "2. Regresi Linear Berganda", 
+                "3. Bicubic Spline Interpolation",    
+                "4. Image Interpolation",   
+                "5. Sistem Persamaan Linear", 
+                "6. Determinan", 
+                "7. Inverse Matriks", 
+                "8. Keluar",
             });
-            var choice = IOPrompter.getBoundedInt("", 1, 8);
+            var choice = IOPrompter.getBoundedInt("Menu> ", 1, 8);
 
-            PrintListMenu.clear();
             if     (choice == 1) PolynomialInterpolationMenu.Run();
             else if(choice == 2) MultipleRegressionMenu.Run();
             else if(choice == 3) BicubicSplineMenu.Run();

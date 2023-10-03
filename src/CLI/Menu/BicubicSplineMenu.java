@@ -6,6 +6,7 @@ import Vector.EquationSpace;
 import Vector.EuclideanSpace;
 import Application.BicubicSpline;
 import CLI.IO.IOFile;
+import CLI.IO.IONavigator;
 import CLI.IO.IOPrompter;
 import CLI.IO.MatrixPrinter;
 
@@ -14,13 +15,14 @@ public class BicubicSplineMenu {
 
     public static void Run() {
         while(true){
-            IOPrompter.print(new String[]{
-                "Bicubic Spline Menu",
+            IONavigator.next("Bicubic Spline");
+
+            IOPrompter.printMultiLine(new String[]{
                 "1. CLI", 
                 "2. File",
                 "3. Back",
             });
-            var choice = IOPrompter.getBoundedInt("", 1, 3);
+            var choice = IOPrompter.getBoundedInt("Input Type> ", 1, 3);
 
             if(choice == 3) break;
 
@@ -58,6 +60,8 @@ public class BicubicSplineMenu {
             System.out.println("Hasil aproximasi f(" + x + "," + y + ")" + " = " + r + "\n");
 
             IOFile.askToSave(Double.toString(r));
+
+            IONavigator.back();
         }
     }
 }

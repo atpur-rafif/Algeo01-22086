@@ -10,17 +10,18 @@ public class IONavigator {
     }
 
     private static String getNavigatorView(){
-        String[] strings = (String[]) stack.toArray();
+        String[] strings = new String[stack.size()];
+        stack.toArray(strings);
         return IOStringFormatter.combineString(strings, " > ");
     }
 
-    public static void nextPanel(String name){
-        stack.push(name);
+    public static void next(String name){
+        stack.add(name);
         clear();
         System.out.println(getNavigatorView());
     }
 
-    public static void backPanel(){
+    public static void back(){
         stack.pop();
         clear();
         System.out.println(getNavigatorView());
