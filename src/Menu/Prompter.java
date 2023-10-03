@@ -28,6 +28,12 @@ public class Prompter {
         return Double.parseDouble(s);
     }
 
+    public static Integer getIntegerInline(String prompt){
+        System.out.print(prompt);
+        var s = scanner.next();
+        return Integer.parseInt(s);
+    }
+
     public static EuclideanSpace getEuclideanVectorInline(String prompt, int dimension){
         EuclideanSpace r = null;
         System.out.print(prompt);

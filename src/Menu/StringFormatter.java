@@ -88,13 +88,9 @@ public class StringFormatter {
         String r = "";
         for(int i = 0; i < eq.basisCount; ++i){
             var t = eq.get(i);
-            if(t != 0){
-                if(i == 0) r += t;
-                else{
-                    r += t + "x" + createSubscript(i);
-                }
-                if(i != eq.basisCount - 1) r += " + ";
-            }
+            if (i == 0) r += t;
+            else r += t + "x" + createSubscript(i);
+            if(i != eq.basisCount - 1) r += " + ";
         }
         return r;
     }

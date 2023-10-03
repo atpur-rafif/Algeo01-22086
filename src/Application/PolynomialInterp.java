@@ -1,7 +1,6 @@
 package Application;
 
 import Matrix.Matrix;
-import Matrix.MatrixPrinter;
 import Matrix.OBE.OBERunner;
 import Menu.StringFormatter;
 import Vector.EquationSpace;

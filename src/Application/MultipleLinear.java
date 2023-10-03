@@ -2,7 +2,6 @@ package Application;
 
 import Matrix.*;
 import Matrix.OBE.OBERunner;
-import Menu.StringFormatter;
 import Vector.*;
 
 public class MultipleLinear{
@@ -62,22 +61,12 @@ public class MultipleLinear{
         return R;
     }
 
+    public static double approximate(EquationSpace eq, EuclideanSpace v){
+        var t = new EuclideanSpace(v.basisCount + 1);
 
-    public static void DisplayEquation(EquationSpace result){
-        String plus = " + ";
-        for(int i = 0; i < result.basisCount; ++i){
-            if(i == result.basisCount - 1){
-                plus = "";
-            }
-            if(i == 0){
-                System.out.print(result.get(i) + plus);
-            }
-            else{
-                System.out.print(result.get(i) + "x" + StringFormatter.createSubscript(i) + plus);
-            }
-        }
-        System.out.println("");
+        t.set(0, 1);
+        for(int i = 0; i < v.basisCount; ++i) t.set(i + 1, v.get(i));
+
+        return VectorSpace.innerProduct(eq, t);
     }
-
-
 }

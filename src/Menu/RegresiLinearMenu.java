@@ -3,114 +3,42 @@ package Menu;
 import Application.MultipleLinear;
 import Matrix.Matrix;
 import Matrix.MatrixReader;
-import java.util.Scanner;
 import Vector.*;
 
 public class RegresiLinearMenu {
-    static Scanner scanner = new Scanner(System.in);
-    private static EquationSpace coefficient;
-    private static String tryEquation;
-    private static double result;
-    private static boolean isTryEquation;
-    private static Matrix samplePoint;
-
     public static void Run(){
-        boolean isRegresi = true;
-        PrintListMenu.clear();
-        while(isRegresi == true){
-            PrintListMenu.Repetitive(2);
-            System.out.print("> ");
-            String choice = scanner.next();
-            switch (choice) {
-                case "1":
-                    System.out.println("Masukkan sample Point");
-                    System.out.print("Masukkan banyak peubah: ");
-                    int n = Integer.parseInt(scanner.next()); 
-                    System.out.print("Masukkan banyak sampel: ");
-                    int m = Integer.parseInt(scanner.next());
-                    samplePoint = MatrixReader.readCLI(m, n + 1);
-
-                    coefficient =  MultipleLinear.solve(samplePoint); 
-                    System.out.print("Hasil: ");
-                    MultipleLinear.DisplayEquation(coefficient);
-
-                    tryMultipleEquation(coefficient);
-                    IOFile.EquationValue(coefficient); //perlu diperbaiki savenya dengan hasil persamaan
-                    break; 
-                case "2": 
-                    System.out.println("Masukkan sample Point");
-                    samplePoint = MatrixReader.readFileCLI();
-                    coefficient =  MultipleLinear.solve(samplePoint); 
-                    
-                    System.out.print("Hasil: ");
-                    MultipleLinear.DisplayEquation(coefficient);
-
-                    tryMultipleEquation(coefficient);
-                    IOFile.EquationValue(coefficient);
-                case "3": 
-                    isRegresi = false; 
-                    System.out.print("\033\143");
-                    break;
-                default:
-                    System.out.println("Input tidak valid");
-                    break;
-            }
-        }   
-    }
-
-    public static void tryMultipleEquation(EquationSpace coefficient){
         while(true){
-            PrintListMenu.Print(new String[]{
-            "========================Coba Persamaan==========================", 
-            "1. Ya",
-            "2. Tidak",
-            "*Note: Masukkan dengan urutan angka yang sesuai"
-        });
-            tryEquation = scanner.next(); 
-            if(tryEquation.equals("1")){
-                isTryEquation = true;
-                break;
-            }
-            else if (tryEquation.equals("2")){
-                isTryEquation = false;
-                break;
-            }
-            else{
-                PrintListMenu.clear();
-                System.out.print("input tidak valid");
-            }
-        }
+            var input = Prompter.getBoundedInt(new String[]{
+                "Multiple Regression",
+                "1. CLI",
+                "2. File",
+                "3. Back"
+            }, 1, 3);
 
-        while(isTryEquation == true){
-            EquationSpace variable = new EquationSpace(coefficient.basisCount);
-            System.out.println("Masukkan nilai tiap x");
-            variable.set(0, 1);
-            for(int i = 1 ; i < variable.basisCount; ++i){
-                System.out.print("Masukkan nilai " + "x" + StringFormatter.createSubscript(i)+": ");
-                var value = Double.parseDouble(scanner.next());
-                variable.set(i, value);
-            }  
-            result = VectorSpace.innerProduct(coefficient, variable);
-            System.out.println("Hasil: " + result);
-            System.out.println("Coba lagi? (Y/N)");
-            System.out.print("> ");
-            tryEquation = scanner.next();
-            isTryEquation = false;
-            while(true){
-                if(tryEquation.equalsIgnoreCase("Y")){
-                    isTryEquation = true;
-                    break;
-                }
-                else if(tryEquation.equalsIgnoreCase("N")){
-                    isTryEquation = false;
-                    break;
-                }
-                else{
-                    System.out.println("Input tidak valid"); 
-                    System.out.print("> ");
-                    tryEquation = scanner.next();
-                }
+            if(input == 3) break;
+
+
+            Matrix samplePoint = null;
+            EuclideanSpace testPoint = null;
+            if(input == 1){
+                var n = Prompter.getIntegerInline("Masukkan banyak peubah: ");
+                var m = Prompter.getIntegerInline("Masukkan banyak sampel: ");
+                System.out.println("Masukkan sample point");
+                samplePoint = MatrixReader.readCLI(m, n + 1);
+                testPoint = Prompter.getEuclideanVectorInline("Masukkan test point: ", n);
+            } else if(input == 2){
+                var t = IOFile.readObscureFormat();
+                samplePoint = t.matrix;
+                testPoint = t.vector;
             }
+
+
+            var equation = MultipleLinear.solve(samplePoint);
+            var result = MultipleLinear.approximate(equation, testPoint);
+            var out = StringFormatter.multipleRegression(equation) + "\n" + "Hasil regresi: " + result;
+            System.out.println(out);
+
+            IOFile.askToSave(out);
         }
     }
 }
