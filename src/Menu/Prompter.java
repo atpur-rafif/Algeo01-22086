@@ -19,7 +19,6 @@ public class Prompter {
     public static String getInlineString(String prompt){
         System.out.print(prompt);
         var s = scanner.next();
-        System.out.print("\n");
         return s;
     }
     

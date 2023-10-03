@@ -4,10 +4,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
-import Matrix.*;
+import java.util.regex.Pattern;
+
 import Vector.EquationSpace;
+import Vector.EuclideanSpace;
 import FilePrinter.*;
+import Matrix.Matrix;
+import Matrix.MatrixPrinter;
 
 
 public class IOFile {
@@ -28,6 +33,87 @@ public class IOFile {
 
         path.toFile().createNewFile();
         return path.toFile();
+    }
+
+    public static class ObscureFormat{
+        public EuclideanSpace vector;
+        public Matrix matrix;
+        ObscureFormat(Matrix matrix, EuclideanSpace vector){
+            this.matrix = matrix;
+            this.vector = vector;
+        }
+    }
+
+    public static ObscureFormat parseObscureFormat(String str){
+        int row = 0;
+        int col = -1;
+
+        int cCol = 0;
+        boolean finished = false;
+        var buffer = new ArrayList<Double>();
+        var pattern = Pattern.compile("[0-9|\\.]");
+        String current = "";
+        var len = str.length();
+        for(int i = 0; i < len; ++i){
+            var c = str.charAt(i);
+            if(c == ' '){
+                if(current != ""){
+                    cCol += 1;
+                    var d = Double.parseDouble(current);;
+                    buffer.add(d);
+                }
+                current = "";
+            } else if(pattern.matcher(String.valueOf(c)).find()){
+                if(finished) throw new Error("Invalid format");
+                current += str.charAt(i);
+            } else if(c == '\n'){
+                if(col == -1) col = cCol;
+
+                if(col == cCol) row += 1;
+                else finished = true;
+                cCol = 0;
+                current = "";
+            }
+            
+            if(i == len - 1){
+                var d = Double.parseDouble(current);;
+                buffer.add(d);
+            }
+        }
+
+        var p = 0;
+        var m = new Matrix(row, col);
+        for(int i = 0; i < row; ++i){
+            for(int j = 0; j < col; ++j){
+                m.set(i, j, buffer.get(p));
+                p += 1;
+            }
+        }
+
+        var v = new EuclideanSpace(buffer.size() - p);
+        for(int i = p; i < buffer.size(); ++i){
+            v.set(i - p, buffer.get(i));
+        }
+
+        return new ObscureFormat(m, v);
+    }
+
+    public static ObscureFormat readObscureFormat(){
+        Path path = null;
+        do{
+            var input = Prompter.getInlineString("Masukkan path: ");
+            path = Path.of(input);
+            if(Files.exists(path)){
+                String str = null;
+                try {
+                    str = Files.readString(path);
+                    return parseObscureFormat(str);
+                } catch (IOException e) {
+                    System.out.println("Format file tidak sesuai");
+                    continue;
+                }
+            } else System.out.println("File tidak ditemukan");
+        } while(true);
     }
 
     public static void save(Path path, String content) throws IOException{
@@ -79,43 +165,6 @@ public class IOFile {
         System.out.println("File " + myMatrix.getName() + " dibuat");
     }
 
-
-
-    public static void ResultMatrix(Matrix M){
-        while(true){
-            PrintListMenu.Print(new String[]{
-                "====================================Saving=====================================", 
-                "Simpan dalam file?(Y/N)", 
-            });
-            System.out.print("> ");
-            choice = scanner.next(); 
-            if(choice.equalsIgnoreCase("Y") || choice.equalsIgnoreCase("N")){
-                break;
-            }
-            System.out.println("Input invalid, masukkan lagi");
-        }
-        if(choice.equalsIgnoreCase("Y")){
-            MatrixPrinter.printMatrixFileCLI(M);
-        }
-    }
-
-    public static void ResultSingleValue(Matrix matrix, Double Result){
-        while(true){
-            PrintListMenu.Print(new String[]{
-                "====================================Saving=====================================", 
-                "Simpan dalam file?(Y/N)", 
-            });
-            System.out.print("> ");
-            choice = scanner.next(); 
-            if(choice.equalsIgnoreCase("Y") || choice.equalsIgnoreCase("N")){
-                break;
-            }
-            System.out.println("Input invalid, masukkan lagi");
-        }
-        if(choice.equalsIgnoreCase("Y")){
-            DeterminantPrinter.printFileCLI(matrix, Result);
-        }
-    }
     public static void EquationValue(EquationSpace Result){
         while(true){
             PrintListMenu.Print(new String[]{
