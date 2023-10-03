@@ -4,8 +4,8 @@ import Application.MultipleRegression;
 import CLI.IO.IOFile;
 import CLI.IO.IOPrompter;
 import CLI.IO.IOStringFormatter;
+import CLI.IO.MatrixReader;
 import Matrix.Matrix;
-import Matrix.MatrixReader;
 import Vector.*;
 
 public class RegresiLinearMenu {

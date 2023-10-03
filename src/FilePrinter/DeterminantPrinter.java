@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import CLI.IO.IOFile;
+import CLI.IO.MatrixPrinter;
 import Matrix.*;
 
 

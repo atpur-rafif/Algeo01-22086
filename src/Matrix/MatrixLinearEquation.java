@@ -1,6 +1,7 @@
 package Matrix;
 
 import CLI.IO.IOStringFormatter;
+import CLI.IO.MatrixPrinter;
 import Matrix.OBE.OBERunner;
 
 public class MatrixLinearEquation {

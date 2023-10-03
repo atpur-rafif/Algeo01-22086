@@ -1,9 +1,11 @@
-package Matrix;
+package CLI.IO;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException; 
 import java.util.Scanner;
+
+import Matrix.Matrix;
 
 
 public class MatrixPrinter {

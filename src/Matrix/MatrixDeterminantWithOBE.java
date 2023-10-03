@@ -1,5 +1,6 @@
 package Matrix;
 
+import CLI.IO.MatrixPrinter;
 import Matrix.OBE.OBERunner;
 import Matrix.OBE.LogType.MultiplyRow;
 import Matrix.OBE.LogType.SwitchRow;

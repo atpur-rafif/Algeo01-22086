@@ -7,7 +7,7 @@ import Vector.EuclideanSpace;
 import Application.BicubicSpline;
 import CLI.IO.IOFile;
 import CLI.IO.IOPrompter;
-import Matrix.MatrixPrinter;
+import CLI.IO.MatrixPrinter;
 
 public class BicubicSplineMenu {
     static Scanner scanner = new Scanner(System.in);

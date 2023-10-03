@@ -2,10 +2,10 @@ package CLI.Menu;
 
 import java.util.Scanner;
 import Matrix.Matrix;
-import Matrix.MatrixReader;
 import Application.*;
 import CLI.IO.IOFile;
 import CLI.IO.IOPrompter;
+import CLI.IO.MatrixReader;
 
 public class InterpolinomMenu {
     static Scanner scanner = new Scanner(System.in);

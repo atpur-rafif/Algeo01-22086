@@ -2,12 +2,12 @@ package CLI.Menu;
 
 import Matrix.Matrix;
 import Matrix.MatrixDeterminant;
-import Matrix.MatrixReader;
 
 import java.util.Scanner;
 
 import CLI.IO.IOFile;
 import CLI.IO.IOType;
+import CLI.IO.MatrixReader;
 import CLI.IO.IOPrompter;
 
 public class DeterminantMenu {

@@ -2,12 +2,12 @@ package CLI.Menu;
 
 import CLI.IO.IOFile;
 import CLI.IO.IOType;
+import CLI.IO.MatrixReader;
 import CLI.IO.IOStringFormatter;
 import CLI.IO.IOPrompter;
 import Matrix.Matrix;
 import Matrix.MatrixDeterminant;
 import Matrix.MatrixInverse;
-import Matrix.MatrixReader;
 
 public class InverseMenu {
     public static void Run(){

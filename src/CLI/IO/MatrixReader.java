@@ -1,6 +1,9 @@
-package Matrix;
+package CLI.IO;
 
 import java.util.Scanner;
+
+import Matrix.Matrix;
+
 import java.io.*;
 
 public class MatrixReader {

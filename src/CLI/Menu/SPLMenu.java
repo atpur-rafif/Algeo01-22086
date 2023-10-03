@@ -3,9 +3,9 @@ package CLI.Menu;
 import java.util.Scanner;
 
 import CLI.PrintListMenu;
-import Matrix.MatrixReader;
+import CLI.IO.MatrixPrinter;
+import CLI.IO.MatrixReader;
 import Matrix.MatrixLinearEquation;
-import Matrix.MatrixPrinter;
 public class SPLMenu {
     static Scanner scanner = new Scanner(System.in);
     public static void Run(){
