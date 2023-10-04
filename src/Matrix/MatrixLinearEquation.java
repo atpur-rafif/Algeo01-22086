@@ -4,7 +4,6 @@ import CLI.IO.IOStringFormatter;
 import Matrix.OBE.OBERunner;
 
 public class MatrixLinearEquation {
-
     private static Matrix augmentedMatrix(Matrix MatriksKoefisien, Matrix MatriksKonstanta) {
         var MatriksAugmented_editor = new MatrixDimensionManipulator(MatriksKoefisien);
         MatriksAugmented_editor.addColumnToRight(new MatrixManipulator(MatriksKonstanta).getCol(0));
@@ -70,21 +69,23 @@ public class MatrixLinearEquation {
         obe.gaussianElimination();
         M1 = obe.getResult();
 
-        double count_coeff = 0, count_last = 0;
-        for (int i = 0; i < M1.col; i++) {
-            if (i != M1.col - 1) {
-                count_coeff += M1.get(M1.row - 1, i);
-            } else {
-                count_last = M1.get(M1.row - 1, i);
+        boolean impos = false;
+        int var_count = M1.col - 1;
+        int eq_count = 0;
+        for(int i = 0; i < M1.row; ++i){
+            boolean allCoefZero = true;
+            boolean isConstZero = M1.get(i, M1.col - 1) == 0;
+            for(int j = 0; j < M1.col - 1; ++j){
+                if(M1.get(i, j) != 0) allCoefZero = false;
             }
+            if(allCoefZero && !isConstZero) impos = true;
+            else if(!allCoefZero) eq_count += 1;
         }
-        if (count_coeff == 0 && count_last == 0) {
-            return MatrixLinearEquationSolutionType.ManySolution;
-        } else if (count_coeff == 0 && count_last != 0) {
-            return MatrixLinearEquationSolutionType.NoSolution;
-        } else {
-            return MatrixLinearEquationSolutionType.OneSolution;
-        }
+
+        if(impos) return MatrixLinearEquationSolutionType.NoSolution;
+        else if(var_count > eq_count) return MatrixLinearEquationSolutionType.ManySolution;
+        else if(var_count == eq_count) return MatrixLinearEquationSolutionType.OneSolution;
+        return MatrixLinearEquationSolutionType.NoSolution;
     }
 
     private static String parametricSolution(Matrix M1) {
