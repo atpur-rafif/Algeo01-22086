@@ -40,9 +40,14 @@ public class InverseMenu {
             IONavigator.next("Result");
             var det = MatrixDeterminant.calculateWithOBE(matrix);
             if(det == 0){
-                // TODO: Navigator error handler
                 System.out.println("Matrix tidak memliki invers karena determinan = 0");
-                break;
+                IOPrompter.waitEnter();
+                continue;
+            }
+            if(matrix.col != matrix.row){
+                System.out.println("Matrix bukan berbentuk persegi");
+                IOPrompter.waitEnter();
+                continue;
             }
 
             Matrix inversedMatrix = null;

@@ -110,4 +110,9 @@ public class IOPrompter {
 
         return result;
     }
+
+    public static void waitEnter(){
+        System.out.print("Enter to continue");
+        scanner.nextLine(); scanner.nextLine();
+    }
 }
