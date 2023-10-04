@@ -39,7 +39,7 @@ public class MatrixArithmetic {
         var Mresult = new Matrix(M1.row, M2.col); 
         for(int i = 0; i < Mresult.row; ++i){
             for(int j = 0; j < Mresult.col; ++j){
-                var temp = 0;
+                var temp = 0.0;
                 for(int k = 0; k < M1.col; ++k){
                     temp += M1.get(i, k) * M2.get(k, j);
                 }

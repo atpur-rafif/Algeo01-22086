@@ -52,12 +52,16 @@ public class MatrixLinearEquation {
                 output += gaussJordanEliminationSolution(m);
             } else if(type == MatrixLinearEquationMethodType.Crammer){
                 output += cramerSolution(koefisien, konstanta);
+            } else if(type == MatrixLinearEquationMethodType.Inverse){
+                output += inverseSolution(koefisien, konstanta);
             }
         } else if(typesolution == MatrixLinearEquationSolutionType.ManySolution){
             if(type == MatrixLinearEquationMethodType.Gaussian || type == MatrixLinearEquationMethodType.GausJordan){
                 output += MatrixLinearEquation.parametricSolution(m);
             } else if(type == MatrixLinearEquationMethodType.Crammer){
                 output += "Tidak dapat memberikan solusi, terdapat pembagian dengan 0";
+            } else if(type == MatrixLinearEquationMethodType.Inverse){
+                output += "Tidak dapat memberikan solusi, matriks tidak memiliki balikan";
             }
         }
 
@@ -170,6 +174,25 @@ public class MatrixLinearEquation {
         for (int i = 0; i < koefisien.row; i++) {
             String currentSubscript = IOStringFormatter.createSubscript(i);
             output += "x" + currentSubscript + " = " + solution[i][1] + "\n";
+        }
+        return output;
+    }
+
+    private static String inverseSolution(Matrix koefisien, Matrix konstanta){
+        String output = "";
+        var invers = MatrixInverse.calculateWithGaussJordan(koefisien);
+        var solution = MatrixArithmetic.Multiply(invers, konstanta);
+        output += "Matriks Balikan Koefisien :\n";
+        output += IOStringFormatter.matrix(invers);
+        output +="\n\n";
+        output += "Matriks Konstanta :\n";
+        output += IOStringFormatter.matrix(konstanta);
+        output += "\n\n";
+        for(int i=0;i<solution.row;i++){
+            var subscript = IOStringFormatter.createSubscript(i);
+            output += "x"+subscript+" = ";
+            output += solution.get(i, 0);
+            output += "\n";
         }
         return output;
     }
