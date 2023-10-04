@@ -39,16 +39,18 @@ public class SPLMenu {
             IONavigator.next("Method");
             IOPrompter.printMultiLine(new String[]{
                 "1. Metode Gauss",
-                "2. Methode GaussJordan",
-                "3. Methode Crammer",
+                "2. Metode GaussJordan",
+                "3. Metode Cramer",
+                "4. Metode Matriks Balikan"
             });
-            var method = IOPrompter.getBoundedInt("Metode: ", 1, 3);
+            var method = IOPrompter.getBoundedInt("Metode: ", 1, 4);
             IONavigator.back();
 
             var methodInString = "";
             if(method == 1) methodInString = "Gaussian Elimination"; 
             if(method == 2) methodInString = "Gauss-Jordan Elimination"; 
-            if(method == 3) methodInString = "Crammer"; 
+            if(method == 3) methodInString = "Cramer";
+            if(method == 4) methodInString = "Inverse";  
 
             IONavigator.next("Result " + methodInString);
             String r = null;
@@ -58,6 +60,8 @@ public class SPLMenu {
                 r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationMethodType.GausJordan);
             } else if(method == 3){
                 r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationMethodType.Crammer);
+            } else if(method == 4){
+                r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationMethodType.Inverse);
             }
             System.out.println(r);
             IOFile.askToSave(r);
