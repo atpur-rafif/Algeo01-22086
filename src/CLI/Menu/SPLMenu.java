@@ -2,145 +2,65 @@ package CLI.Menu;
 
 import java.util.Scanner;
 
-import CLI.PrintListMenu;
-import CLI.IO.MatrixPrinter;
+import CLI.IO.IOFile;
+import CLI.IO.IONavigator;
+import CLI.IO.IOPrompter;
 import CLI.IO.MatrixReader;
+import Matrix.Matrix;
 import Matrix.MatrixLinearEquation;
+import Matrix.MatrixLinearEquationType;
+
 public class SPLMenu {
     static Scanner scanner = new Scanner(System.in);
     public static void Run(){
-        PrintListMenu.clear();
-        boolean isSPL = true; 
-        String inputChoice;
-        while(isSPL == true){
-            boolean isInput = true;
-            PrintListMenu.Print(new String[]{
-                "Sistem Persamaan Linear Menu", 
-                "1. Metode Gauss", 
-                "2. Metode GaussJordan", 
-                "3. Metode Cramer",
-                "4. Back",
+        IONavigator.next("Linear Equations");
+        while(true){
+            IOPrompter.printMultiLine(new String[]{
+                "1. CLI",
+                "2. File",
+                "3. Back"
             });
-            System.out.print("> ");
-            String choice = scanner.next(); 
-            switch(choice){
-                case "1":
-                    PrintListMenu.clear();
-                    while(isInput){
-                        PrintListMenu.Repetitive(5);
-                        System.out.print("> ");
-                        inputChoice = scanner.next();
-                        switch(inputChoice){
-                            case "1":
-                                System.out.println("Masukkan matriks koefisien :");
-                                var MatriksKoefisien = MatrixReader.readCLI();
-                                System.out.println("Masukkan matriks konstanta :");
-                                var MatriksKonstanta = MatrixReader.readCLI(MatriksKoefisien.row,1);
-                                var result = MatrixLinearEquation.solution(MatriksKoefisien,MatriksKonstanta,1);
-                                System.out.println(result);
-                                break;
-                            case "2":
-                                var MatriksFile = MatrixReader.readFileCLI();
-                                if (MatriksFile.row==0||MatriksFile.col==0){
-                                    break;
-                                }
-                                MatrixPrinter.print(MatriksFile);
-                                var resultFile = MatrixLinearEquation.solutionAugmented(MatriksFile, 1);
-                                System.out.println(resultFile);
-                                break;
-                            case "3":
-                                PrintListMenu.clear();
-                                isInput = false;
-                                break;
-                            default:
-                                PrintListMenu.clear();
-                                System.out.println("Input tidak valid");
-                                break;
-                        }
+            var choice = IOPrompter.getBoundedInt("Input Type>", 1, 3);
 
-                    }
-                    break;
-                case "2":
-                    PrintListMenu.clear();
-                    while(isInput){
-                        PrintListMenu.Repetitive(5);
-                        System.out.print("> ");
-                        inputChoice = scanner.next();
-                        switch(inputChoice){
-                            case "1":
-                                System.out.println("Masukkan matriks koefisien :");
-                                var MatriksKoefisien = MatrixReader.readCLI();
-                                System.out.println("Masukkan matriks konstanta :");
-                                var MatriksKonstanta = MatrixReader.readCLI(MatriksKoefisien.row,1);
-                                var result = MatrixLinearEquation.solution(MatriksKoefisien,MatriksKonstanta,2);
-                                System.out.println(result);
-                                break;
-                            case "2":
-                                var MatriksFile = MatrixReader.readFileCLI();
-                                if (MatriksFile.row==0||MatriksFile.col==0){
-                                    break;
-                                }
-                                MatrixPrinter.print(MatriksFile);
-                                var resultFile = MatrixLinearEquation.solutionAugmented(MatriksFile, 2);
-                                System.out.println(resultFile);
-                                break;
-                            case "3":
-                                PrintListMenu.clear();
-                                isInput = false;
-                                break;
-                            default:
-                                PrintListMenu.clear();
-                                System.out.println("Input tidak valid");
-                                break;
-                        }
+            if(choice == 3) break;
 
-                    }
-                    break;
-                case "3":
-                    PrintListMenu.clear();
-                    while(isInput){
-                        PrintListMenu.Repetitive(5);
-                        System.out.print("> ");
-                        inputChoice = scanner.next();
-                        switch(inputChoice){
-                            case "1":
-                                System.out.println("Masukkan matriks koefisien :");
-                                var MatriksKoefisien = MatrixReader.readCLI();
-                                System.out.println("Masukkan matriks konstanta :");
-                                var MatriksKonstanta = MatrixReader.readCLI(MatriksKoefisien.row,1);
-                                var result = MatrixLinearEquation.solution(MatriksKoefisien,MatriksKonstanta,3);
-                                System.out.println(result);
-                                break;
-                            case "2":
-                                var MatriksFile = MatrixReader.readFileCLI();
-                                if (MatriksFile.row==0||MatriksFile.col==0){
-                                    break;
-                                }
-                                MatrixPrinter.print(MatriksFile);
-                                var resultFile = MatrixLinearEquation.solutionAugmented(MatriksFile, 3);
-                                System.out.println(resultFile);
-                                break;
-                            case "3":
-                                PrintListMenu.clear();
-                                isInput = false;
-                                break;
-                            default:
-                                PrintListMenu.clear();
-                                System.out.println("Input tidak valid");
-                                break;
-                        }
-
-                    }
-                    break;
-                case "4":
-                    isSPL = false;
-                    PrintListMenu.clear();
-                    break;
-                default:
-                    PrintListMenu.clear();
-                    System.out.println("Input tidak valid");
-                    break;
+            IONavigator.next("Input");
+            Matrix matrix = null;
+            if(choice == 1){
+                var r = IOPrompter.getInteger("Masukkan banyaknya persamaan: ");
+                var c = IOPrompter.getInteger("Masukkan banyaknya koefisien: ");
+                System.out.println("Masukan matrix augmented: ");
+                matrix = MatrixReader.readCLI(r, c + 1);
+            } else if(choice == 2){
+                matrix = MatrixReader.readFileCLI();
             }
+            IONavigator.back();
+
+            IONavigator.next("Method");
+            IOPrompter.printMultiLine(new String[]{
+                "1. Metode Gauss",
+                "2. Methode GaussJordan",
+                "3. Methode Crammer",
+            });
+            var method = IOPrompter.getBoundedInt("Metode: ", 1, 3);
+            IONavigator.back();
+
+            IONavigator.next("Result");
+            String r = null;
+            if(method == 1){
+                r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationType.Gaussian);
+            } else if(method == 2){
+                r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationType.GausJordan);
+            } else if(method == 3){
+                r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationType.Crammer);
+            }
+            System.out.println(r);
+            IOFile.askToSave(r);
+            IONavigator.back();
+
+            IONavigator.reload();
+            break;
         }
+        IONavigator.back();
     }
 }
