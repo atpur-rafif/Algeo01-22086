@@ -2,7 +2,6 @@ package CLI.Menu;
 
 import CLI.IO.IOFile;
 import CLI.IO.IONavigator;
-import CLI.IO.IOType;
 import CLI.IO.MatrixReader;
 import CLI.IO.IOStringFormatter;
 import CLI.IO.IOPrompter;
@@ -12,36 +11,51 @@ import Matrix.MatrixInverse;
 
 public class InverseMenu {
     public static void Run(){
+        IONavigator.next("Inverse");
         while(true){
-            IONavigator.next("Inverse");
             IOPrompter.printMultiLine(new String[]{
-                "1. Metode OBE", 
-                "2. Metode Adjoin", 
-                "3. Back",
+                "1. CLI",
+                "2. File",
+                "3. Back"
             });
-            var choice = IOPrompter.getBoundedInt("Metode> ", 1, 3);
+            var choice = IOPrompter.getBoundedInt("Input Type: ", 1, 3);
 
             if(choice == 3) break;
 
+            IONavigator.next("Method");
+            IOPrompter.printMultiLine(new String[]{
+                "1. Metode OBE", 
+                "2. Metode Adjoin", 
+            });
+            var method = IOPrompter.getBoundedInt("Metode> ", 1, 3);
+            IONavigator.back();
+
+
+            IONavigator.next("Input");
             Matrix matrix = null;
+            if     (choice == 1) matrix = MatrixReader.readCLI();
+            else if(choice == 2) matrix = MatrixReader.readFileCLI();
+            IONavigator.back();
 
-            var ioType = IOPrompter.getIOType();
-            if     (ioType == IOType.CLI) matrix = MatrixReader.readCLI();
-            else if(ioType == IOType.File) matrix = MatrixReader.readFileCLI();
-
+            IONavigator.next("Result");
             var det = MatrixDeterminant.calculateWithOBE(matrix);
             if(det == 0){
+                // TODO: Navigator error handler
                 System.out.println("Matrix tidak memliki invers karena determinan = 0");
                 break;
             }
 
             Matrix inversedMatrix = null;
-            if     (choice == 1) inversedMatrix = MatrixInverse.calculateWithGaussJordan(matrix);
-            else if(choice == 2) inversedMatrix = MatrixInverse.calculateWithCofactor(matrix);
+            if     (method == 1) inversedMatrix = MatrixInverse.calculateWithGaussJordan(matrix);
+            else if(method == 2) inversedMatrix = MatrixInverse.calculateWithCofactor(matrix);
 
-            System.out.println(IOStringFormatter.matrix(inversedMatrix));
-            IOFile.askToSave(IOStringFormatter.matrix(inversedMatrix));
+            var s = IOStringFormatter.matrix(inversedMatrix);
+            System.out.println(s);
+            IOFile.askToSave(s);
             IONavigator.back();
+
+            IONavigator.reload();
         }
+        IONavigator.back();
     }
 }

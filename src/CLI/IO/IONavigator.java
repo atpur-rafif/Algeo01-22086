@@ -15,6 +15,11 @@ public class IONavigator {
         return IOStringFormatter.combineString(strings, " > ");
     }
 
+    public static void reload(){
+        clear();
+        System.out.println(getNavigatorView());
+    }
+
     public static void next(String name){
         stack.add(name);
         clear();

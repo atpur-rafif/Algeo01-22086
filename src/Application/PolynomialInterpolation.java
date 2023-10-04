@@ -1,65 +1,41 @@
 package Application;
 
-import CLI.IO.IOStringFormatter;
 import Matrix.Matrix;
 import Matrix.OBE.OBERunner;
 import Vector.EquationSpace;
+import Vector.EuclideanSpace;
+import Vector.VectorSpace;
 
 public class PolynomialInterpolation {
 
-    private static Matrix pointInput(Matrix points){
+    private static Matrix pointToAugmented(Matrix points){
         var Mat = new Matrix(points.row,points.row+1);
         for (int i=0;i<points.row;i++){
             for (int j=0;j<points.row;j++){
-                Mat.set(i, j, Math.pow(points.get(i,0),j));
+                Mat.set(i, j, Math.pow(points.get(i,0), j));
             }
-            Mat.set(i,points.row,(Math.pow(10, 10)*points.get(i,1)));
+            Mat.set(i, points.row, (Math.pow(10, 10) * points.get(i, 1)));
         }
         return Mat;
     }
 
-    public static EquationSpace calculate(Matrix points){
-        var M = pointInput(points);
-        var Mat = new EquationSpace(M.col-1);
+    public static EquationSpace solve(Matrix points){
+        var M = pointToAugmented(points);
+        var eq = new EquationSpace(M.col - 1);
         var OBE = new OBERunner(M);
         OBE.gaussJordanElimination_v2();
         var reduced = OBE.getResult();
         for (int i=0;i<reduced.row;i++){
-            Mat.set(i, Math.round(reduced.get(i, reduced.col-1))/Math.pow(10, 10));
+            eq.set(i, Math.round(reduced.get(i, reduced.col-1))/Math.pow(10, 10));
         }
-        return Mat;
+        return eq;
     }
 
-    public static double f(Matrix points,double x){
-        double result=0;
-        var Mat = PolynomialInterpolation.calculate(points);
-        for (int i=0;i<points.row;i++){
-            result += Math.pow(x, i)*(Mat.get(i))*Math.pow(10, 10);
+    public static double approximate(EquationSpace eq, double x){
+        EuclideanSpace v = new EuclideanSpace(eq.basisCount);
+        for(int i = 0; i < eq.basisCount; ++i){
+            v.set(i, Math.pow(x, i));
         }
-        return result/Math.pow(10, 10);
+        return VectorSpace.innerProduct(eq, v);
     }
-
-    public static String EquationString(EquationSpace result){
-        String plus = " + ";
-        String output = "f(x) = ";
-        for(int i = result.basisCount-1; i >= 0; i--){
-            if(i == 0){
-                plus = "";
-            }
-            if(i == 0){
-                output += (result.get(i) + plus);
-            }
-            else{
-                String currentPower = IOStringFormatter.createSuperscript(i);
-                output += (result.get(i) + "x" + currentPower + plus);
-            }
-        }
-        output += ("\n");
-        return output;
-    }
-
-    public static String interpolatedXString(Matrix M,double x){
-        return "f("+x+") = "+ f(M, x)+"\n";
-    }
-    
 }

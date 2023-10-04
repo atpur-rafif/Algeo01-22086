@@ -11,8 +11,8 @@ import Vector.*;
 
 public class MultipleRegressionMenu {
     public static void Run(){
+        IONavigator.next("Multiple Linear Regression");
         while(true){
-            IONavigator.next("Multiple Linear Regression");
             IOPrompter.printMultiLine(new String[]{
                 "1. CLI",
                 "2. File",
@@ -25,6 +25,8 @@ public class MultipleRegressionMenu {
 
             Matrix samplePoint = null;
             EuclideanSpace testPoint = null;
+
+            IONavigator.next("Input");
             if(input == 1){
                 var n = IOPrompter.getInteger("Masukkan banyak peubah: ");
                 var m = IOPrompter.getInteger("Masukkan banyak sampel: ");
@@ -36,15 +38,18 @@ public class MultipleRegressionMenu {
                 samplePoint = t.matrix;
                 testPoint = t.vector;
             }
+            IONavigator.back();
 
-
+            IONavigator.next("Result");
             var equation = MultipleRegression.solve(samplePoint);
             var result = MultipleRegression.approximate(equation, testPoint);
-            var out = IOStringFormatter.multipleRegression(equation) + "\n" + "Hasil regresi: " + result;
-            System.out.println(out);
-
-            IOFile.askToSave(out);
+            var s = IOStringFormatter.multipleRegression(equation) + "\n" + "Hasil regresi: " + result;
+            System.out.println(s);
+            IOFile.askToSave(s);
             IONavigator.back();
+
+            IONavigator.reload();
         }
+        IONavigator.back();
     }
 }

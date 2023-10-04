@@ -45,11 +45,10 @@ public class IOPrompter {
 
     public static IOType getIOType(){
         printMultiLine(new String[]{
-            "Metode input",
             "1. CLI",
             "2. File"
         });
-        return get("Input Type>", (String v) -> {
+        return get("Input Type> ", (String v) -> {
             if(v.equals("1")) return IOType.CLI;
             else if(v.equals(v)) return IOType.File;
             else return null;

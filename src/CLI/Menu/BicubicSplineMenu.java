@@ -8,15 +8,14 @@ import Application.BicubicSpline;
 import CLI.IO.IOFile;
 import CLI.IO.IONavigator;
 import CLI.IO.IOPrompter;
-import CLI.IO.MatrixPrinter;
+import CLI.IO.IOStringFormatter;
 
 public class BicubicSplineMenu {
     static Scanner scanner = new Scanner(System.in);
 
     public static void Run() {
+        IONavigator.next("Bicubic Spline");
         while(true){
-            IONavigator.next("Bicubic Spline");
-
             IOPrompter.printMultiLine(new String[]{
                 "1. CLI", 
                 "2. File",
@@ -26,6 +25,7 @@ public class BicubicSplineMenu {
 
             if(choice == 3) break;
 
+            IONavigator.next("Input");
             int eqCount = LocalSplineTransformation.equationCount;
             int poCount = LocalSplineTransformation.pointCount;
             EuclideanSpace gradient = new EuclideanSpace(16);
@@ -44,7 +44,6 @@ public class BicubicSplineMenu {
             } else if(choice == 2){
                 var t = IOFile.readObscureFormat();
                 var m = t.matrix;
-                MatrixPrinter.print(m);
                 for(int i = 0; i < eqCount; ++i){
                     for(int j = 0; j < poCount; ++j){
                         gradient.set(poCount * i + j, m.get(i, j));
@@ -52,16 +51,21 @@ public class BicubicSplineMenu {
                 }
                 vector = t.vector;
             };
+            IONavigator.back();
 
+            IONavigator.next("Result");
             EquationSpace eq = BicubicSpline.getEquation(gradient);
             double x = vector.get(0);
             double y = vector.get(1);
             double r = BicubicSpline.approximate(eq, x, y);
-            System.out.println("Hasil aproximasi f(" + x + "," + y + ")" + " = " + r + "\n");
+            var s = IOStringFormatter.bicubicSpline(eq) + "\n" + "Hasil aproximasi f(" + x + "," + y + ")" + " = " + r;
+            System.out.println(s);
 
-            IOFile.askToSave(Double.toString(r));
-
+            IOFile.askToSave(s);
             IONavigator.back();
+
+            IONavigator.reload();
         }
+        IONavigator.back();
     }
 }

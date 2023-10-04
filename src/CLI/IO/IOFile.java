@@ -82,7 +82,6 @@ public class IOFile {
                 }
             }
         }
-        System.out.println(row + " " + col);
 
         var p = 0;
         var m = new Matrix(row, col);
