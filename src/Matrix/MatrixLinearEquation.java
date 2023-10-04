@@ -13,7 +13,7 @@ public class MatrixLinearEquation {
         return result.getResult();
     }
 
-    public static String solutionAugmented(Matrix augmentedmatrix, MatrixLinearEquationType type) {
+    public static String solutionAugmented(Matrix augmentedmatrix, MatrixLinearEquationMethodType type) {
         var koefisienMatrix = new Matrix(augmentedmatrix.row, augmentedmatrix.col - 1);
         var konstantaMatrix = new Matrix(augmentedmatrix.row, 1);
         var originalbase = new MatrixManipulator(augmentedmatrix);
@@ -28,60 +28,48 @@ public class MatrixLinearEquation {
         return solution(koefisienMatrix, konstantaMatrix, type);
     }
 
-    public static String solution(Matrix koefisien, Matrix konstanta, MatrixLinearEquationType type) {
+    public static String solution(Matrix koefisien, Matrix konstanta, MatrixLinearEquationMethodType type) {
         String output = "";
         var augmented = augmentedMatrix(koefisien, konstanta);
-        var OBEResult = new OBERunner(augmented);
-        OBEResult.gaussianElimination();
-        var typesolution = MatrixLinearEquation.typeOfSolution(OBEResult.getResult());
-        if (typesolution == -1) {
-            output += "Tidak memiliki solusi";
-            return output;
-        } else if (typesolution == 0) {
-            switch (type) {
-                case Gaussian:
-                    System.out.println("\nMatrix hasil OBE : ");
-                    output += "\nSolusi parametrik : \n";
-                    output += MatrixLinearEquation.parametricSolution(OBEResult.getResult());
-                    break;
-                case GausJordan:
-                    var OBEResult2 = new OBERunner(augmented);
-                    OBEResult2.gausJordanElimination();
-                    System.out.println("\nMatrix hasil OBE : ");
-                    output += "\nSolusi parametrik : \n";
-                    output += MatrixLinearEquation.parametricSolution(OBEResult2.getResult());
-                    break;
-                case Crammer:
-                    output += "Tidak dapat memberikan solusi, terdapat pembagian dengan 0";
-                    break;
-            }
+        var typesolution = typeOfSolution(augmented);
 
-        } else {
-            output += "\nSolusi : \n";
-            switch (type) {
-                case Gaussian:
-                    System.out.println("\nMatrix hasil OBE : ");
-                    output += gaussianEliminationSolution(OBEResult.getResult());
-                    break;
-                case GausJordan:
-                    System.out.println("\nMatrix hasil OBE : ");
-                    var OBEResult2 = new OBERunner(augmented);
-                    OBEResult2.gaussJordanElimination_v2();
-                    output += gaussJordanEliminationSolution(OBEResult2.getResult());
-                    break;
-                case Crammer:
-                    output += cramerSolution(koefisien, konstanta);
-                    break;
-            }
+        var obe = new OBERunner(augmented);
+        if(type == MatrixLinearEquationMethodType.Gaussian) obe.gaussianElimination();
+        else if(type == MatrixLinearEquationMethodType.GausJordan) obe.gaussJordanElimination();
 
+        Matrix m = obe.getResult();
+        if(type == MatrixLinearEquationMethodType.Gaussian || type == MatrixLinearEquationMethodType.GausJordan){
+            output += "Matrix setelah OBE: \n";
+            output += IOStringFormatter.matrix(m);
+            output += "\n";
         }
+
+        if(typesolution == MatrixLinearEquationSolutionType.NoSolution){
+            output += "Tidak memiliki solusi";
+        } else if(typesolution == MatrixLinearEquationSolutionType.OneSolution){
+            if(type == MatrixLinearEquationMethodType.Gaussian){
+                output += gaussianEliminationSolution(m);
+            } else if(type == MatrixLinearEquationMethodType.GausJordan){
+                output += gaussJordanEliminationSolution(m);
+            } else if(type == MatrixLinearEquationMethodType.Crammer){
+                output += cramerSolution(koefisien, konstanta);
+            }
+        } else if(typesolution == MatrixLinearEquationSolutionType.ManySolution){
+            if(type == MatrixLinearEquationMethodType.Gaussian || type == MatrixLinearEquationMethodType.GausJordan){
+                output += MatrixLinearEquation.parametricSolution(m);
+            } else if(type == MatrixLinearEquationMethodType.Crammer){
+                output += "Tidak dapat memberikan solusi, terdapat pembagian dengan 0";
+            }
+        }
+
         return output;
     }
 
-    private static int typeOfSolution(Matrix M1) {
-        // -1 no solution
-        // 0 inf many solution
-        // 1 1 exact solution
+    private static MatrixLinearEquationSolutionType typeOfSolution(Matrix M1) {
+        var obe = new OBERunner(M1);
+        obe.gaussianElimination();
+        M1 = obe.getResult();
+
         double count_coeff = 0, count_last = 0;
         for (int i = 0; i < M1.col; i++) {
             if (i != M1.col - 1) {
@@ -91,11 +79,11 @@ public class MatrixLinearEquation {
             }
         }
         if (count_coeff == 0 && count_last == 0) {
-            return 0;
+            return MatrixLinearEquationSolutionType.ManySolution;
         } else if (count_coeff == 0 && count_last != 0) {
-            return -1;
+            return MatrixLinearEquationSolutionType.NoSolution;
         } else {
-            return 1;
+            return MatrixLinearEquationSolutionType.OneSolution;
         }
     }
 

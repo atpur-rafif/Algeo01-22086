@@ -1,6 +1,6 @@
 package Matrix;
 
-public enum MatrixLinearEquationType {
+public enum MatrixLinearEquationMethodType {
     Gaussian,
     GausJordan,
     Crammer

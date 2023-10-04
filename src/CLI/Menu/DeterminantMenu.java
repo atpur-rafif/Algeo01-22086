@@ -39,7 +39,11 @@ public class DeterminantMenu {
             else if(choice == 2) matrix = MatrixReader.readFileCLI();
             IONavigator.back();
 
-            IONavigator.next("Result");
+            var methodInString = "";
+            if(method == 1) methodInString = "OBE"; 
+            if(method == 2) methodInString = "Kofaktor"; 
+
+            IONavigator.next("Result " + methodInString);
             Double determinant = null;
             if     (method == 1) determinant = MatrixDeterminant.calculateWithOBE(matrix);
             else if(method == 2) determinant = MatrixDeterminant.calculateWithCofactor(matrix);

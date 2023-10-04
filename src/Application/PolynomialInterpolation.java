@@ -23,7 +23,7 @@ public class PolynomialInterpolation {
         var M = pointToAugmented(points);
         var eq = new EquationSpace(M.col - 1);
         var OBE = new OBERunner(M);
-        OBE.gaussJordanElimination_v2();
+        OBE.gaussJordanElimination();
         var reduced = OBE.getResult();
         for (int i=0;i<reduced.row;i++){
             eq.set(i, Math.round(reduced.get(i, reduced.col-1))/Math.pow(10, 10));

@@ -52,7 +52,7 @@ public class MultipleRegression{
     public static EquationSpace solve(Matrix samplePoint){
         var M = createMatrix(samplePoint);
         var OBE = new OBERunner(M); 
-        OBE.gausJordanElimination();
+        OBE.gaussJordanElimination();
         M = OBE.getResult();
         var R = new EquationSpace(M.col - 1);
         for(int i = 0; i < R.basisCount; ++i){

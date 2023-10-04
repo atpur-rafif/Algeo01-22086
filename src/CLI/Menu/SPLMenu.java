@@ -8,7 +8,7 @@ import CLI.IO.IOPrompter;
 import CLI.IO.MatrixReader;
 import Matrix.Matrix;
 import Matrix.MatrixLinearEquation;
-import Matrix.MatrixLinearEquationType;
+import Matrix.MatrixLinearEquationMethodType;
 
 public class SPLMenu {
     static Scanner scanner = new Scanner(System.in);
@@ -45,21 +45,25 @@ public class SPLMenu {
             var method = IOPrompter.getBoundedInt("Metode: ", 1, 3);
             IONavigator.back();
 
-            IONavigator.next("Result");
+            var methodInString = "";
+            if(method == 1) methodInString = "Gaussian Elimination"; 
+            if(method == 2) methodInString = "Gauss-Jordan Elimination"; 
+            if(method == 3) methodInString = "Crammer"; 
+
+            IONavigator.next("Result " + methodInString);
             String r = null;
             if(method == 1){
-                r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationType.Gaussian);
+                r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationMethodType.Gaussian);
             } else if(method == 2){
-                r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationType.GausJordan);
+                r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationMethodType.GausJordan);
             } else if(method == 3){
-                r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationType.Crammer);
+                r = MatrixLinearEquation.solutionAugmented(matrix, MatrixLinearEquationMethodType.Crammer);
             }
             System.out.println(r);
             IOFile.askToSave(r);
             IONavigator.back();
 
             IONavigator.reload();
-            break;
         }
         IONavigator.back();
     }

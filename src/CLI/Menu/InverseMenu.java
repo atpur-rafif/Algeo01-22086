@@ -37,7 +37,11 @@ public class InverseMenu {
             else if(choice == 2) matrix = MatrixReader.readFileCLI();
             IONavigator.back();
 
-            IONavigator.next("Result");
+            var methodInString = "";
+            if(method == 1) methodInString = "OBE"; 
+            if(method == 2) methodInString = "Adjoin"; 
+
+            IONavigator.next("Result " + methodInString);
             var det = MatrixDeterminant.calculateWithOBE(matrix);
             if(det == 0){
                 System.out.println("Matrix tidak memliki invers karena determinan = 0");
