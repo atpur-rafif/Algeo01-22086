@@ -1,5 +1,6 @@
 package Application;
 
+import CLI.IO.IOStringFormatter;
 import Matrix.*;
 import Matrix.OBE.OBERunner;
 import Vector.*;
@@ -14,7 +15,7 @@ public class MultipleRegression{
             if(i == 0){
                 for(int j = 0; j < n + 2; ++j){
                     if(j == 0){
-                        matrix.set(0, 0, (double) n);
+                        matrix.set(0, 0, (double) m);
                     }
                     else{
                         double temp = 0;
@@ -45,8 +46,9 @@ public class MultipleRegression{
 
             }
         }
-
+        System.out.println(IOStringFormatter.matrix(matrix));
         return matrix;
+
     }
 
     public static EquationSpace solve(Matrix samplePoint){
