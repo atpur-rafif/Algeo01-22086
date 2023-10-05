@@ -8,7 +8,6 @@ import CLI.IO.IOFile;
 import CLI.IO.IONavigator;
 import CLI.IO.IOPrompter;
 import CLI.IO.IOStringFormatter;
-import CLI.IO.MatrixReader;
 
 public class PolynomialInterpolationMenu {
     static Scanner scanner = new Scanner(System.in);
@@ -21,7 +20,7 @@ public class PolynomialInterpolationMenu {
                 "2. File",
                 "3. Back"
             });
-            var choice = IOPrompter.getBoundedInt("Input Type: ", 1, 3);
+            var choice = IOPrompter.getBoundedInt("Input Type> ", 1, 3);
 
             if(choice == 3) break;
 

@@ -5,7 +5,6 @@ import java.util.Scanner;
 import CLI.IO.IOFile;
 import CLI.IO.IONavigator;
 import CLI.IO.IOPrompter;
-import CLI.IO.MatrixReader;
 import Matrix.Matrix;
 import Matrix.MatrixLinearEquation;
 import Matrix.MatrixLinearEquationMethodType;
@@ -20,7 +19,7 @@ public class SPLMenu {
                 "2. File",
                 "3. Back"
             });
-            var choice = IOPrompter.getBoundedInt("Input Type>", 1, 3);
+            var choice = IOPrompter.getBoundedInt("Input Type> ", 1, 3);
 
             if(choice == 3) break;
 
@@ -30,9 +29,9 @@ public class SPLMenu {
                 var r = IOPrompter.getInteger("Masukkan banyaknya persamaan: ");
                 var c = IOPrompter.getInteger("Masukkan banyaknya koefisien: ");
                 System.out.println("Masukan matrix augmented: ");
-                matrix = MatrixReader.readCLI(r, c + 1);
+                matrix = IOPrompter.getMatrix(r, c + 1);
             } else if(choice == 2){
-                matrix = MatrixReader.readFileCLI();
+                matrix = IOFile.readMatrix();
             }
             IONavigator.back();
 
@@ -43,7 +42,7 @@ public class SPLMenu {
                 "3. Metode Cramer",
                 "4. Metode Matriks Balikan"
             });
-            var method = IOPrompter.getBoundedInt("Metode: ", 1, 4);
+            var method = IOPrompter.getBoundedInt("Metode> ", 1, 4);
             IONavigator.back();
 
             var methodInString = "";

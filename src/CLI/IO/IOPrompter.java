@@ -3,6 +3,7 @@ package CLI.IO;
 import java.util.Scanner;
 import java.util.function.Function;
 
+import Matrix.Matrix;
 import Vector.EuclideanSpace;
 
 public class IOPrompter {
@@ -90,7 +91,7 @@ public class IOPrompter {
     }
 
     public static <T> T get(String prompt, Function<String, T> checkFn){
-        return get(prompt, checkFn, (var n) -> { return "\n(Input tidak valid)"; });
+        return get(prompt, checkFn, (var n) -> { return "(Input tidak valid) "; });
     }
 
     public static <T> T get(String prompt, Function<String, T> checkFn, Function<String, String> onFalse){
@@ -114,5 +115,32 @@ public class IOPrompter {
     public static void waitEnter(){
         System.out.print("Enter to continue");
         scanner.nextLine(); scanner.nextLine();
+    }
+
+    static Scanner cliScanner = new Scanner(System.in);
+
+    private static Matrix read(Scanner s, int row, int col){
+        var M = new Matrix(row, col);
+        for(int i = 0; i < row; ++i){
+            for(int j = 0; j < col; ++j){
+                M.set(i, j, Double.parseDouble(s.next()));
+            }
+        }
+
+        return M;
+    }
+    
+    public static Matrix getMatrix(){
+        System.out.print("Masukkan baris: ");
+        int row = Integer.parseInt(cliScanner.next());
+        
+        System.out.print("Masukkan kolom: ");
+        int col = Integer.parseInt(cliScanner.next());
+        
+        return read(cliScanner, row, col);
+    }
+    
+    public static Matrix getMatrix(int row, int col){
+        return read(cliScanner, row, col);
     }
 }

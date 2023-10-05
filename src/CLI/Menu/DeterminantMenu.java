@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import CLI.IO.IOFile;
 import CLI.IO.IONavigator;
-import CLI.IO.MatrixReader;
 import CLI.IO.IOPrompter;
 
 public class DeterminantMenu {
@@ -21,7 +20,7 @@ public class DeterminantMenu {
                 "2. File",
                 "3. Back"
             });
-            var choice = IOPrompter.getBoundedInt("Input Type: ", 1, 3);
+            var choice = IOPrompter.getBoundedInt("Input Type> ", 1, 3);
 
             if(choice == 3) break;
 
@@ -30,13 +29,13 @@ public class DeterminantMenu {
                 "1. Metode OBE", 
                 "2. Metode Kofaktor", 
             });
-            var method = IOPrompter.getBoundedInt("Metode: ", 1, 2);
+            var method = IOPrompter.getBoundedInt("Metode> ", 1, 2);
             IONavigator.back();
 
             IONavigator.next("Input");
             Matrix matrix = null;
-            if     (choice == 1) matrix = MatrixReader.readCLI();
-            else if(choice == 2) matrix = MatrixReader.readFileCLI();
+            if     (choice == 1) matrix = IOPrompter.getMatrix();
+            else if(choice == 2) matrix = IOFile.readMatrix();
             IONavigator.back();
 
             var methodInString = "";

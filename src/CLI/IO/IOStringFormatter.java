@@ -81,7 +81,7 @@ public class IOStringFormatter {
             for(int i = 0; i <= maxDegree; ++i){
                 var t = eq.get(j * (maxDegree + 1) + i);
                 if(t != 0){
-                    r += eq.get(j * (maxDegree + 1) + i);
+                    r += "(" + eq.get(j * (maxDegree + 1) + i) + ")";
                     if(i != 0) r += "x" + createSuperscript(i);
                     if(j != 0) r += "y" + createSuperscript(j);
                     if(j != maxDegree || i != maxDegree) r += " + ";
@@ -97,7 +97,7 @@ public class IOStringFormatter {
         for(int i = 0; i < eq.basisCount; ++i){
             var t = eq.get(i);
             if (i == 0) r += t;
-            else r += t + "x" + createSubscript(i);
+            else r += "(" + t + ")" + "x" + createSubscript(i);
             if(i != eq.basisCount - 1) r += " + ";
         }
         return r;
@@ -107,7 +107,7 @@ public class IOStringFormatter {
         String r = "";
         for(int i = 0; i < eq.basisCount; ++i){
             var t = eq.get(i);
-            r += t;
+            r += "(" + t + ")";
             if(i != 0) r += "x" + createSuperscript(i);
             if(i != eq.basisCount - 1) r += " + ";
         }

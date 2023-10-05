@@ -15,7 +15,7 @@ public class IOFile {
     static Scanner scanner = new Scanner(System.in);
     static String choice;
 
-    public static File createFile_v2(Path path) throws IOException{
+    public static File createFile(Path path) throws IOException{
         var iterator = path.getParent().iterator();
         var currentPath = iterator.next();
         while(iterator.hasNext()){
@@ -40,7 +40,7 @@ public class IOFile {
         }
     }
 
-    public static ObscureFormat parseObscureFormat(String str){
+    public static ObscureFormat parseObscureFormat(String str) throws Exception{
         str = str.trim();
 
         int row = 0;
@@ -55,7 +55,7 @@ public class IOFile {
         for(int i = 0; i < len; ++i){
             var c = str.charAt(i);
 
-            if(finished) throw new Error("Invalid format");
+            if(finished) throw new Exception("Invalid format");
 
             if(pattern.matcher(String.valueOf(c)).find()){
                 current += c;
@@ -109,8 +109,10 @@ public class IOFile {
                 String str = null;
                 try {
                     str = Files.readString(path);
-                    return parseObscureFormat(str);
-                } catch (IOException e) {
+                    var t = parseObscureFormat(str);
+                    if(t.vector.basisCount + 1 != t.matrix.col) throw new Exception("Format file tidak sesuai");
+                    return t;
+                } catch (Exception e) {
                     System.out.println("Format file tidak sesuai");
                     continue;
                 }
@@ -119,7 +121,7 @@ public class IOFile {
     }
 
     public static void save(Path path, String content) throws IOException{
-        var f = createFile_v2(path);
+        var f = createFile(path);
         var w = new FileWriter(f);
         w.write(content);
         w.close();
@@ -155,16 +157,76 @@ public class IOFile {
 		}
     }
 
-    public static void createFile(String fileName){
-        fileName = fileName + ".txt";
-        File myMatrix = new File(fileName); 
-        while (myMatrix.exists()){
-            System.out.println("Nama file sudah ada, silahkan ganti namanya");
-            System.out.print("Nama file: ");
-            fileName = scanner.next();
-            fileName = fileName + ".txt";
-            myMatrix = new File(fileName); 
+    public static Matrix parseMatrix(String str) throws Exception{
+        str = str.trim();
+
+        int row = 0;
+        int col = -1;
+
+        int cCol = 0;
+        boolean finished = false;
+        var buffer = new ArrayList<Double>();
+        var pattern = Pattern.compile("[0-9|.]");
+        String current = "";
+        var len = str.length();
+        for(int i = 0; i < len; ++i){
+            var c = str.charAt(i);
+
+            if(finished) throw new Exception("Invalid format");
+
+            if(pattern.matcher(String.valueOf(c)).find()){
+                current += c;
+            }
+
+            if((c == ' ' || c == '\n' || i == len - 1) && (current.length() != 0)){
+                var v = Double.parseDouble(current);
+                buffer.add(v);
+                current = "";
+                cCol += 1;
+            }
+
+            if(c == '\n' || i == len - 1){
+                if(col == -1){
+                    col = cCol;
+                }
+
+
+                if(col == cCol){
+                    col = cCol;
+                    cCol = 0;
+                    row += 1;
+                } else throw new Exception("Invalid format");
+            }
         }
-        System.out.println("File " + myMatrix.getName() + " dibuat");
+
+        var p = 0;
+        var m = new Matrix(row, col);
+        for(int i = 0; i < row; ++i){
+            for(int j = 0; j < col; ++j){
+                m.set(i, j, buffer.get(p));
+                p += 1;
+            }
+        }
+
+        return m;
+    }
+
+    public static Matrix readMatrix(){
+        Path path = null;
+        do{
+            var input = IOPrompter.getString("Masukkan path: ");
+            path = Path.of(input);
+            if(Files.exists(path)){
+                String str = null;
+                try {
+                    str = Files.readString(path);
+                    var t = parseMatrix(str);
+                    return t;
+                } catch (Exception e) {
+                    System.out.println("Format file tidak sesuai");
+                    continue;
+                }
+            } else System.out.println("File tidak ditemukan");
+        } while(true);
     }
 }

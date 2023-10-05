@@ -2,7 +2,6 @@ package CLI.Menu;
 
 import CLI.IO.IOFile;
 import CLI.IO.IONavigator;
-import CLI.IO.MatrixReader;
 import CLI.IO.IOStringFormatter;
 import CLI.IO.IOPrompter;
 import Matrix.Matrix;
@@ -18,7 +17,7 @@ public class InverseMenu {
                 "2. File",
                 "3. Back"
             });
-            var choice = IOPrompter.getBoundedInt("Input Type: ", 1, 3);
+            var choice = IOPrompter.getBoundedInt("Input Type> ", 1, 3);
 
             if(choice == 3) break;
 
@@ -33,8 +32,8 @@ public class InverseMenu {
 
             IONavigator.next("Input");
             Matrix matrix = null;
-            if     (choice == 1) matrix = MatrixReader.readCLI();
-            else if(choice == 2) matrix = MatrixReader.readFileCLI();
+            if     (choice == 1) matrix = IOPrompter.getMatrix();
+            else if(choice == 2) matrix = IOFile.readMatrix();
             IONavigator.back();
 
             var methodInString = "";
