@@ -9,14 +9,15 @@ import Vector.VectorSpace;
 public class PolynomialInterpolation {
 
     private static Matrix pointToAugmented(Matrix points){
-        var Mat = new Matrix(points.row,points.row+1);
-        for (int i=0;i<points.row;i++){
-            for (int j=0;j<points.row;j++){
-                Mat.set(i, j, Math.pow(points.get(i,0), j));
+        var m = new Matrix(points.row,points.row+1);
+        for (int i = 0; i < points.row; i++) {
+            for (int j = 0; j < points.row; j++) {
+                m.set(i, j, Math.pow(points.get(i, 0), j));
             }
-            Mat.set(i, points.row, (Math.pow(10, 10) * points.get(i, 1)));
+            m.set(i, points.row, points.get(i, 1));
         }
-        return Mat;
+
+        return m;
     }
 
     public static EquationSpace solve(Matrix points){
@@ -26,7 +27,7 @@ public class PolynomialInterpolation {
         OBE.gaussJordanElimination();
         var reduced = OBE.getResult();
         for (int i=0;i<reduced.row;i++){
-            eq.set(i, Math.round(reduced.get(i, reduced.col-1))/Math.pow(10, 10));
+            eq.set(i, reduced.get(i, reduced.col-1));
         }
         return eq;
     }

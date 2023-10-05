@@ -60,7 +60,7 @@ public class OBERunner {
                     mostLeftRow = j;
                 } else if(
                     t == mostLeft && 
-                    (Math.abs(this.Manipulator.get(j, t)) < Math.abs(this.Manipulator.get(mostLeftRow, mostLeft)))
+                    (Math.abs(this.Manipulator.get(j, t)) > Math.abs(this.Manipulator.get(mostLeftRow, mostLeft)))
                 ){
                     mostLeft = t;
                     mostLeftRow = j;
