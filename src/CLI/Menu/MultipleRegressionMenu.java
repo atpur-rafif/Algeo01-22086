@@ -42,7 +42,11 @@ public class MultipleRegressionMenu {
             IONavigator.next("Result");
             var equation = MultipleRegression.solve(samplePoint);
             var result = MultipleRegression.approximate(equation, testPoint);
-            var s = IOStringFormatter.multipleRegression(equation) + "\n" + "Hasil regresi: " + result;
+            String s = "";
+            for(int i = 0; i < testPoint.basisCount; ++i){
+                s += "x" + IOStringFormatter.createSubscript(i) + " = " + testPoint.get(i) + "\n";
+            }
+            s += IOStringFormatter.multipleRegression(equation) + "\n" + "Hasil regresi: " + result;
             System.out.println(s);
             IOFile.askToSave(s);
             IONavigator.back();
