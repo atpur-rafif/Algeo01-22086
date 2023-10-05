@@ -105,8 +105,6 @@ public class IOPrompter {
         scanner.nextLine(); scanner.nextLine();
     }
 
-    static Scanner cliScanner = new Scanner(System.in);
-
     private static Matrix read(Scanner s, int row, int col){
         var M = new Matrix(row, col);
         for(int i = 0; i < row; ++i){
@@ -120,15 +118,15 @@ public class IOPrompter {
     
     public static Matrix getMatrix(){
         System.out.print("Masukkan baris: ");
-        int row = Integer.parseInt(cliScanner.next());
+        int row = Integer.parseInt(scanner.next());
         
         System.out.print("Masukkan kolom: ");
-        int col = Integer.parseInt(cliScanner.next());
+        int col = Integer.parseInt(scanner.next());
         
-        return read(cliScanner, row, col);
+        return read(scanner, row, col);
     }
     
     public static Matrix getMatrix(int row, int col){
-        return read(cliScanner, row, col);
+        return read(scanner, row, col);
     }
 }
