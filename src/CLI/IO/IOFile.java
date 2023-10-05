@@ -12,6 +12,7 @@ import Vector.EuclideanSpace;
 import Matrix.Matrix;
 
 public class IOFile {
+    static Pattern doublePattern = Pattern.compile("[0-9|.|-]");
     static Scanner scanner = new Scanner(System.in);
     static String choice;
 
@@ -49,7 +50,6 @@ public class IOFile {
         int cCol = 0;
         boolean finished = false;
         var buffer = new ArrayList<Double>();
-        var pattern = Pattern.compile("[0-9|.]");
         String current = "";
         var len = str.length();
         for(int i = 0; i < len; ++i){
@@ -57,7 +57,7 @@ public class IOFile {
 
             if(finished) throw new Exception("Invalid format");
 
-            if(pattern.matcher(String.valueOf(c)).find()){
+            if(doublePattern.matcher(String.valueOf(c)).find()){
                 current += c;
             }
 
@@ -166,7 +166,6 @@ public class IOFile {
         int cCol = 0;
         boolean finished = false;
         var buffer = new ArrayList<Double>();
-        var pattern = Pattern.compile("[0-9|.]");
         String current = "";
         var len = str.length();
         for(int i = 0; i < len; ++i){
@@ -174,7 +173,7 @@ public class IOFile {
 
             if(finished) throw new Exception("Invalid format");
 
-            if(pattern.matcher(String.valueOf(c)).find()){
+            if(doublePattern.matcher(String.valueOf(c)).find()){
                 current += c;
             }
 
