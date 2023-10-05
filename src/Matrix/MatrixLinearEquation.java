@@ -166,7 +166,7 @@ public class MatrixLinearEquation {
                         t.add("(" + (eq[j] * -1) + ")" + parameter[j]);
                     }
                 }
-                if(k != 0 || t.size() == 0) t.add(k + "");
+                if(k != 0 || t.size() == 0) t.add("(" + k + ")");
 
                 var at = new String[t.size()];
                 t.toArray(at);
