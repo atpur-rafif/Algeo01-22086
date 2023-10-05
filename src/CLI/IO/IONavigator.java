@@ -30,5 +30,6 @@ public class IONavigator {
         stack.pop();
         clear();
         System.out.println(getNavigatorView());
+        reload();
     }
 }

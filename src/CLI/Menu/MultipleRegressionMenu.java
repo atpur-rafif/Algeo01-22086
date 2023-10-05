@@ -5,7 +5,6 @@ import CLI.IO.IOFile;
 import CLI.IO.IONavigator;
 import CLI.IO.IOPrompter;
 import CLI.IO.IOStringFormatter;
-import CLI.IO.MatrixReader;
 import Matrix.Matrix;
 import Vector.*;
 
@@ -31,7 +30,7 @@ public class MultipleRegressionMenu {
                 var n = IOPrompter.getInteger("Masukkan banyak peubah: ");
                 var m = IOPrompter.getInteger("Masukkan banyak sampel: ");
                 System.out.println("Masukkan sample point");
-                samplePoint = MatrixReader.readCLI(m, n + 1);
+                samplePoint = IOPrompter.getMatrix(m, n + 1);
                 testPoint = IOPrompter.getEuclideanVectorInline("Masukkan test point: ", n);
             } else if(input == 2){
                 var t = IOFile.readObscureFormat();

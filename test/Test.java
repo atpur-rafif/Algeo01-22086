@@ -8,7 +8,6 @@ import Matrix.MatrixArithmetic;
 
 public class Test {
     public static void main(String[] args){
-        //MainMenu.InterfaceProgram();
-        IOFile.readMatrix();
+        MainMenu.InterfaceProgram();
     }
 }

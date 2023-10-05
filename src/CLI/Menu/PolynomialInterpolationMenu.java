@@ -8,7 +8,6 @@ import CLI.IO.IOFile;
 import CLI.IO.IONavigator;
 import CLI.IO.IOPrompter;
 import CLI.IO.IOStringFormatter;
-import CLI.IO.MatrixReader;
 
 public class PolynomialInterpolationMenu {
     static Scanner scanner = new Scanner(System.in);
@@ -33,7 +32,7 @@ public class PolynomialInterpolationMenu {
                 var row = IOPrompter.getInteger("Masukkan banyaknya sampel: ");
                 var col = 2;
                 System.out.println("Masukkan sampel: ");
-                matrix = MatrixReader.readCLI(row, col);
+                matrix = IOPrompter.getMatrix(row, col);
                 x = IOPrompter.getDouble("Tes: ");
             } else if(choice == 2){
                 var t = IOFile.readObscureFormat();
