@@ -1,6 +1,5 @@
 package Application;
 
-import Point.Point;
 import Vector.*;
 import Transformation.*;
 

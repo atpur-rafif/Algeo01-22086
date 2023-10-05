@@ -1,4 +1,4 @@
-package Point;
+package Vector;
 
 public class Point {
     public double x, y;
