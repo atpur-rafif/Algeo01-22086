@@ -34,6 +34,16 @@ public class MatrixLinearEquation {
         var augmented = augmentedMatrix(koefisien, konstanta);
         var typesolution = typeOfSolution(augmented);
 
+        if(typesolution == MatrixLinearEquationSolutionType.NoSolution){
+            output += "Tidak memiliki solusi";
+            return output;
+        } else if(typesolution == MatrixLinearEquationSolutionType.OneSolution){
+            output += "Terdapat satu solusi\n";
+        } else if(typesolution == MatrixLinearEquationSolutionType.ManySolution){
+            output += "Terdapat banyak solusi\n";
+        }
+
+
         var obe = new OBERunner(augmented);
         if(type == MatrixLinearEquationMethodType.Gaussian) obe.gaussianElimination();
         else if(type == MatrixLinearEquationMethodType.GausJordan) obe.gaussJordanElimination();
@@ -45,13 +55,9 @@ public class MatrixLinearEquation {
             output += "\n";
         }
 
-        if(typesolution == MatrixLinearEquationSolutionType.NoSolution){
-            output += "Tidak memiliki solusi";
-        } else if(typesolution == MatrixLinearEquationSolutionType.OneSolution){
-            if(type == MatrixLinearEquationMethodType.Gaussian){
-                output += gaussianEliminationSolution(m);
-            } else if(type == MatrixLinearEquationMethodType.GausJordan){
-                output += gaussJordanEliminationSolution(m);
+        if(typesolution == MatrixLinearEquationSolutionType.OneSolution){
+            if(type == MatrixLinearEquationMethodType.Gaussian || type == MatrixLinearEquationMethodType.GausJordan){
+                output += runSolution(m);
             } else if(type == MatrixLinearEquationMethodType.Crammer){
                 output += cramerSolution(koefisien, konstanta);
             } else if(type == MatrixLinearEquationMethodType.Inverse){
@@ -59,9 +65,9 @@ public class MatrixLinearEquation {
             }
         } else if(typesolution == MatrixLinearEquationSolutionType.ManySolution){
             if(type == MatrixLinearEquationMethodType.Gaussian || type == MatrixLinearEquationMethodType.GausJordan){
-                output += MatrixLinearEquation.parametricSolution(m);
+                output += MatrixLinearEquation.runSolution(m);
             } else if(type == MatrixLinearEquationMethodType.Crammer){
-                output += "Tidak dapat memberikan solusi, terdapat pembagian dengan 0";
+                output += "Tidak dapat memberikan solusi, terdapat pembagian dengan 0, atau terdapat matrix yang tidak memiliki balikan";
             } else if(type == MatrixLinearEquationMethodType.Inverse){
                 output += "Tidak dapat memberikan solusi, matriks tidak memiliki balikan";
             }
@@ -94,7 +100,7 @@ public class MatrixLinearEquation {
         return MatrixLinearEquationSolutionType.NoSolution;
     }
 
-    private static String parametricSolution(Matrix M) {
+    private static String runSolution(Matrix M) {
         var output = "";
         var varCount = M.col - 1;
         var parameterized = new boolean[varCount];
@@ -176,47 +182,6 @@ public class MatrixLinearEquation {
             }
         }
 
-        return output;
-    }
-
-    private static String gaussianEliminationSolution(Matrix M1) {
-        double[] count;
-        count = new double[M1.row];
-        String output = "";
-        for (int i = M1.row - 1; i >= 0; i--) {
-            count[i] = M1.get(i, M1.col - 1);
-            String currentSubscript = IOStringFormatter.createSubscript(i);
-            output += "x" + currentSubscript + " = ";
-            if (i == M1.row - 1) {
-                output += M1.get(i, M1.col - 1);
-            } else {
-                output += count[i] + "-";
-            }
-            for (int j = M1.col - 2; j > i; j--) {
-                if (i != M1.row - 1) {
-                    String currentSubscript3 = IOStringFormatter.createSubscript(j);
-                    output += "(" + M1.get(i, j) + ")x" + currentSubscript3;
-                    count[i] -= M1.get(i, j) * count[j];
-                    if (j - 1 != i) {
-                        output += "-";
-                    }
-                }
-            }
-            if (i != M1.row - 1) {
-                String currentSubscript2 = IOStringFormatter.createSubscript(i);
-                output += "\nx" + currentSubscript2 + " = " + count[i];
-            }
-            output += "\n";
-        }
-        return output;
-    }
-
-    private static String gaussJordanEliminationSolution(Matrix M1) {
-        String output = "";
-        for (int i = 0; i < M1.row; i++) {
-            String currentSubscript = IOStringFormatter.createSubscript(i);
-            output += "x" + currentSubscript + " = " + M1.get(i, M1.col - 1) + "\n";
-        }
         return output;
     }
 

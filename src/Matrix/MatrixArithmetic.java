@@ -1,7 +1,5 @@
 package Matrix;
 
-import CLI.IO.IOStringFormatter;
-
 public class MatrixArithmetic {
     Matrix M1, M2;
     
