@@ -34,7 +34,7 @@ public class PolynomialInterpolationMenu {
                 var col = 2;
                 System.out.println("Masukkan sampel: ");
                 matrix = MatrixReader.readCLI(row, col);
-                x = IOPrompter.getDouble("Tes: ");
+                x = IOPrompter.getDouble("Masukkan x untuk interpolasi: ");
             } else if(choice == 2){
                 var t = IOFile.readObscureFormat();
                 matrix = t.matrix;
@@ -46,7 +46,7 @@ public class PolynomialInterpolationMenu {
             EquationSpace eq = PolynomialInterpolation.solve(matrix);
             double result = PolynomialInterpolation.approximate(eq, x);
 
-            var s = IOStringFormatter.polynomialEquation(eq) + "\n" + "Hasil: " + result;
+            var s = IOStringFormatter.polynomialEquation(eq) + "\n" + "f("+x+") = "+ result;
             System.out.println(s);
             IOFile.askToSave(s);
             IONavigator.back();
