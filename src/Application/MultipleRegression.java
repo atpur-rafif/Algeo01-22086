@@ -1,6 +1,5 @@
 package Application;
 
-import CLI.IO.IOStringFormatter;
 import Matrix.*;
 import Matrix.OBE.OBERunner;
 import Vector.*;
@@ -46,9 +45,8 @@ public class MultipleRegression{
 
             }
         }
-        System.out.println(IOStringFormatter.matrix(matrix));
-        return matrix;
 
+        return matrix;
     }
 
     public static EquationSpace solve(Matrix samplePoint){
