@@ -44,18 +44,6 @@ public class IOPrompter {
         });
     }
 
-    public static IOType getIOType(){
-        printMultiLine(new String[]{
-            "1. CLI",
-            "2. File"
-        });
-        return get("Input Type> ", (String v) -> {
-            if(v.equals("1")) return IOType.CLI;
-            else if(v.equals(v)) return IOType.File;
-            else return null;
-        });
-    }
-
     public static int getInteger(String prompt){
         return get(prompt, (var v) -> {
             try {
