@@ -32,7 +32,7 @@ public class PolynomialInterpolationMenu {
                 var row = IOPrompter.getInteger("Masukkan banyaknya sampel: ");
                 var col = 2;
                 System.out.println("Masukkan sampel: ");
-                matrix = MatrixReader.readCLI(row, col);
+                matrix = IOPrompter.getMatrix(row, col);
                 x = IOPrompter.getDouble("Masukkan x untuk interpolasi: ");
             } else if(choice == 2){
                 var t = IOFile.readObscureFormat();
