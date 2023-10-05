@@ -3,7 +3,6 @@ package Transformation;
 import java.util.function.Function;
 import Matrix.*;
 import Vector.*;
-import Point.Point;
 
 public class LocalSplineTransformation extends Transformation{
     public static Point[] points = {

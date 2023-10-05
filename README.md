@@ -3,7 +3,7 @@
 
 ### Compiling Library
 ```
-javac -d bin/class src/**/*.java && jar cf bin/Matrix.jar -C ./bin/class .
+javac -d bin/class src/**/*.java && jar cfm bin/Matrix.jar ./src/Manifest.txt -C ./bin/class .
 ```
 
 ### Running with Library

@@ -29,7 +29,7 @@ public class MatrixDeterminant {
     public static double calculateWithOBE(Matrix A) {
         double det = 1;
         var R = new OBERunner(A);
-        R.gaussianElimination_v2();
+        R.gaussianElimination();
         var M = R.getResult();
         int sign = 0;
         double divider = 1;

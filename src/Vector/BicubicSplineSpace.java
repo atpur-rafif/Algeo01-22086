@@ -1,6 +1,5 @@
 package Vector;
 
-import Point.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 

@@ -48,7 +48,7 @@ public class MatrixInverse {
     public static Matrix calculateWithGaussJordan(Matrix M){
         var T = addIdentityMatrixToRight(M); 
         var OBE = new OBERunner(T); 
-        OBE.gausJordanElimination(); 
+        OBE.gaussJordanElimination(); 
         return getRightSideMatrix(OBE.getResult()); 
     }
 }
