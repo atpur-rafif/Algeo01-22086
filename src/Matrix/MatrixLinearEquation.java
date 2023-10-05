@@ -1,5 +1,7 @@
 package Matrix;
 
+import java.util.ArrayList;
+
 import CLI.IO.IOStringFormatter;
 import Matrix.OBE.OBERunner;
 
@@ -68,57 +70,112 @@ public class MatrixLinearEquation {
         return output;
     }
 
-    private static MatrixLinearEquationSolutionType typeOfSolution(Matrix M1) {
-        var obe = new OBERunner(M1);
+    private static MatrixLinearEquationSolutionType typeOfSolution(Matrix M) {
+        var obe = new OBERunner(M);
         obe.gaussianElimination();
-        M1 = obe.getResult();
+        M = obe.getResult();
 
         boolean impos = false;
-        int var_count = M1.col - 1;
-        int eq_count = 0;
-        for(int i = 0; i < M1.row; ++i){
+        int varCount = M.col - 1;
+        int eqCount = 0;
+        for(int i = 0; i < M.row; ++i){
             boolean allCoefZero = true;
-            boolean isConstZero = M1.get(i, M1.col - 1) == 0;
-            for(int j = 0; j < M1.col - 1; ++j){
-                if(M1.get(i, j) != 0) allCoefZero = false;
+            boolean isConstZero = M.get(i, M.col - 1) == 0;
+            for(int j = 0; j < M.col - 1; ++j){
+                if(M.get(i, j) != 0) allCoefZero = false;
             }
             if(allCoefZero && !isConstZero) impos = true;
-            else if(!allCoefZero) eq_count += 1;
+            else if(!allCoefZero) eqCount += 1;
         }
 
         if(impos) return MatrixLinearEquationSolutionType.NoSolution;
-        else if(var_count > eq_count) return MatrixLinearEquationSolutionType.ManySolution;
-        else if(var_count == eq_count) return MatrixLinearEquationSolutionType.OneSolution;
+        else if(varCount > eqCount) return MatrixLinearEquationSolutionType.ManySolution;
+        else if(varCount == eqCount) return MatrixLinearEquationSolutionType.OneSolution;
         return MatrixLinearEquationSolutionType.NoSolution;
     }
 
-    private static String parametricSolution(Matrix M1) {
-        boolean first;
-        String output = "";
-        for (int j = 0; j < M1.row - 1; j++) {
-            first = false;
-            if (M1.get(j, j) != 0) {
-                String currentSubscript = IOStringFormatter.createSubscript(j);
-                output += ("x" + (currentSubscript) + " = ");
-            }
-            if ((M1.get(j, M1.col - 1)) != 0) {
-                output += ("(" + (M1.get(j, M1.col - 1)) * 1 + ")");
-                first = true;
-            }
-            for (int k = j + 1; k < M1.col - 1; k++) {
-                if (M1.get(j, k) != 0) {
-                    if (first) {
-                        output += (" + ");
+    private static String parametricSolution(Matrix M) {
+        var output = "";
+        var varCount = M.col - 1;
+        var parameterized = new boolean[varCount];
+        var parameter = new String[varCount];
+        for(int i = 0; i < varCount; ++i) parameterized[i] = false;
+
+        var parameterCount = 0;
+        for(int i = varCount - 1; i >= 0; --i){
+            int leadingOne = -1;
+            int leadingOneRow = 0;
+            for(int j = M.row - 1; j >= 0; --j){
+                int currentLeadingOne = -1;
+                for(int k = 0; k < varCount; ++k){
+                    if(M.get(j, k) == 1){
+                        currentLeadingOne = k;
+                        break;
                     }
-                    output += ("(" + M1.get(j, k) * (-1));
-                    String currentSubscript2 = IOStringFormatter.createSubscript(k);
-                    output += (")x" + (currentSubscript2));
+                }
+
+                if(currentLeadingOne == i){
+                    leadingOne = currentLeadingOne;
+                    leadingOneRow = j;
                 }
             }
-            if (M1.get(j, j) != 0) {
-                output += ("\n");
+
+
+            if(leadingOne != -1){
+                var eq = new double[M.col];
+                for(int j = i; j < M.col; ++j){
+                    eq[j] = M.get(leadingOneRow, j);
+                }
+
+                output += "\nBounded variable: \n";
+                for(int j = 0; j < eq.length - 1; ++j){
+                    output += "(" + eq[j] + ")" + "x" + IOStringFormatter.createSubscript(j);
+                    if(j != eq.length - 2) output += " + ";
+                }
+                output += " = " + eq[eq.length - 1] + "\n";
+
+                for(int j = leadingOneRow + 1; j < M.row; ++j){
+                    var localLeading = -1;
+                    for(int k = leadingOne + 1; k < varCount; ++k){
+                        if(M.get(j, k) != 0){
+                            localLeading = k;
+                            break;
+                        }
+                    }
+
+                    if(localLeading != -1){
+                        var m = eq[localLeading];
+                        for(int k = leadingOne + 1; k < M.col; ++k){
+                            eq[k] -= M.get(j, k) * m;
+                        }
+                    }
+                }
+
+                output += "x" + IOStringFormatter.createSubscript(leadingOne) + " = ";
+
+                var t = new ArrayList<String>();
+                var k = eq[eq.length - 1];
+                if(k != 0) t.add(k + "");
+                for(int j = leadingOne + 1; j < eq.length - 1; ++j){
+                    if(eq[j] != 0 && parameterized[j]){
+                        t.add("(" + (eq[j] * -1) + ")" + parameter[j]);
+                    }
+                }
+
+                var at = new String[t.size()];
+                t.toArray(at);
+                output += IOStringFormatter.combineString(at, " + ") + "\n";
+
+            } else {
+                parameterized[i] = true;
+                parameterCount += 1;
+                parameter[i] = "t" + IOStringFormatter.createSubscript(parameterCount);
+                output += "\nFree variable: \n";
+                output += "x" + IOStringFormatter.createSubscript(i);
+                output += " = " + parameter[i] + "\n";
             }
         }
+
         return output;
     }
 

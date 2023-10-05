@@ -1,5 +1,7 @@
 package Matrix;
 
+import CLI.IO.IOStringFormatter;
+
 public class MatrixArithmetic {
     Matrix M1, M2;
     
@@ -43,11 +45,10 @@ public class MatrixArithmetic {
                 for(int k = 0; k < M1.col; ++k){
                     temp += M1.get(i, k) * M2.get(k, j);
                 }
+                System.out.println(i + " " + j + ": " + temp);
                 Mresult.set(i, j, temp);
             }
         }
         return Mresult; 
     }
-
-
 }
