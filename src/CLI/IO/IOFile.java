@@ -109,8 +109,10 @@ public class IOFile {
                 String str = null;
                 try {
                     str = Files.readString(path);
-                    return parseObscureFormat(str);
-                } catch (IOException e) {
+                    var t = parseObscureFormat(str);
+                    if(t.vector.basisCount + 1 != t.matrix.col) throw new Exception("Format file tidak sesuai");
+                    return t;
+                } catch (Exception e) {
                     System.out.println("Format file tidak sesuai");
                     continue;
                 }
