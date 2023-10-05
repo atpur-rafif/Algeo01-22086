@@ -25,16 +25,7 @@ public class ImageResizingMenu {
             return "File tidak ditemukan";
         });
 
-
-        var scale = IOPrompter.get("Masukkan skala gambar: ", (var i) -> {
-            try {
-                return Double.parseDouble(i);
-            } catch (Exception e) {
-                return null;
-            }
-        }, (var t) -> {
-            return "Input tidak valid";
-        });
+        var scale = IOPrompter.getDouble("Masukkan skala gambar: ");
 
         Grayscale image = ImageLoader.load(imagePath);
         Grayscale resized = Resize.resize(image, scale);

@@ -20,7 +20,7 @@ public class SPLMenu {
                 "2. File",
                 "3. Back"
             });
-            var choice = IOPrompter.getBoundedInt("Input Type>", 1, 3);
+            var choice = IOPrompter.getBoundedInt("Input Type> ", 1, 3);
 
             if(choice == 3) break;
 
@@ -43,7 +43,7 @@ public class SPLMenu {
                 "3. Metode Cramer",
                 "4. Metode Matriks Balikan"
             });
-            var method = IOPrompter.getBoundedInt("Metode: ", 1, 4);
+            var method = IOPrompter.getBoundedInt("Metode> ", 1, 4);
             IONavigator.back();
 
             var methodInString = "";

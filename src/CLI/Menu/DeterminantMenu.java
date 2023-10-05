@@ -21,7 +21,7 @@ public class DeterminantMenu {
                 "2. File",
                 "3. Back"
             });
-            var choice = IOPrompter.getBoundedInt("Input Type: ", 1, 3);
+            var choice = IOPrompter.getBoundedInt("Input Type> ", 1, 3);
 
             if(choice == 3) break;
 
@@ -30,7 +30,7 @@ public class DeterminantMenu {
                 "1. Metode OBE", 
                 "2. Metode Kofaktor", 
             });
-            var method = IOPrompter.getBoundedInt("Metode: ", 1, 2);
+            var method = IOPrompter.getBoundedInt("Metode> ", 1, 2);
             IONavigator.back();
 
             IONavigator.next("Input");
